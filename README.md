@@ -18,7 +18,7 @@
 | member1      |               |                 |
 | member2      |               |                 |
 | member3      |               |                 |
-| member4      |               |                 |
+| Javier Maruqez|jmarquez21@mail.sfsu.edu|BorntoRebel|
 | member5      |               |                 |
 | member6      |               |                 |
 

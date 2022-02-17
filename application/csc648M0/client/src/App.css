@@ -57,6 +57,9 @@
   background-color: #555;
 }
 
+.aboutHeader{
+  text-align: center;
+}
 img{
   height: 400px;
   width: 100%;

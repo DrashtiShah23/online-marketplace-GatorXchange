@@ -2,13 +2,21 @@ import React from "react";
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import '../css/about.css';
 import AboutThomas from "./About/AboutThomas";
+import AboutWilfredo from "./About/AboutWilfredo";
 
 
 const About = () => {
   return (
     <div className="container">
-      <header>
-          <h1> MEET OUR TEAM </h1>
+      <header className="aboutHeader">
+          <h1> Software Engineering class SFSU 
+          <br />
+                Spring, 2022
+                <br />
+                Section 03
+                <br />
+                Team 01 
+          </h1>
       </header>
 
       
@@ -102,11 +110,11 @@ const About = () => {
           </div>
           <div className="card-content">
             <p className="title">Github Master</p>
-            <p>Some text that describes me</p>
-            <p>xyz@xyz.com</p>
+            <p>Computer Science Major at San Francisco State University</p>
+            <p>waceytun@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutWilfredo.html">
+          <Link to="/about/Wilfredo" element={<AboutWilfredo/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>

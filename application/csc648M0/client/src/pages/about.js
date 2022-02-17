@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../css/about.css';
+import img1 from "../pages/images/img1.jpg"; 
+import img2 from "../pages/images/img2.jpg"; 
+import img3 from "../pages/images/img3.jpg";
+import img4 from "../pages/images/img4.jpg";
+import img5 from "../pages/images/img5.jpg";
+import img6 from "../pages/images/img6.jpg";
 
 
 
@@ -26,10 +32,11 @@ return (
         <div class="row">
   <div class="column">
     <div class="card">
-      <img src="../images/img1.jpg" alt="1"/>
+    
       <div class="container">
       <Link to="../pages/About/AboutDrashti.html">
-                            <h2>Drashti Pareshkumar Shah</h2>
+      <img src={img1} alt="1" />
+         <h2>Drashti Pareshkumar Shah</h2>
                         </Link>
         <p class="title">Team Lead</p>
         <p>Some text that describes me </p>
@@ -41,7 +48,7 @@ return (
 
   <div class="column">
     <div class="card">
-      <img src="./img2.jpg" alt="2" />
+      <img src={img2} alt="2" />
       <div class="container">
       <Link to="../pages/About/AboutMary.html">
                             <h2>Mary</h2>
@@ -57,7 +64,7 @@ return (
 
   <div class="column">
     <div class="card">
-      <img src="./img3.jpg" alt="3" />
+      <img src={img3} alt="3" />
       <div class="container">
       <Link to="../pages/About/AboutThomas.html">
                             <h2>Thomas</h2>
@@ -72,7 +79,7 @@ return (
 
   <div class="column">
     <div class="card">
-      <img src="./img2.jpg" alt="2" />
+      <img src={img4} alt="2" />
       <div class="container">
       <Link to="../pages/About/AboutWilfredo.html">
                             <h2>Wilfredo</h2>
@@ -87,7 +94,7 @@ return (
 
   <div class="column">
     <div class="card">
-      <img src="./img2.jpg" alt="2" />
+      <img src={img5} alt="2" />
       <div class="container">
       <Link to="../pages/About/AboutMicheas.html">
                             <h2>Micheas</h2>
@@ -102,9 +109,10 @@ return (
 
   <div class="column">
     <div class="card">
-      <img src="./img2.jpg" alt="2" />
+      
       <div class="container">
       <Link to="../pages/About/AboutJavier.html">
+      <img src={img6} alt="2" />
                             <h2>Javier</h2>
                         </Link>
         <p class="title"></p>
@@ -114,6 +122,8 @@ return (
       </div>
     </div>
   </div>
+
+
 
 
 </div>

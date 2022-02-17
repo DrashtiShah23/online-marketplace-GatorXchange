@@ -9,13 +9,8 @@ const About = () => {
   return (
     <div className="container">
       <header className="aboutHeader">
-          <h1> Software Engineering class SFSU 
-          <br />
-                Spring, 2022
-                <br />
-                Section 03
-                <br />
-                Team 01 
+          <h1>  
+            Software Engineering class SFSU <br /> Spring, 2022 <br /> Section 03 <br /> Team 01 
           </h1>
       </header>
 

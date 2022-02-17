@@ -14,8 +14,8 @@ return (
     <Navbar />
     <Routes>
         <Route exact path='/index' element={<Home />} />
-        <Route path='About/about' element={<About/>} />
-        <Route path='/Login' element={<Login/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/login' element={<Login/>} />
         <Route path='/sign-up' element={<SignUp/>} />
     </Routes>
     </Router>

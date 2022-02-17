@@ -16,7 +16,7 @@
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
-| member2      |               |                 |
+| Thomas Nguyen | tnguyen135@mail.sfsu.edu| tnguyen372 |
 | member3      |               |                 |
 | Javier Maruqez|jmarquez21@mail.sfsu.edu|BorntoRebel|
 | member5      |               |                 |

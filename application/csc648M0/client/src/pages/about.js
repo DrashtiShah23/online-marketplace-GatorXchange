@@ -1,124 +1,174 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import '../css/about.css';
-
+import AboutThomas from "./About/AboutThomas";
 
 
 const About = () => {
-return (
-    <div>
-        <header>
-            <h1> MEET OUR TEAM </h1>
-        </header>
-        {/* <div className="about-section">
-                <div className="card">
-                    <img src="" alt="Drashti"/>
-                    <div className="container">
-                        <Link to="../pages/About/AboutDrashti.html">
-                            <h2>Drashti Pareshkumar Shah</h2>
-                        </Link>
-                        <h3>Lead</h3>
-                        <p>Some description</p>
-                        <p>dshah5@mail.sfsu.edu</p>
-                    </div>
-            </div> 
-        </div> */}
-        <div class="row">
-  <div class="column">
-    <div class="card">
-      <img src="../images/img1.jpg" alt="1"/>
-      <div class="container">
-      <Link to="../pages/About/AboutDrashti.html">
-                            <h2>Drashti Pareshkumar Shah</h2>
-                        </Link>
-        <p class="title">Team Lead</p>
-        <p>Some text that describes me </p>
-        <p>dshah5@mail.sfsu.edu</p>
+  return (
+    <div className="container">
+      <header>
+          <h1> MEET OUR TEAM </h1>
+      </header>
+
+      
+      <div className="card-container">
+      
+        {/*Drashti's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Drashti Pareshkumar Shah</h2>
+          </div>
+          <div className="card-content">
+            <p className="title">Team Lead</p>
+            <p>Some text that describes me</p>
+            <p>dshah5@mail.sfsu.edu</p>
+          </div>
+          <div className="card-content">
+            <Link to="/AboutDrashti.html">
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*Mary's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Mary</h2>
+          </div>
+          <div className="card-content">
+            <p className="title">Front End Lead</p>
+            <p>Some text that describes me</p>
+            <p>xyz@xyz.com</p>
+          </div>
+          <div className="card-content">
+            <Link to="/AboutMary.html">
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*Thomas's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Thomas</h2>
+          </div>
+          <div className="card-content">
+            <p className="title">Back End Lead</p>
+            <p>Incoming SFSU Spring 2022 CS graduate.</p>
+            <p>tnguyen135@mail.sfsu.edu</p>
+          </div>
+          <div className="card-content">
+            <Link to="/about/Thomas" element={<AboutThomas/>}>
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*Wilfredo's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Wilfredo</h2>
+          </div>
+          <div className="card-content">
+            <p className="title">Github Master</p>
+            <p>Some text that describes me</p>
+            <p>xyz@xyz.com</p>
+          </div>
+          <div className="card-content">
+            <Link to="/AboutWilfredo.html">
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*Micheas's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Micheas</h2>
+          </div>
+          <div className="card-content">
+            <p className="title"></p>
+            <p>Some text that describes me</p>
+            <p>xyz@xyz.com</p>
+          </div>
+          <div className="card-content">
+            <Link to="/AboutMicheas.html">
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*Javier's Card*/}
+        <div className="card">
+          <div className="card-content">
+            <img className="thumbnail"
+              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              alt="placeholder-image" 
+            />
+          </div>
+          <div className="card-content">
+            <h2>Javier</h2>
+          </div>
+          <div className="card-content">
+            <p className="title"></p>
+            <p>Some text that describes me</p>
+            <p>xyz@xyz.com</p>
+          </div>
+          <div className="card-content">
+            <Link to="/AboutJavier.html">
+            <button className="btn-learn-more">
+            <h2>Learn More</h2>
+            </button>
+            </Link>
+          </div>
+        </div>
         
       </div>
+
+
     </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./img2.jpg" alt="2" />
-      <div class="container">
-      <Link to="../pages/About/AboutMary.html">
-                            <h2>Mary</h2>
-                        </Link>
-        <p class="title">Front End Lead</p>
-        <p>Some text that describes me </p>
-        <p>xyz@xyz.com</p>
-        
-      </div>
-    </div>
-  </div>
-
-
-  <div class="column">
-    <div class="card">
-      <img src="./img3.jpg" alt="3" />
-      <div class="container">
-      <Link to="../pages/About/AboutThomas.html">
-                            <h2>Thomas</h2>
-                        </Link>
-        <p class="title">Back End Lead</p>
-        <p>Some text that describes me </p>
-        <p>xyz@xyz.com</p>
-       
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./img2.jpg" alt="2" />
-      <div class="container">
-      <Link to="../pages/About/AboutWilfredo.html">
-                            <h2>Wilfredo</h2>
-                        </Link>
-        <p class="title">Github Master</p>
-        <p>Some text that describes me </p>
-        <p>xyz@xyz.com</p>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./img2.jpg" alt="2" />
-      <div class="container">
-      <Link to="../pages/About/AboutMicheas.html">
-                            <h2>Micheas</h2>
-                        </Link>
-        <p class="title"></p>
-        <p>Some text that describes me </p>
-        <p>xyz@xyz.com</p>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <img src="./img2.jpg" alt="2" />
-      <div class="container">
-      <Link to="../pages/About/AboutJavier.html">
-                            <h2>Javier</h2>
-                        </Link>
-        <p class="title"></p>
-        <p>Some text that describes me </p>
-        <p>xyz@xyz.com</p>
-        
-      </div>
-    </div>
-  </div>
-
-
-</div>
-    </div>
-    );
+  );
 }
 
 

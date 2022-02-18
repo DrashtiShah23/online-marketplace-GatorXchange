@@ -17,7 +17,7 @@
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
 | Thomas Nguyen | tnguyen135@mail.sfsu.edu| tnguyen372 |
-| member3      |               |                 |
+| Mary Nicole Tangog | mtangog@mail.sfsu.edu | mnicoleee |
 | Javier Maruqez|jmarquez21@mail.sfsu.edu|BorntoRebel|
 | member5      |               |                 |
 | Wilfredo Aceytuno Jolon | waceytun@mail.sfsu.edu | WilfredoAceytuno |

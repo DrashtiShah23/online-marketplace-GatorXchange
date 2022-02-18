@@ -3,6 +3,8 @@ import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
 import '../css/about.css';
 import AboutThomas from "./About/AboutThomas";
 import AboutWilfredo from "./About/AboutWilfredo";
+import AboutJavier from "./About/Aboutjavier";
+import javi from "./images/javi.jpg"
 
 
 const About = () => {
@@ -146,7 +148,8 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              id = 'javi'
+              src= {javi}
               alt="placeholder-image" 
             />
           </div>
@@ -154,12 +157,13 @@ const About = () => {
             <h2>Javier</h2>
           </div>
           <div className="card-content">
-            <p className="title"></p>
-            <p>Some text that describes me</p>
-            <p>xyz@xyz.com</p>
+            <p className="title">Back End</p>
+            <p>"Best revenge is massive success"</p>
+            <p>-Frank Sinatra</p>
+            <p>jmarquez21@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutJavier.html">
+            <Link to="/About/Aboutjavier" element={<AboutJavier/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>

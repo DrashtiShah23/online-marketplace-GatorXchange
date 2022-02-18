@@ -4,6 +4,9 @@ import '../css/about.css';
 import AboutThomas from "./About/AboutThomas";
 import AboutWilfredo from "./About/AboutWilfredo";
 import AboutJavier from "./About/Aboutjavier";
+import AboutDrashti from "./About/AboutDrashti";
+import AboutMary from "./About/AboutMary";
+import AboutMicheas from "./About/AboutMicheas";
 import javi from "./images/javi.jpg"
 
 
@@ -22,10 +25,12 @@ const About = () => {
         {/*Drashti's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/AboutDrashti" element={<AboutDrashti/>}>
             <img className="thumbnail"
               src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
               alt="placeholder-image" 
             />
+          </Link>  
           </div>
           <div className="card-content">
             <h2>Drashti Pareshkumar Shah</h2>
@@ -36,7 +41,7 @@ const About = () => {
             <p>dshah5@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutDrashti">
+            <Link to="/AboutDrashti" element={<AboutDrashti/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -47,10 +52,12 @@ const About = () => {
         {/*Mary's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/AboutMary" element={<AboutMary/>}> 
             <img className="thumbnail"
               src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
               alt="placeholder-image" 
             />
+          </Link>   
           </div>
           <div className="card-content">
             <h2>Mary</h2>
@@ -61,7 +68,7 @@ const About = () => {
             <p>xyz@xyz.com</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMary">
+            <Link to="/AboutMary" element={<AboutMary/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -72,10 +79,12 @@ const About = () => {
         {/*Thomas's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/AboutThomas" element={<AboutThomas/>}>  
             <img className="thumbnail"
               src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
               alt="placeholder-image" 
             />
+          </Link>  
           </div>
           <div className="card-content">
             <h2>Thomas</h2>
@@ -86,7 +95,7 @@ const About = () => {
             <p>tnguyen135@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/about/Thomas" element={<AboutThomas/>}>
+            <Link to="/AboutThomas" element={<AboutThomas/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -97,10 +106,12 @@ const About = () => {
         {/*Wilfredo's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
             <img className="thumbnail"
               src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
               alt="placeholder-image" 
             />
+          </Link>  
           </div>
           <div className="card-content">
             <h2>Wilfredo</h2>
@@ -111,7 +122,7 @@ const About = () => {
             <p>waceytun@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-          <Link to="/about/Wilfredo" element={<AboutWilfredo/>}>
+          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -122,10 +133,12 @@ const About = () => {
         {/*Micheas's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
             <img className="thumbnail"
               src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
               alt="placeholder-image" 
             />
+          </Link>  
           </div>
           <div className="card-content">
             <h2>Micheas</h2>
@@ -136,7 +149,7 @@ const About = () => {
             <p>xyz@xyz.com</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMicheas">
+          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -147,11 +160,13 @@ const About = () => {
         {/*Javier's Card*/}
         <div className="card">
           <div className="card-content">
+          <Link to="/Aboutjavier" element={<AboutJavier/>}>
             <img className="thumbnail"
               id = 'javi'
               src= {javi}
               alt="placeholder-image" 
             />
+          </Link>    
           </div>
           <div className="card-content">
             <h2>Javier</h2>
@@ -163,7 +178,7 @@ const About = () => {
             <p>jmarquez21@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/About/Aboutjavier" element={<AboutJavier/>}>
+            <Link to="/Aboutjavier" element={<AboutJavier/>}>
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -176,6 +191,7 @@ const About = () => {
     </div>
   );
 }
+
 
 
 export default About;

@@ -11,7 +11,7 @@ module.exports = {
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
       path: '/home/ubuntu/csc648-03-sp22-Team01',
-      'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
+      'post-deploy': 'npm install && pm2 startOrRestart /home/ubuntu/csc648-03-sp22-Team01/application/csc648M0/Server/ecosystem.config.js'
     }
   }
 }

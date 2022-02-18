@@ -1,32 +1,98 @@
-header{
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
   width: 100%;
   height: 200px;
-  text-decoration: underline;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.about-section{
+
+.about-section {
   width: 100%;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* Grid System for cards */
+.card-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 30px;
+    row-gap: 30px;
+    width: 75%;
+    height: 70%;
+}
+
+/* Individual card properties */
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: space-between;
+    background-color: ghostwhite;
+    width: auto;
 }
+
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-.container {
-    padding: 2px 16px;
+
+.card-content {
+    padding-bottom: 2em;
+    text-align: center;
+    overflow: auto;
+    width: 100%;
 }
-img{
-    height: 50;
-    width: 50;
+
+/* Responsive design */
+@media screen and (min-width: 40em) {
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 }
-h3{
+
+
+img {
+    display: block;
+    border: 0;
+    width: 100%;
+    height: 80%;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 80%;
+}
+
+h3 {
     color:gray;
+}
+
+.btn-learn-more {
+    background-color: steelblue;
+    color: whitesmoke;
+    text-align: center;
+    width: 70%;
+    transition: 0.5s;
+}
+
+.btn-learn-more:hover {
+    background-color: whitesmoke;
+    color: steelblue;
 }

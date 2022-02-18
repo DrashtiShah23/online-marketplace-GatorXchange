@@ -36,7 +36,7 @@ const About = () => {
             <p>dshah5@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutDrashti.html">
+            <Link to="/AboutDrashti">
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -61,7 +61,7 @@ const About = () => {
             <p>xyz@xyz.com</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMary.html">
+            <Link to="/AboutMary">
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>
@@ -136,7 +136,7 @@ const About = () => {
             <p>xyz@xyz.com</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMicheas.html">
+            <Link to="/AboutMicheas">
             <button className="btn-learn-more">
             <h2>Learn More</h2>
             </button>

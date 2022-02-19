@@ -10,6 +10,7 @@ module.exports = {
       key: '~/.ssh/team1.pem',
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
+      cwd :'/home/ubuntu/csc648-03-sp22-Team01/source',
       path: '/home/ubuntu/csc648-03-sp22-Team01',
       'post-deploy': 'npm install && pm2 startOrRestart /home/ubuntu/csc648-03-sp22-Team01/source/application/server/ecosystem.config.js'
     }

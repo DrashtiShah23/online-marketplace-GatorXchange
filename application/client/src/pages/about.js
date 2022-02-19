@@ -150,7 +150,7 @@ const About = () => {
           </div>
           <div className="card-content">
             <p className="title">Team Member</p>
-            <p>Computer Science Major San Francisco State University</p>
+            <p>Computer Science Major at San Francisco State University</p>
             <p>Mgebere@mail.sfsu.edu</p>
           </div>
           <div className="card-content">

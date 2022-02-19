@@ -8,7 +8,11 @@ import AboutDrashti from "./About/AboutDrashti";
 import AboutMary from "./About/AboutMary";
 import AboutMicheas from "./About/AboutMicheas";
 import javi from "./images/javi.jpg"
+<<<<<<< HEAD:application/csc648M0/client/src/pages/about.js
+import drashti from "./images/drashti.jpeg"
+=======
 import mary from "./images/mary.jpg";
+>>>>>>> 6b33f5f0e56474c9ba8044d0400280d935d6d2f1:application/client/src/pages/about.js
 
 
 const About = () => {
@@ -27,10 +31,7 @@ const About = () => {
         <div className="card">
           <div className="card-content">
           <Link to="/AboutDrashti" element={<AboutDrashti/>}>
-            <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
-            />
+          <img className="thumbnail" id = 'drashti' src= {drashti}alt="placeholder-image"/>
           </Link>  
           </div>
           <div className="card-content">
@@ -38,7 +39,7 @@ const About = () => {
           </div>
           <div className="card-content">
             <p className="title">Team Lead</p>
-            <p>Some text that describes me</p>
+            <p>Senior at SFSU pursuing computer science!</p>
             <p>dshah5@mail.sfsu.edu</p>
           </div>
           <div className="card-content">

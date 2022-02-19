@@ -12,7 +12,7 @@ module.exports = {
       ref: 'origin/souza-test',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
       path: '/home/ubuntu/prod',
-      'post-deploy': '(cd ./application/Server) &&npm install && pm2 reload ecosystem.config.js --env production'
+      'post-deploy': 'cd ./application/Server && npm install && pm2 reload ecosystem.config.js --env production'
     }
   }
 }

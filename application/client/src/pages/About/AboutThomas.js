@@ -7,9 +7,9 @@ const AboutThomas = () => {
   return (
     <div className="container">
       <div>
-      <h1>Thomas Nguyen</h1>
-      <br />
+        <h1>Thomas Nguyen</h1>
       </div>
+      <br />
       <div>
         <p>
           Hi there. My name is Thomas. I am a senior at SFSU and will be graduating in Spring 2022 with a Bachelors in Computer Science.

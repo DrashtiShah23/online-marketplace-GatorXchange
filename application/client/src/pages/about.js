@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../css/about.css';
 import AboutThomas from "./About/AboutThomas";
 import AboutWilfredo from "./About/AboutWilfredo";
@@ -8,12 +8,9 @@ import AboutDrashti from "./About/AboutDrashti";
 import AboutMary from "./About/AboutMary";
 import AboutMicheas from "./About/AboutMicheas";
 import javi from "./images/javi.jpg"
-<<<<<<< HEAD:application/csc648M0/client/src/pages/about.js
 import drashti from "./images/drashti.jpeg"
-=======
-import mary from "./images/mary.jpg";
->>>>>>> 6b33f5f0e56474c9ba8044d0400280d935d6d2f1:application/client/src/pages/about.js
-
+import mary from './images/mary.jpg'
+import thomas from './images/thomas.jpg'
 
 const About = () => {
   return (
@@ -86,8 +83,8 @@ const About = () => {
           <div className="card-content">
           <Link to="/AboutThomas" element={<AboutThomas/>}>  
             <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
+              src={thomas}
+              alt="Picture of Thomas" 
             />
           </Link>  
           </div>

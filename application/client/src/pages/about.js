@@ -89,7 +89,7 @@ const About = () => {
           </Link>  
           </div>
           <div className="card-content">
-            <h2>Thomas</h2>
+            <h2>Thomas Nguyen</h2>
           </div>
           <div className="card-content">
             <p className="title">Back End Lead</p>

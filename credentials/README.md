@@ -21,8 +21,9 @@
 ### Instructions for SSHing into AWS EC2 instance
 1. Move the copy of team1.pem file into your ~/.ssh folder (Usually hidden).
 2. Open terminal/cmd/powershell.
-3. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@3.101.39.111
-4. You should see a welcome message by Ubuntu. You are now in the AWS virtual machine!
+3. Enter the following command on the team1.pem file: chmod 400 ~/.ssh/team1.pem
+4. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@3.101.39.111
+5. You should see a welcome message by Ubuntu. You are now in the AWS virtual machine!
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>

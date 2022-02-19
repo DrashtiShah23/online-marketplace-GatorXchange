@@ -138,7 +138,8 @@ const About = () => {
           <div className="card-content">
           <Link to="/AboutMicheas" element={<AboutMicheas/>}>
             <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
+              id = 'Mike'
+              src={Mike}
               alt="placeholder-image" 
             />
           </Link>  
@@ -147,9 +148,9 @@ const About = () => {
             <h2>Micheas</h2>
           </div>
           <div className="card-content">
-            <p className="title"></p>
-            <p>Some text that describes me</p>
-            <p>xyz@xyz.com</p>
+            <p className="title">Team Member</p>
+            <p>Computer Science Major at San Francisco State University</p>
+            <p>Mgebere@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
           <Link to="/AboutMicheas" element={<AboutMicheas/>}>

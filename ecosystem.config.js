@@ -9,7 +9,7 @@ module.exports = {
       user: 'ubuntu',
       host: 'ec2-54-183-182-205.us-west-1.compute.amazonaws.com',
       key: '~/.ssh/team1.pem',
-      ref: 'origin/main',
+      ref: 'origin/test-deploy',
       branch: 'test-deploy',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
       path: '/home/ubuntu/csc648-03-sp22-Team01',

@@ -11,6 +11,7 @@ import javi from "./images/javi.jpg"
 import drashti from "./images/drashti.jpeg"
 import mary from './images/mary.jpg'
 import thomas from './images/thomas.jpg'
+import wilfredo from './images/wilfredo.jpg'
 
 const About = () => {
   return (
@@ -110,8 +111,8 @@ const About = () => {
           <div className="card-content">
           <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
             <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
+              src={wilfredo}
+              alt="Wilfredo Aceytuno"  
             />
           </Link>  
           </div>

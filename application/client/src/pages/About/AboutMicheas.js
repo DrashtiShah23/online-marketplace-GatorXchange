@@ -12,7 +12,7 @@ const AboutMicheas = () => {
     </div>
     <div>
       <p>
-        Hi there, My name is Micheas Gebere, i am a senior at SFSU graduating in summer 2022 with a Bachlors in Computer science.
+        Hi there, My name is Micheas Gebere. I am a senior at SFSU graduating in summer 2022 with a Bachlors in Computer science.
         my time at sfsu has been nothing but fun and exciting skill share expereince. After i graduate, i want to exlore different  
         options as a software engineer. I plan working in C++ on packaged software but also love front end and back end developments. 
       </p>

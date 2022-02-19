@@ -12,6 +12,7 @@ import drashti from "./images/drashti.jpeg"
 import mary from './images/mary.jpg'
 import thomas from './images/thomas.jpg'
 import wilfredo from './images/wilfredo.jpg'
+import Mike from './images/Mike.jpg'
 
 const About = () => {
   return (

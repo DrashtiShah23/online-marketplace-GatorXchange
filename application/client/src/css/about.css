@@ -45,6 +45,7 @@ header {
     align-content: space-between;
     background-color: ghostwhite;
     width: auto;
+    padding: 8px;
 }
 
 .card:hover {

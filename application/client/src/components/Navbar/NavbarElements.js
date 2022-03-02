@@ -1,11 +1,12 @@
 
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaCentercode } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
-  
+
+
 export const Nav = styled.nav`
   background: #000000;
-  height: 85px;
+  height: 55px;
   display: flex;
   text-styled: center;
   justify-content: space-between;

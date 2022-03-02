@@ -16,14 +16,7 @@ import Mike from './images/Mike.jpg'
 
 const About = () => {
   return (
-    <div className="container">
-      <header className="aboutHeader">
-          <h1>  
-            Software Engineering class SFSU <br /> Spring, 2022 <br /> Section 03 <br /> Team 01 
-          </h1>
-      </header>
-
-      
+    <div className="container">      
       <div className="card-container">
       
         {/*Drashti's Card*/}
@@ -62,9 +55,10 @@ const About = () => {
           </Link>   
           </div>
           <div className="card-content">
-            <h2>Mary</h2>
+            <h2>Mary Nicole Tangog</h2>
           </div>
           <div className="card-content">
+            <p className="title">Front End Lead</p>
             <p>
               Computer Science Major <br/>
               San Francisco State University

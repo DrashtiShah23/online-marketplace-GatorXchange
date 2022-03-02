@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from "axios" 
 
 
+
 const Login = () => {
 
     const [userName, setUsername] = useState("") 
@@ -24,15 +25,17 @@ const Login = () => {
 
     
     return (
-        <div>
-            <label>Login:</label>
-            <label>Username:</label>
-            {/*event listener to parse binary code to set user values.*/}
-            <input type="text" onChange={(e) => setUsername(e.target.value)}/> 
-            <label>Password:</label>
-            {/*event listener to parse binary code to set user values.*/}
-            <input type= "text" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={login_function}>Submit</button>
+        <div className="container">
+            <div className="card">
+                <label>Login:</label>
+                <label>Username:</label>
+                {/*event listener to parse binary code to set user values.*/}
+                <input type="text" onChange={(e) => setUsername(e.target.value)}/> 
+                <label>Password:</label>
+                {/*event listener to parse binary code to set user values.*/}
+                <input type= "text" onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={login_function}>Submit</button>
+            </div>
         </div>
     )
 }

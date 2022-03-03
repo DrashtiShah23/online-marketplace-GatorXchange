@@ -57,6 +57,7 @@
 .button:hover {
   background-color: #555;
 }
+/*header*/
 .aboutHeader {
   text-align: center;
 }
@@ -69,4 +70,10 @@ img{
   height: auto;
   width: 80%;
   margin: auto;
+}
+.card-signup{
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 5px;
 }

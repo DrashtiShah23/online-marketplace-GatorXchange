@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import Axios from "axios" 
+import React, { useState } from 'react'
+import Axios from "axios"
 
 const Login = () => {
 
@@ -37,9 +37,9 @@ const Login = () => {
 
                 <button onClick={login_function}>Submit</button>
 
-                
 
-                <p>Don't have an Account?<a href= "/SignUp">Register</a></p>
+
+                <p>Don't have an Account?<a href="/SignUp">Register</a></p>
 
             </div>
         </div>

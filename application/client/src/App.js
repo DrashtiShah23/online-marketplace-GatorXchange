@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route, Link}
+import { BrowserRouter as Router, Routes, Route, Link }
     from 'react-router-dom';
 import Home from './pages/index';
 import About from './pages/about';
@@ -17,12 +17,11 @@ import AboutMicheas from './pages/About/AboutMicheas';
 import VP_Test_Home from './pages/VP_Test_Home'; // Vertical prototype test home page
 import VP_Result from './pages/VP_Result'; // Vertical prototype search result page
 // import LearnMore from '.pages/learnMore'
-  
 function App() {
-return (
-    <Router>
-    <Navbar />
-    <Routes>
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
 
         <Route exact path='/' element={<Home />} />
         <Route path='/about' element={<About/>} />

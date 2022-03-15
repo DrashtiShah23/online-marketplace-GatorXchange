@@ -16,15 +16,15 @@ import Mike from './images/Mike.jpg'
 
 const About = () => {
   return (
-    <div className="container">      
+    <div className="container">
       <div className="card-container">
-      
+
         {/*Drashti's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutDrashti" element={<AboutDrashti/>}>
-          <img className="thumbnail" id = 'drashti' src= {drashti}alt="placeholder-image"/>
-          </Link>  
+            <Link to="/AboutDrashti" element={<AboutDrashti />}>
+              <img className="thumbnail" id='drashti' src={drashti} alt="placeholder-image" />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Drashti Pareshkumar Shah</h2>
@@ -35,10 +35,10 @@ const About = () => {
             <p>dshah5@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutDrashti" element={<AboutDrashti/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutDrashti" element={<AboutDrashti />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -46,13 +46,13 @@ const About = () => {
         {/*Mary's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutMary" element={<AboutMary/>}> 
-          <img className="thumbnail"
-              id = 'mary'
-              src= {mary}
-              alt="placeholder-image" 
-            />
-          </Link>   
+            <Link to="/AboutMary" element={<AboutMary />}>
+              <img className="thumbnail"
+                id='mary'
+                src={mary}
+                alt="placeholder-image"
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Mary Nicole Tangog</h2>
@@ -60,16 +60,16 @@ const About = () => {
           <div className="card-content">
             <p className="title">Front End Lead</p>
             <p>
-              Computer Science Major <br/>
+              Computer Science Major <br />
               San Francisco State University
             </p>
             <p>mtangog@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMary" element={<AboutMary/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutMary" element={<AboutMary />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -77,12 +77,12 @@ const About = () => {
         {/*Thomas's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutThomas" element={<AboutThomas/>}>  
-            <img className="thumbnail"
-              src={thomas}
-              alt="Picture of Thomas" 
-            />
-          </Link>  
+            <Link to="/AboutThomas" element={<AboutThomas />}>
+              <img className="thumbnail"
+                src={thomas}
+                alt="Picture of Thomas"
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Thomas Nguyen</h2>
@@ -93,10 +93,10 @@ const About = () => {
             <p>tnguyen135@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutThomas" element={<AboutThomas/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutThomas" element={<AboutThomas />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -104,12 +104,12 @@ const About = () => {
         {/*Wilfredo's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
-            <img className="thumbnail"
-              src={wilfredo}
-              alt="Wilfredo Aceytuno"  
-            />
-          </Link>  
+            <Link to="/AboutWilfredo" element={<AboutWilfredo />}>
+              <img className="thumbnail"
+                src={wilfredo}
+                alt="Wilfredo Aceytuno"
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Wilfredo</h2>
@@ -120,10 +120,10 @@ const About = () => {
             <p>waceytun@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutWilfredo" element={<AboutWilfredo />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -131,13 +131,13 @@ const About = () => {
         {/*Micheas's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
-            <img className="thumbnail"
-              id = 'Mike'
-              src={Mike}
-              alt="placeholder-image" 
-            />
-          </Link>  
+            <Link to="/AboutMicheas" element={<AboutMicheas />}>
+              <img className="thumbnail"
+                id='Mike'
+                src={Mike}
+                alt="placeholder-image"
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Micheas</h2>
@@ -148,10 +148,10 @@ const About = () => {
             <p>Mgebere@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutMicheas" element={<AboutMicheas />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -159,13 +159,13 @@ const About = () => {
         {/*Javier's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/Aboutjavier" element={<AboutJavier/>}>
-            <img className="thumbnail"
-              id = 'javi'
-              src= {javi}
-              alt="placeholder-image" 
-            />
-          </Link>    
+            <Link to="/Aboutjavier" element={<AboutJavier />}>
+              <img className="thumbnail"
+                id='javi'
+                src={javi}
+                alt="placeholder-image"
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Javier</h2>
@@ -177,14 +177,14 @@ const About = () => {
             <p>jmarquez21@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/Aboutjavier" element={<AboutJavier/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/Aboutjavier" element={<AboutJavier />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
-        
+
       </div>
 
     </div>

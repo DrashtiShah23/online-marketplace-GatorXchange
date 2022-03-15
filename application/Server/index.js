@@ -1,22 +1,10 @@
-require('dotenv').config()
-
 const express = require('express')
-const mysql = require("mysql")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
 const socketio = require("socket.io")
-
-const db = mysql.createConnection({
-  user: process.env.NAME,
-  host: "localhost",
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE_NAME
-})
-
-
 
 
 const app = express();

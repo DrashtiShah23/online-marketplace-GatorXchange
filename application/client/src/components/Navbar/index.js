@@ -21,6 +21,9 @@ const Navbar = () => {
           <NavLink to="/SignUp" activeStyle>
             Sign Up
           </NavLink>
+          <NavLink to="/VPTestHome" activeStyle>
+            Vertical Prototype Home
+          </NavLink>
         </NavMenu>
       </Nav>
       <div className="container">

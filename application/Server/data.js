@@ -1,95 +1,114 @@
 require('dotenv').config();
 const mysql = require("mysql");
 const express = require('express');
-
 const app = express();
-// db.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log('MySql connected');
-//     db.query('example');
-// })
-// app.get('/createDB', function (req, res) {
-//     let sql = 'Create DATABASE nodeMySql';
-//     db.query(sql, function (err, result) {
-//         if (err) throw err;
-//         console.log(result)
-//         res.send('DB created')
-//     })
-// });
+// Use express middleware to parse req body into json
+app.use(express.json());
+const port = 3001;
+
 
 // Create a connection to the database using account info
-const db = mysql.createConnection({
-    user: process.env.USER,
-    host: process.env.HOST,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE_NAME
-  })
-  // Try connecting to the database. If connection failed, throw an error
-  db.connect((err) => {
-    if (err) {
+const database = mysql.createConnection({
+  user: process.env.USER,
+  host: process.env.HOST,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE_NAME
+});
+
+// Establish a connection to the database
+database.connect((err) => {
+  // If connection to database failed, throw an error
+  if (err) {
       console.error('Error connecting to database: ' + err.stack);
       return;
-    }
-    console.log('MySql connected');
-    // Sample test query to database that just shows all users in user table
-    db.query('SELECT * FROM `csc648-team1-db`.`users`', (error, results, fields) => {
-      console.log(results);
-      console.log(results[0].sfsu_id);
-      console.log(results[0].username);
-      console.log(results[0].email);
-    });
+  }
+  console.log('MySQL connected');
+  // Sample test query to database that just shows all posts in post table
+  // database.query('SELECT * FROM `csc648-team1-db`.`Posts`', (error, results, fields) => {
+  //     console.log(results);
+  //     for (let i = 0; i < results.length; i++) {
+  //     console.log('Post ID: ' + results[i].post_id);
+  //     console.log('Title: ' + results[i].title);
+  //     console.log('Description: ' + results[i].description);
+  //     console.log('Category: ' + results[i].category);
+  //     }
+  // });
+});
+
+// TODO: Populate the database with entries upon app start
+
+// Send user search parameters to server 
+app.post('/VPResult', (req, res) => {
+    
+  console.log('Got a post request. Data is:');
+  console.log(req.body);
+  
+  res.send(req.body);
+});
+
+
+app.get('/VPResult', (req, res) => {
+  
+  console.log('Got a request: ');
+  console.log(req.body);
+  
+  // Get the search params and assign to separate variables
+  const category = req.body.category;
+  const searchTerm = req.body.searchTerm;
+  
+  // Represents the SQL query to run to get the relevant posts from database
+  let getPosts;
+
+  // User clicked search button without any params. Display all posts from database
+  if (searchTerm == '' && category == '' ) {
+      getPosts = 'SELECT * FROM `csc648-team1-db`.`Posts`';
+  }
+  // User entered a search term and selected a category
+  else if (searchTerm != '' && category != '') {
+      getPosts = `SELECT * FROM Posts WHERE fk_category = '` + category + `' AND 
+      ( title LIKE '%` + searchTerm + `%' OR description LIKE '%` + searchTerm + `%')`;
+  }
+  // User entered a search term but did not select a category
+  else if (searchTerm != '' && category == '') {
+      getPosts = `SELECT * FROM Posts WHERE title LIKE '%` + searchTerm + `%' OR 
+      description LIKE '%` + searchTerm + `%')`;
+  }
+  // User did not enter a search term but selected a category
+  else if (searchTerm == '' && category != '') {
+      getPosts = `SELECT * FROM Posts WHERE fk_category = '` + category + `'`;
+  }
+  // Extract posts from Posts table in database based on user's search params 
+  database.query(getPosts, function (error, results) {
+      if (error) {
+          console.error('Error querying database: ' + error.stack);
+          return;
+      }
+      // Store the list of search results to send over to the VP Result page
+      let searchResults = [];
+      // For every search result, create a post object containing relevant post info to display
+      for (let i = 0; i < results.length; i++) {
+          let post = {
+            category: results[i].category,
+            image: results[i].photo_path,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description
+          }
+          console.log('Post sent over is: ');
+          console.log(post.category);
+          console.log(post.image);
+          console.log(post.title);
+          console.log(post.price);
+          console.log(post.description);
+          // Add the post to the list of search results
+          searchResults.push(post);
+      }
+      // Send the list of search results to the VP Result page to display
+      res.send(searchResults);
   });
-
-function search(req, res, next) {
-    // The user's provided title
-    const title = req.query.title;
-    // The user's provided description
-    const description = req.query.description;
-    // The user's selected category
-    const category = req.query.category;
-
-    let query = 'SELECT * FROM `csc648-team1-db`.`posts`';
-    if (title != '' && category != '') {
-        query = `SELECT * FROM posts WHERE category = '` + category + `' AND 
-        ( title LIKE '%` + title + `%' OR description LIKE '%` + description + `%')`;
-    }
-    else if (title != '' && category == '') {
-        query = `SELECT * FROM posts WHERE title LIKE '%` + title + `%' OR 
-        description LIKE '%` + description + `%')`;
-    }
-    else if (title == '' && category != '') {
-        query = `SELECT * FROM posts WHERE category = '` + category + `'`;
-    }
-    db.query(query, function (err, result) {
-        if (err) {
-            req.title = '';
-            req.description = '';
-            req.category = '';
-            next();
-        }
-        req.title = title;
-        req.description = description;
-        req.category = '';
-
-        next()
-    })
-}
-
-// Vertical prototype result page receives search request data
-// from vertical prototype test home page
-app.get('/VP_Result', search, function (req, res,) {
-
-    var searchResult = req.searchResult;
-    res.render('/VP_Result', {
-        results: searchResult.length,
-        searchFor: req.searchFor,
-        searchResult: searchResult,
-        category: req.category
-    })
-})
+  console.log('Finished sending database results');
+});
 
 
 
-
+app.listen(port, () => console.log(`Server is listening on port ${port}`));

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route, Link }
+import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import Home from './pages/index';
 import About from './pages/about';
@@ -14,31 +14,31 @@ import AboutMary from './pages/About/AboutMary';
 import AboutJavier from './pages/About/Aboutjavier';
 import AboutMicheas from './pages/About/AboutMicheas';
 
-import VP_Test_Home from './pages/VP_Test_Home'; // Vertical prototype test home page
-import VP_Result from './pages/VP_Result'; // Vertical prototype search result page
+import VPTestHome from './pages/VPTestHome'; // Vertical prototype test home page
+import VPResult from './pages/VPResult'; // Vertical prototype search result page
 // import LearnMore from '.pages/learnMore'
 function App() {
     return (
-        <Router>
-            <Navbar />
-            <Routes>
+    <Router>
+        <Navbar />
+        <Routes>
 
-        <Route exact path='/' element={<Home />} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/SignUp' element={<SignUp/>} />
-        
-        <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
-        <Route path='/AboutThomas' element={<AboutThomas/>} />
-        <Route path='/AboutDrashti' element={<AboutDrashti/>} />
-        <Route path='/AboutMary' element={<AboutMary/>} />
-        <Route path='/AboutJavier' element={<AboutJavier/>} />
-        <Route path='/AboutMicheas' element={<AboutMicheas/>} />
+            <Route exact path='/' element={<Home />} />
+            <Route path='/about' element={<About/>} />
+            <Route path='/login' element={<Login/>} />
+            <Route path='/SignUp' element={<SignUp/>} />
+            
+            <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
+            <Route path='/AboutThomas' element={<AboutThomas/>} />
+            <Route path='/AboutDrashti' element={<AboutDrashti/>} />
+            <Route path='/AboutMary' element={<AboutMary/>} />
+            <Route path='/AboutJavier' element={<AboutJavier/>} />
+            <Route path='/AboutMicheas' element={<AboutMicheas/>} />
 
-        <Route path='/VP_Test_Home' element={<VP_Test_Home/>} />
-        <Route path='/VP_Result' element={<VP_Result/>} />
+            <Route path='/VPTestHome' element={<VPTestHome/>} />
+            <Route path='/VPResult' element={<VPResult/>} />
         
-    </Routes>
+        </Routes>
     </Router>
 );
 }

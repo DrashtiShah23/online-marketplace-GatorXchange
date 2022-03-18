@@ -22,13 +22,13 @@ app.use(cookieParser());
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "UPDATE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000"],
+//     methods: ["GET", "POST", "UPDATE"],
+//     credentials: true,
+//   })
+// );
 
 app.use(
   session({
@@ -63,18 +63,22 @@ app.post("/login", (req, res) => {
 })
 
 
+app.post('/test', (req, res) => {
+  req.body.name = '123'
+  req.body.email = '123@mail'
+  res.send(req.body);
+  console.log('Sent a message');
+})
 
-
-
-
-
-
-
+app.get('/test', (req, res) => {
+  res.send('got the data: ' + req.body.name);
+  console.log(req.body.name);
+})
 
 
 
 
 app.listen(3001, () => {
-  console.log("server is running onn port 3001")
+  console.log("server is running on port 3001")
 });
 

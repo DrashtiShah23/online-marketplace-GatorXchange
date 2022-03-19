@@ -43,6 +43,7 @@ const VPResult = () => {
   ];
   // Display the list of search results received from database
   const postList = test.map((result, i) => {
+    return (
     <div className="card" key={i}>
         <div className="card-content">
           <li>{result.category}</li>
@@ -52,6 +53,7 @@ const VPResult = () => {
           <li>{result.description}</li>
         </div>             
     </div>
+    )
   });
   // Get the list of search results from database and store it in the results array
   const getSearchResults = () => {
@@ -75,13 +77,12 @@ const VPResult = () => {
       <header>
         <h1>Vertical Prototype Search Results</h1>
       </header>
-      {getSearchResults}
+    
       <div>
         <h3>Number of Results returned: {test.length}</h3>
         <h3>Here are your search results!</h3>
         <div className="card-container">
           {postList}
-          {/*results*/}
         </div>
       </div>
     </div>

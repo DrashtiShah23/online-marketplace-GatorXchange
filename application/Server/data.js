@@ -39,43 +39,64 @@ database.connect((err) => {
 
 // Send user search parameters to server 
 app.post('/VPResult', (req, res) => {
-    
-  console.log('Got a post request. Data is:');
+   
+  console.log('Posted data. Data is:');
   console.log(req.body);
-  
+
   res.send(req.body);
+  
 });
+
+app.get('/VPResult_getTest', (req, res) => {
+  res.send(req.body) 
+  console.log("result getTest: ", req.body) 
+}); 
 
 
 app.get('/VPResult', (req, res) => {
   
   console.log('Got a request: ');
   console.log(req.body);
-  
+  // console.log(req.body.category);
+  // console.log(req.body.searchTerm);
+
   // Get the search params and assign to separate variables
+
   const category = req.body.category;
   const searchTerm = req.body.searchTerm;
-  
+  console.log(category);
+  console.log(searchTerm);
   // Represents the SQL query to run to get the relevant posts from database
   let getPosts;
 
   // User clicked search button without any params. Display all posts from database
   if (searchTerm == '' && category == '' ) {
-      getPosts = 'SELECT * FROM `csc648-team1-db`.`Posts`';
+      getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
   }
   // User entered a search term and selected a category
   else if (searchTerm != '' && category != '') {
-      getPosts = `SELECT * FROM Posts WHERE fk_category = '` + category + `' AND 
-      ( title LIKE '%` + searchTerm + `%' OR description LIKE '%` + searchTerm + `%')`;
+    getPosts = 
+      `SELECT * 
+      FROM posts 
+      INNER JOIN categories 
+      ON posts.fk_category_id = categories.category_id
+      WHERE category = '` + category + `' 
+      AND ( title LIKE '%` + searchTerm + `%' 
+      OR description LIKE '%` + searchTerm + `%')`;
   }
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
-      getPosts = `SELECT * FROM Posts WHERE title LIKE '%` + searchTerm + `%' OR 
+      getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
       description LIKE '%` + searchTerm + `%')`;
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
-      getPosts = `SELECT * FROM Posts WHERE fk_category = '` + category + `'`;
+    getPosts = 
+      `SELECT * 
+      FROM posts 
+      INNER JOIN categories 
+      ON posts.fk_category_id = categories.category_id
+      WHERE category = '` + category + `'`;
   }
   // Extract posts from Posts table in database based on user's search params 
   database.query(getPosts, function (error, results) {
@@ -88,7 +109,7 @@ app.get('/VPResult', (req, res) => {
       // For every search result, create a post object containing relevant post info to display
       for (let i = 0; i < results.length; i++) {
           let post = {
-            category: results[i].category,
+            category: results[i].fk_category_id,
             image: results[i].photo_path,
             title: results[i].title,
             price: results[i].price,
@@ -108,7 +129,6 @@ app.get('/VPResult', (req, res) => {
   });
   console.log('Finished sending database results');
 });
-
 
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

@@ -91,25 +91,29 @@ const VPResult = () => {
       <div>
         <h3>Number of Results returned: {results.length}</h3>
         <h3>Here are your search results!</h3>
-        <div className="card-container">
-          {/* Display the pst of results from the database */}
-          {
-            results.map((result, i) => {
-              return (
-                <div className="card" key={i}>
-                  <div className="card-content">
-                    <p>Category: {result.category}</p>
-                    <p>Image: {result.image}</p>
-                    <p>Title: {result.title}</p>
-                    <p>Price: ${result.price}.00</p>
-                    <p>Description: {result.description}</p>
-                  </div>
-                </div> 
-              )
-            })
-          }
-        </div>
       </div>
+
+      <div className="card-container">
+        
+        {/* Display the pst of results from the database */}
+        {
+          results.map((result, i) => {
+            return (
+              <div className="card" key={i}>
+                <div className="card-content">
+                  <p>Category: {result.category}</p>
+                  <p>Image: {result.image}</p>
+                  <p>Title: {result.title}</p>
+                  <p>Price: ${result.price}.00</p>
+                  <p>Description: {result.description}</p>
+                </div>
+              </div> 
+            )
+          })
+        }
+        
+      </div>
+
     </div>
     );
 };

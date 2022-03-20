@@ -27,19 +27,14 @@ database.connect((err) => {
       return;
   }
   console.log('MySQL connected');
-  // Sample test query to database that just shows all posts in post table
-  // database.query('SELECT * FROM `csc648-team1-db`.`Posts`', (error, results, fields) => {
-  //     console.log(results);
-  //     for (let i = 0; i < results.length; i++) {
-  //     console.log('Post ID: ' + results[i].post_id);
-  //     console.log('Title: ' + results[i].title);
-  //     console.log('Description: ' + results[i].description);
-  //     console.log('Category: ' + results[i].category);
-  //     }
-  // });
+
 });
 
-// TODO: Populate the database with entries upon app start
+// Populate the database with entries upon app start
+
+
+
+
 
 // store holds the user search parameters globally
 let store = [];
@@ -134,23 +129,20 @@ app.get('/VPResult', (req, res) => {
           // Add the post to the list of search results
           console.log("posts: ", post) 
           searchResults.push(post);
-          //console.log('Search results array: ' + searchResults[i]);
-          console.log('parsed array: ' + JSON.stringify(searchResults))
+          
       }
-      // Send the list of search results to the VP Result page to display
-      //console.log("search result data: " + JSON.parse(searchResults))
 
+  console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+  // Send the database results to the frontend
   res.send(JSON.stringify(searchResults));
+  
   console.log('Finished sending database results');
-  //res.send({"test1": 90, "test2": 89})
+  
   });
-  //res.send({"test1": 90, "test2": 89})
+  
   
 });
-
-// app.get('/VPResult_test_get', (req, res) => {
-//   res.send({"test1": 80, "test2": 89})
-// })
 
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

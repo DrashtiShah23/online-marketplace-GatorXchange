@@ -2,7 +2,8 @@ require('dotenv').config();
 const mysql = require("mysql");
 const express = require('express');
 const app = express();
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const { json } = require('body-parser');
 const port = 3001;
 
 // Use express middleware to parse req body into json
@@ -92,7 +93,7 @@ app.get('/VPResult', (req, res) => {
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
       getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
-      description LIKE '%` + searchTerm + `%')`;
+      description LIKE '%` + searchTerm + `%'`;
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
@@ -104,6 +105,7 @@ app.get('/VPResult', (req, res) => {
       WHERE category = '` + category + `'`;
   }
   // Extract posts from Posts table in database based on user's search params 
+  let searchResults = [];
   database.query(getPosts, function (error, results) {
       if (error) {
           console.error('Error querying database: ' + error.stack);
@@ -111,30 +113,44 @@ app.get('/VPResult', (req, res) => {
       }
       //console.log(results);
       // Store the list of search results to send over to the VP Result page
-      let searchResults = [];
+  
       // For every search result, create a post object containing relevant post info to display
       for (let i = 0; i < results.length; i++) {
           let post = {
-            category: results[i].fk_category_id,
+            category: results[i].category,
             image: results[i].photo_path,
             title: results[i].title,
             price: results[i].price,
             description: results[i].description
           };
-          console.log('Post sent over is: ');
-          console.log(post.category);
-          console.log(post.image);
-          console.log(post.title);
-          console.log(post.price);
-          console.log(post.description);
+          console.log();
+          console.log(`Post ${i} sent over is: `);
+          console.log('Post category: ' + post.category);
+          console.log('Post image: ' + post.image);
+          console.log('Post title: ' + post.title);
+          console.log('Post price: ' + post.price);
+          console.log('Post description: ' + post.description);
+          console.log();
           // Add the post to the list of search results
+          console.log("posts: ", post) 
           searchResults.push(post);
+          //console.log('Search results array: ' + searchResults[i]);
+          console.log('parsed array: ' + JSON.stringify(searchResults))
       }
       // Send the list of search results to the VP Result page to display
-      res.send(searchResults);
-  });
+      //console.log("search result data: " + JSON.parse(searchResults))
+
+  res.send(JSON.stringify(searchResults));
   console.log('Finished sending database results');
+  //res.send({"test1": 90, "test2": 89})
+  });
+  //res.send({"test1": 90, "test2": 89})
+  
 });
+
+// app.get('/VPResult_test_get', (req, res) => {
+//   res.send({"test1": 80, "test2": 89})
+// })
 
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

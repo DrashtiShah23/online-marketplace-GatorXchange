@@ -23,7 +23,7 @@ function App() {
         <Navbar />
         <Routes>
 
-            <Route exact path='/' element={<Home />} />
+            <Route exact path='/' element={<VPTestHome/>} />
             <Route path='/about' element={<About/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/SignUp' element={<SignUp/>} />

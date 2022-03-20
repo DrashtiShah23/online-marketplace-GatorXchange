@@ -19,8 +19,8 @@ const database = mysql.createConnection({
 database.connect((err) => {
   // If connection to database failed, throw an error
   if (err) {
-      console.error('Error connecting to database: ' + err.stack);
-      return;
+    console.error('Error connecting to database: ' + err.stack);
+    return;
   }
   console.log('MySQL connected');
   // Sample test query to database that just shows all posts in post table
@@ -37,24 +37,24 @@ database.connect((err) => {
 
 // TODO: Populate the database with entries upon app start
 
-// Send user search parameters to server 
+// Send user search parameters to server
 app.post('/VPResult', (req, res) => {
-   
+
   console.log('Posted data. Data is:');
   console.log(req.body);
 
   res.send(req.body);
-  
+
 });
 
 app.get('/VPResult_getTest', (req, res) => {
-  res.send(req.body) 
-  console.log("result getTest: ", req.body) 
-}); 
+  res.send(req.body)
+  console.log("result getTest: ", req.body)
+});
 
 
 app.get('/VPResult', (req, res) => {
-  
+
   console.log('Got a request: ');
   console.log(req.body);
   // console.log(req.body.category);
@@ -70,62 +70,62 @@ app.get('/VPResult', (req, res) => {
   let getPosts;
 
   // User clicked search button without any params. Display all posts from database
-  if (searchTerm == '' && category == '' ) {
-      getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
+  if (searchTerm == '' && category == '') {
+    getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
   }
   // User entered a search term and selected a category
   else if (searchTerm != '' && category != '') {
-    getPosts = 
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
+    getPosts =
+      `SELECT *
+      FROM posts
+      INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `' 
-      AND ( title LIKE '%` + searchTerm + `%' 
+      WHERE category = '` + category + `'
+      AND ( title LIKE '%` + searchTerm + `%'
       OR description LIKE '%` + searchTerm + `%')`;
   }
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
-      getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
+    getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR
       description LIKE '%` + searchTerm + `%')`;
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
-    getPosts = 
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
+    getPosts =
+      `SELECT *
+      FROM posts
+      INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
       WHERE category = '` + category + `'`;
   }
-  // Extract posts from Posts table in database based on user's search params 
+  // Extract posts from Posts table in database based on user's search params
   database.query(getPosts, function (error, results) {
-      if (error) {
-          console.error('Error querying database: ' + error.stack);
-          return;
+    if (error) {
+      console.error('Error querying database: ' + error.stack);
+      return;
+    }
+    // Store the list of search results to send over to the VP Result page
+    let searchResults = [];
+    // For every search result, create a post object containing relevant post info to display
+    for (let i = 0; i < results.length; i++) {
+      let post = {
+        category: results[i].fk_category_id,
+        image: results[i].photo_path,
+        title: results[i].title,
+        price: results[i].price,
+        description: results[i].description
       }
-      // Store the list of search results to send over to the VP Result page
-      let searchResults = [];
-      // For every search result, create a post object containing relevant post info to display
-      for (let i = 0; i < results.length; i++) {
-          let post = {
-            category: results[i].fk_category_id,
-            image: results[i].photo_path,
-            title: results[i].title,
-            price: results[i].price,
-            description: results[i].description
-          }
-          console.log('Post sent over is: ');
-          console.log(post.category);
-          console.log(post.image);
-          console.log(post.title);
-          console.log(post.price);
-          console.log(post.description);
-          // Add the post to the list of search results
-          searchResults.push(post);
-      }
-      // Send the list of search results to the VP Result page to display
-      res.send(searchResults);
+      console.log('Post sent over is: ');
+      console.log(post.category);
+      console.log(post.image);
+      console.log(post.title);
+      console.log(post.price);
+      console.log(post.description);
+      // Add the post to the list of search results
+      searchResults.push(post);
+    }
+    // Send the list of search results to the VP Result page to display
+    res.send(searchResults);
   });
   console.log('Finished sending database results');
 });

@@ -1,3 +1,7 @@
+const dotenv = require("dotenv")
+
+dotenv.config()
+require('dotenv').config();
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")
@@ -5,31 +9,45 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
 const socketio = require("socket.io")
-
-const homeRouter = require('./routes.js')
-
-
+const helmet = require("helmet")
+const morgan = require("morgan")
+const path = require("path")
+const mysql = require("mysql2")
+const homeRouter = require('./routers/home.js')
+const usersRouter = require('./routers/users.js')
+const VpRouter = require('./routers/VPResult.js')
 const app = express();
+
+const config = require('./database/database.js')
+const router = express.Router()
+const PORT = 3001
 // app.use(express.static(path.join(__dirname, 'build')));
 
 
+// const db_pool = mysql.createPool({
+//   host: 'localhost', 
+//   user: config.database.user, 
+//   password: config.database.password, 
+//   database: config.database.name, 
+//   waitForConnections: true,
+//   connectionLimit: 50,
+//   queueLimit: 0 
+// })
 
 
-app.get('/*', function (req, res) {
-  //res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  //res.send('Hello World!');
-  console.log(req.body)
-  res.json("Hello: " + req.body) 
-});
+// app.get('/*', function (req, res) {
+//   //res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//   //res.send('Hello World!');
+//   console.log(req.body)
+//   res.json("Hello: " + req.body)
+// });
 
-
+app.use(helmet())
+app.use(morgan("common"))
 app.use(express.json());
 app.use(cookieParser());
-
-
-
-app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(bodyParser.json());
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -44,10 +62,10 @@ app.use(
     secret: "subscribe",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      expires: 60 * 60 * 24,
-    },
-  })
+    // cookie: {
+    //   expires: 60 * 60 * 24,
+  },
+  )
 );
 
 
@@ -71,25 +89,24 @@ app.post("/login", (req, res) => {
 })
 
 
-app.post('/test', (req, res) => {
-  req.body.name = '123'
-  req.body.email = '123@mail'
-  res.send(req.body);
-  console.log('Sent a message');
-})
+// app.post('/test', (req, res) => {
+//   req.body.name = '123'
+//   req.body.email = '123@mail'
+//   res.send(req.body);
+//   console.log('Sent a message');
+// })
 
-app.get('/test', (req, res) => {
-  res.send('got the data: ' + req.body.name);
-  console.log(req.body.name);
-})
-
-
-
-app.use('/VPResult_getTest', homeRouter);
+// app.get('/test', (req, res) => {
+//   res.send('got the data: ' + req.body.name);
+//   // console.log(req.body.name);
+// })
 
 
-require('dotenv').config();
-const mysql = require("mysql");
+
+// app.use('/VPResult_getTest', homeRouter);
+
+
+
 
 
 // Use express middleware to parse req body into json
@@ -106,37 +123,37 @@ const database = mysql.createConnection({
 });
 
 // Establish a connection to the database
-database.connect((err) => {
-  // If connection to database failed, throw an error
-  if (err) {
-      console.error('Error connecting to database: ' + err.stack);
-      return;
-  }
-  console.log('MySQL connected');
-  // Sample test query to database that just shows all posts in post table
-  // database.query('SELECT * FROM `csc648-team1-db`.`Posts`', (error, results, fields) => {
-  //     console.log(results);
-  //     for (let i = 0; i < results.length; i++) {
-  //     console.log('Post ID: ' + results[i].post_id);
-  //     console.log('Title: ' + results[i].title);
-  //     console.log('Description: ' + results[i].description);
-  //     console.log('Category: ' + results[i].category);
-  //     }
-  // });
-});
+// database.connect((err) => {
+//   // If connection to database failed, throw an error
+//   if (err) {
+//     console.error('Error connecting to database: ' + err.stack);
+//     return;
+//   }
+//   console.log('MySQL connected');
+// Sample test query to database that just shows all posts in post table
+// database.query('SELECT * FROM `csc648-team1-db`.`Posts`', (error, results, fields) => {
+//     console.log(results);
+//     for (let i = 0; i < results.length; i++) {
+//     console.log('Post ID: ' + results[i].post_id);
+//     console.log('Title: ' + results[i].title);
+//     console.log('Description: ' + results[i].description);
+//     console.log('Category: ' + results[i].category);
+//     }
+// });
+//});
 
-// TODO: Populate the database with entries upon app start
+// : Populate the database with entries upon app start
 
 // const store = [] 
 // // Send user search parameters to server 
 // app.post('/VPResult', (req, res) => {
-   
+
 //   console.log('Posted data. Data is:');
 //   console.log(req.body);
 
 //   res.json(req.body);
 //   store.push(req.body) 
-  
+
 // });
 
 // app.get('/VPResult_getTest', (req, res) => {
@@ -147,7 +164,7 @@ database.connect((err) => {
 
 
 // app.get('/VPResult', (req, res) => {
-  
+
 //   console.log('Got a request: ');
 //   console.log(req.body);
 //   // console.log(req.body.category);
@@ -226,10 +243,12 @@ database.connect((err) => {
 
 
 
+app.use('/home', homeRouter)
+app.use('/user', usersRouter)
+app.use('/vpresult', VpRouter)
 
 
-
-app.listen(3001, () => {
-  console.log("server is running on port 3001")
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`)
 });
 

@@ -10,6 +10,8 @@ const port = 3001;
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// build
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({

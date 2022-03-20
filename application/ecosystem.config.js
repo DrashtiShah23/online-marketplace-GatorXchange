@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'prod-server',
     cwd:'/home/ubuntu/prod/source/application',
-    script: './Server/index.js',
+    script: './Server/data.js',
   }],
   deploy: {
     production: {

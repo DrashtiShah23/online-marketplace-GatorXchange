@@ -4,7 +4,8 @@ import axios from 'axios';
 
 
 const VPResult = () => {
-  const [results, updateResults] = useState([]);
+  //const [results, updateResults] = useState([]);
+  let results = []
   const test = [ {
       category: 'books',
       image: '/path/to/image',
@@ -46,7 +47,7 @@ const VPResult = () => {
     return (
     <div className="card" key={i}>
         <div className="card-content">
-          <li>{result.category}</li>
+          <li>{result.fk_category_id}</li>
           <li>{result.image}</li>
           <li>{result.title}</li>
           <li>{result.price}</li>
@@ -60,17 +61,18 @@ const VPResult = () => {
     axios.get('/VPResult')
       .then((res) => {
         console.log(res);
-        updateResults(res);
+        //updateResults(res);
+        results = res;
       })
       .catch((err) => {
         console.log('Failed to get search results' + err);
       })
   }
   
-  //   useEffect(() => {
-  //   // Get the search queries to display the correct search results
-  //   getSearchResults();
-  // }, []);
+    useEffect(() => {
+    // Get the search queries to display the correct search results
+    getSearchResults();
+  }, []);
 
   return (
     <div className="container">

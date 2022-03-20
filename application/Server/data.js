@@ -10,8 +10,14 @@ const port = 3001;
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static('public'));
+
 // build
-app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.send('Hello World!');
+});
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({
@@ -31,12 +37,6 @@ database.connect((err) => {
   console.log('MySQL connected');
 
 });
-
-// Populate the database with entries upon app start
-
-
-
-
 
 // store holds the user search parameters globally
 let store = [];

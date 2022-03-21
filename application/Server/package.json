@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "data.js",
+  "main": "index.js",
   "scripts": {
     "restart": "cd ../ && pm2 startOrRestart ecosystem.config.js",
     "deploy": "cd ../ && pm2 deploy ecosystem.config.js production",

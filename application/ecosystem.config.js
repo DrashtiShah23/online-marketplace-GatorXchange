@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'prod-server',
     cwd:'/home/ubuntu/prod/source/application',
-    script: './Server/data.js',
+    script: './Server/index.js',
   }],
   deploy: {
     production: {
@@ -12,7 +12,7 @@ module.exports = {
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
       path: '/home/ubuntu/prod',
-      'post-deploy': 'cd ./application/Server && npm install && cd ../ && pm2 reload ecosystem.config.js --env production && pm2 serve ./client/build 3000 --name prod-server'
+      'post-deploy': 'cd ./application/Server && npm install && cd ../ && pm2 reload ecosystem.config.js --env production && pm2 serve ./client/build 3000 --name prod-client'
     }
   }
 }

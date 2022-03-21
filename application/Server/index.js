@@ -72,11 +72,27 @@ app.post("/login", async (req, res) => {
 
 })
 
+<<<<<<< HEAD
+
+=======
+// Test endpoints for testing backend. Ignore
+app.post('/test', (req, res) => {
+  req.body.name = '123'
+  req.body.email = '123@mail'
+  res.send(req.body);
+  console.log('Sent a message');
+})
+
+app.get('/test', (req, res) => {
+  res.send('got the data: ' + req.body.name);
+  console.log(req.body.name);
+})
+>>>>>>> origin
 
 
 
 
-
+<<<<<<< HEAD
 // Create a connection to the database using account info
 const database = mysql.createConnection({
   user: process.env.USER,
@@ -97,5 +113,9 @@ app.use('/upload', uploadRouter)
 
 app.listen(PORT, async () => {
   console.log(`server is running on port ${PORT}`)
+=======
+app.listen(3001, () => {
+  console.log("server is running on port 3001")
+>>>>>>> origin
 });
 

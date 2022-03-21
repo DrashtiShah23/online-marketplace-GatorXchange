@@ -10,7 +10,7 @@ const Navbar = () => {
       <Nav>
         <NavMenu>
         <NavLink to="/" activeStyle>
-            Home
+            Gator XChange
           </NavLink>
           <NavLink to="/about" activeStyle>
             About
@@ -20,9 +20,6 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/SignUp" activeStyle>
             Sign Up
-          </NavLink>
-          <NavLink to="/VPTestHome" activeStyle>
-            Vertical Prototype Home
           </NavLink>
         </NavMenu>
       </Nav>

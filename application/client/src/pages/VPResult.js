@@ -3,8 +3,12 @@ import '../css/about.css';
 import axios from 'axios';
 
 
+
+
 const VPResult = () => {
-  const [results, updateResults] = useState([]);
+  let [results, updateResults] = useState([]);
+  let [result2, setResult2] = useState([])
+  
   const test = [ {
       category: 'books',
       image: '/path/to/image',
@@ -41,36 +45,42 @@ const VPResult = () => {
       description: 'for iphone'
     },
   ];
-  // Display the list of search results received from database
-  const postList = test.map((result, i) => {
+  // Display the pst of search results received from database
+  const post = results.map((result, i) => {
     return (
     <div className="card" key={i}>
         <div className="card-content">
-          <li>{result.category}</li>
-          <li>{result.image}</li>
-          <li>{result.title}</li>
-          <li>{result.price}</li>
-          <li>{result.description}</li>
+          <p>Category: {result.category}</p>
+          <p>Image: {result.image}</p>
+          <p>Title: {result.title}</p>
+          <p>Price: {result.price}</p>
+          <p>Description: {result.description}</p>
         </div>             
     </div>
     )
   });
-  // Get the list of search results from database and store it in the results array
+  // Get the pst of search results from database and store it in the results array
   const getSearchResults = () => {
     axios.get('/VPResult')
       .then((res) => {
-        console.log(res);
-        updateResults(res);
+        // Create a copy of the database results returned
+        results = [...res.data];
+        
+        console.log(results);
+        
+        // Update the results array state
+        updateResults(results);
+        
       })
       .catch((err) => {
         console.log('Failed to get search results' + err);
       })
   }
   
-  //   useEffect(() => {
-  //   // Get the search queries to display the correct search results
-  //   getSearchResults();
-  // }, []);
+    useEffect(() => {
+    // Get the search queries to display the correct search results
+    getSearchResults();
+  }, []);
 
   return (
     <div className="container">
@@ -79,12 +89,31 @@ const VPResult = () => {
       </header>
     
       <div>
-        <h3>Number of Results returned: {test.length}</h3>
+        <h3>Number of Results returned: {results.length}</h3>
         <h3>Here are your search results!</h3>
-        <div className="card-container">
-          {postList}
-        </div>
       </div>
+
+      <div className="card-container">
+        
+        {/* Display the pst of results from the database */}
+        {
+          results.map((result, i) => {
+            return (
+              <div className="card" key={i}>
+                <div className="card-content">
+                  <p>Category: {result.category}</p>
+                  <p>Image: {result.image}</p>
+                  <p>Title: {result.title}</p>
+                  <p>Price: ${result.price}.00</p>
+                  <p>Description: {result.description}</p>
+                </div>
+              </div> 
+            )
+          })
+        }
+        
+      </div>
+
     </div>
     );
 };

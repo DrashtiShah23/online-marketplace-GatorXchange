@@ -18,19 +18,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // VERY IMPORTANT: Configures the server so that requests to any route 
 // is served the index.html file in the production build
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
-// VERY IMPORTANT: Respond to any route requests with the index.html file
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// // VERY IMPORTANT: Respond to any route requests with the index.html file
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({
-  user: process.env.USER,
-  host: process.env.HOST,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE_NAME
+  // user: process.env.USER,
+  // host: process.env.HOST,
+  // password: process.env.PASSWORD,
+  // database: process.env.DATABASE_NAME
+  
+  // Hard coding the MySQL credentials for build version
+  user: "admin",
+  host: "localhost",
+  password: "team1",
+  database: "csc648-team1-db"
 });
 
 // Establish a connection to the database

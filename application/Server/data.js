@@ -5,18 +5,24 @@ const app = express();
 const bodyParser = require("body-parser");
 const { json } = require('body-parser');
 const port = 3001;
+const path = require('path');
 
 // Use express middleware to parse req body into json
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static('public'));
 
-// build
-app.get('/', (req, res) => {
+//app.use(express.static('public'));
+
+
+// VERY IMPORTANT: Configures the server so that requests to any route 
+// is served the index.html file in the production build
+app.use(express.static(path.join(__dirname, 'build')));
+
+// VERY IMPORTANT: Respond to any route requests with the index.html file
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  res.send('Hello World!');
 });
 
 // Create a connection to the database using account info

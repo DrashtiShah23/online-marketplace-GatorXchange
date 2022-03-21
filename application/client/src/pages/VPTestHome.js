@@ -18,8 +18,6 @@ const VPTestHome = () => {
       searchTerm: searchTerm,
     };
     
-    // Send request to server passing in search parameters 
-    // that the VP Result page will need to process database posts
     axios.post('/VPResult', searchParams)
       .then((res) => {
         // If status is OK, alert the user of submission success and that they
@@ -49,6 +47,7 @@ const VPTestHome = () => {
         console.log('Search submission failed :(');
         console.log(err);
       });
+    
     // Reset the search term and category values after submission
     setSearchTerm('');
     setCategory('');  

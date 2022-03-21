@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "data.js",
   "proxy": "http://localhost:3001",
   "scripts": {
     "restart": "cd ../ && pm2 startOrRestart ecosystem.config.js",
@@ -22,6 +22,7 @@
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
+    "path": "^0.12.7",
     "rebuild": "^0.1.2",
     "sharp": "^0.30.3",
     "socket.io": "^4.4.1"

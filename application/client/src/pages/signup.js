@@ -12,7 +12,7 @@ const Signup = () => {
         <div className="container">
             <div className="card">
                 <div className="card-info">
-                    <h1 class="form-title">Sign Up</h1>
+                    <h1 className="form-title">Sign Up</h1>
                     <div>
                         <label>First Name: </label>
                         <input input type="fname" required name="fname" placeholder="First Name" class="text-input"

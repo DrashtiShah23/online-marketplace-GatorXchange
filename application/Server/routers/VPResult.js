@@ -17,13 +17,13 @@ const db_pool = mysql.createPool({
 
 const store = []
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     res.send("vp router called!")
 })
 
 
 
-router.post('/VPResult', (req, res) => {
+router.post('/VPResult', async (req, res) => {
 
     console.log('Posted data. Data is:');
     console.log(req.body);
@@ -35,12 +35,12 @@ router.post('/VPResult', (req, res) => {
 
 
 
-router.get('/VPResult_getTest', (req, res) => {
+router.get('/VPResult_getTest', async (req, res) => {
     res.send(req.body)
     console.log("result getTest: ", req.body)
 });
 
-router.get('/VPResult', (req, res) => {
+router.get('/VPResult', async (req, res) => {
 
     res.send("Vp result called " + store)
 

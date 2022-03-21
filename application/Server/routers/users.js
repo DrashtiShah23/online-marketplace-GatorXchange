@@ -18,7 +18,7 @@ const db_pool = mysql.createPool({
 
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     res.send("USERS SERVER")
 })
 
@@ -104,7 +104,7 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.post('/logout', (req, res) => {
+router.post('/logout', async (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             res.send(`Error: ${err}`)

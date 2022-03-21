@@ -1,25 +1,49 @@
-import react from 'react';
+import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 
 
+function Test() {
+    const [image, setImage] = useState({ preview: '', data: '' })
+    const [status, setStatus] = useState('')
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let formData = new FormData()
+        formData.append('file', image.data)
+        const response = await fetch('http://localhost:3001/upload/image', {
+            method: 'POST',
+            body: formData,
+        })
 
-
-const Test = () => {
-    const [input, setInput] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const example = { input: input }
-        axios.post('/vpresult/vpresult', example)
-
+        if (response) setStatus(response.statusText)
     }
+
+    const handleFileChange = (e) => {
+        const img = {
+            preview: URL.createObjectURL(e.target.files[0]),
+            data: e.target.files[0],
+        }
+        setImage(img)
+    }
+
     return (
-        <div>
-            <input value={input} onChange={(e) => setInput(e.target.value)}></input>
-            <button value="Submit" onClick={handleSubmit}>text</button>
+        <div className='Test'>
+            <h1>Upload to server</h1>
+            {image.preview && <img src={image.preview} alt={'fuck'} width='100' height='100' />}
+            <hr></hr>
+            <form onSubmit={handleSubmit}>
+                <input type='file' name='file' onChange={handleFileChange}></input>
+                <button type='submit'>Submit</button>
+            </form>
+            {status && <h4>{status}</h4>}
         </div>
     )
 }
+
+
+
+
+
+
 
 export default Test;

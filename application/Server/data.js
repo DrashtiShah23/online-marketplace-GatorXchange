@@ -38,7 +38,7 @@ database.connect((err) => {
 // TODO: Populate the database with entries upon app start
 
 // Send user search parameters to server
-app.post('/VPResult', (req, res) => {
+app.post('/VPResult', async (req, res) => {
 
   console.log('Posted data. Data is:');
   console.log(req.body);
@@ -47,13 +47,13 @@ app.post('/VPResult', (req, res) => {
 
 });
 
-app.get('/VPResult_getTest', (req, res) => {
+app.get('/VPResult_getTest', async (req, res) => {
   res.send(req.body)
   console.log("result getTest: ", req.body)
 });
 
 
-app.get('/VPResult', (req, res) => {
+app.get('/VPResult', async (req, res) => {
 
   console.log('Got a request: ');
   console.log(req.body);
@@ -99,7 +99,7 @@ app.get('/VPResult', (req, res) => {
       WHERE category = '` + category + `'`;
   }
   // Extract posts from Posts table in database based on user's search params
-  database.query(getPosts, function (error, results) {
+  database.query(getPosts, async function (error, results) {
     if (error) {
       console.error('Error querying database: ' + error.stack);
       return;
@@ -131,4 +131,4 @@ app.get('/VPResult', (req, res) => {
 });
 
 
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+app.listen(port, async () => console.log(`Server is listening on port ${port}`));

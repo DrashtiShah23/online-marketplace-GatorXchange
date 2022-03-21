@@ -39,7 +39,7 @@ function App() {
 
                 <Route path='/VPTestHome' element={<VPTestHome />} />
                 <Route path='/VPResult' element={<VPResult />} />
-                <Route path='/test' element={<Test />} />
+                <Route path='/upload' element={<Test />} />
 
             </Routes>
         </Router>

@@ -101,7 +101,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // // // VERY IMPORTANT: Respond to any route requests with the index.html file
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
   //res.send('Hello world!');
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });

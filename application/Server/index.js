@@ -1,3 +1,6 @@
+const dotenv = require("dotenv")
+dotenv.config()
+require('dotenv').config();
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")
@@ -5,15 +8,29 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
 const socketio = require("socket.io")
+<<<<<<< HEAD
 const port = 3001;
 
 
+=======
+const helmet = require("helmet")
+const morgan = require("morgan")
+const path = require("path")
+const mysql = require("mysql2")
+const homeRouter = require('./routers/home.js')
+const usersRouter = require('./routers/users.js')
+const VpRouter = require('./routers/VPResult.js')
+const uploadRouter = require('./routers/upload.js')
+>>>>>>> updated.Mconventions
 const app = express();
+
+// const config = require('./database/database.js')
+// const router = express.Router()
+const PORT = 3001
 // app.use(express.static(path.join(__dirname, 'build')));
 
 
-
-
+<<<<<<< HEAD
 // app.get('/*', function (req, res) {
 //   //res.sendFile(path.join(__dirname, 'build', 'index.html'));
 //   //res.send('Hello World!');
@@ -29,6 +46,16 @@ const app = express();
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
+=======
+
+
+app.use(helmet())
+app.use(morgan("common"))
+app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(bodyParser.json());
+>>>>>>> updated.Mconventions
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -43,14 +70,14 @@ app.use(
     secret: "subscribe",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      expires: 60 * 60 * 24,
-    },
-  })
+    // cookie: {
+    //   expires: 60 * 60 * 24,
+  },
+  )
 );
 
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   const firstname = req.body.firstName;
   const lastname = req.body.lastName;
   const email = req.body.Email;
@@ -62,13 +89,19 @@ app.post("/register", (req, res) => {
 })
 
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   const username = req.body.Username;
   const password = req.body.passWord;
 
 
 })
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> updated.Mconventions
 // Test endpoints for testing backend. Ignore
 app.post('/test', (req, res) => {
   req.body.name = '123'
@@ -81,6 +114,7 @@ app.get('/test', (req, res) => {
   res.send('got the data: ' + req.body.name);
   console.log(req.body.name);
 })
+<<<<<<< HEAD
 
 
 require('dotenv').config();
@@ -92,6 +126,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
 
 //app.use(express.static('public'));
 
@@ -106,6 +143,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
+<<<<<<< HEAD
 // Create a connection to the database using account info
 const database = mysql.createConnection({
   // user: process.env.USER,
@@ -120,6 +158,7 @@ const database = mysql.createConnection({
   database: "csc648-team1-db"
 });
 
+<<<<<<< HEAD
 // Establish a connection to the database
 database.connect((err) => {
   // If connection to database failed, throw an error
@@ -238,11 +277,27 @@ app.get('/VPResult', (req, res) => {
   
   
 });
+=======
+>>>>>>> updated.Mconventions
 
 
 
 
+app.use('/home', homeRouter)
+app.use('/user', usersRouter)
+app.use('/vpresult', VpRouter)
+app.use('/upload', uploadRouter)
 
 
+<<<<<<< HEAD
+=======
+app.listen(PORT, async () => {
+  console.log(`server is running on port ${PORT}`)
+=======
+app.listen(3001, () => {
+  console.log("server is running on port 3001")
+>>>>>>> origin
+});
+>>>>>>> updated.Mconventions
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

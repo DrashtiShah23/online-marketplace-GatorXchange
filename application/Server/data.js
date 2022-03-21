@@ -14,7 +14,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //app.use(express.static('public'));
+<<<<<<< HEAD
 
+=======
+>>>>>>> updated.Mconventions
 
 // VERY IMPORTANT: Configures the server so that requests to any route 
 // is served the index.html file in the production build
@@ -24,6 +27,15 @@ app.use(express.static(path.join(__dirname, './client/build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build', 'index.html'));
 });
+
+// VERY IMPORTANT: Configures the server so that requests to any route 
+// is served the index.html file in the production build
+// app.use(express.static(path.join(__dirname, 'build')));
+
+// // VERY IMPORTANT: Respond to any route requests with the index.html file
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({
@@ -43,8 +55,8 @@ const database = mysql.createConnection({
 database.connect((err) => {
   // If connection to database failed, throw an error
   if (err) {
-      console.error('Error connecting to database: ' + err.stack);
-      return;
+    console.error('Error connecting to database: ' + err.stack);
+    return;
   }
   console.log('MySQL connected');
 
@@ -52,19 +64,49 @@ database.connect((err) => {
 
 // store holds the user search parameters globally
 let store = [];
+<<<<<<< HEAD
+=======
 
+<<<<<<< HEAD
+// Send user search parameters to server
+app.post('/VPResult', async (req, res) => {
+>>>>>>> updated.Mconventions
+
+  console.log('Posted data. Data is:');
+=======
 // Send user search parameters to server 
 app.post('/VPResult', (req, res) => {
   console.log();
   console.log('Got a post request. Request body is:');
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
   console.log(req.body);
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
   res.send(req.body);
-  
+
 });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+app.get('/VPResult_getTest', async (req, res) => {
+  res.send(req.body)
+  console.log("result getTest: ", req.body)
+});
+
+
+app.get('/VPResult', async (req, res) => {
+
+  console.log('Got a request: ');
+  console.log(req.body);
+  // console.log(req.body.category);
+  // console.log(req.body.searchTerm);
+=======
+>>>>>>> updated.Mconventions
 // Get the search params and assign to separate variables
 app.get('/VPResult', (req, res) => {
   console.log();
@@ -74,6 +116,10 @@ app.get('/VPResult', (req, res) => {
   let storeLength = store.length;
   console.log('Category is: ' + store[storeLength - 1].category);
   console.log('Search term is: ' + store[storeLength - 1].searchTerm);
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
 
   // Set the category and search term from the user's input
   const category = store[storeLength - 1].category;
@@ -85,34 +131,75 @@ app.get('/VPResult', (req, res) => {
   let getPosts;
 
   // User clicked search button without any params. Display all posts from database
-  if (searchTerm == '' && category == '' ) {
-      getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
+  if (searchTerm == '' && category == '') {
+    getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
   }
   // User entered a search term and selected a category
   else if (searchTerm != '' && category != '') {
-    getPosts = 
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
+    getPosts =
+      `SELECT *
+      FROM posts
+      INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `' 
-      AND ( title LIKE '%` + searchTerm + `%' 
+      WHERE category = '` + category + `'
+      AND ( title LIKE '%` + searchTerm + `%'
       OR description LIKE '%` + searchTerm + `%')`;
   }
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
+<<<<<<< HEAD
       getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
       description LIKE '%` + searchTerm + `%'`;
+=======
+<<<<<<< HEAD
+    getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR
+      description LIKE '%` + searchTerm + `%')`;
+=======
+      getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
+      description LIKE '%` + searchTerm + `%'`;
+>>>>>>> origin
+>>>>>>> updated.Mconventions
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
-    getPosts = 
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
+    getPosts =
+      `SELECT *
+      FROM posts
+      INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
       WHERE category = '` + category + `'`;
   }
+<<<<<<< HEAD
+  // Extract posts from Posts table in database based on user's search params
+  database.query(getPosts, async function (error, results) {
+    if (error) {
+      console.error('Error querying database: ' + error.stack);
+      return;
+    }
+    // Store the list of search results to send over to the VP Result page
+    let searchResults = [];
+    // For every search result, create a post object containing relevant post info to display
+    for (let i = 0; i < results.length; i++) {
+      let post = {
+        category: results[i].fk_category_id,
+        image: results[i].photo_path,
+        title: results[i].title,
+        price: results[i].price,
+        description: results[i].description
+      }
+      console.log('Post sent over is: ');
+      console.log(post.category);
+      console.log(post.image);
+      console.log(post.title);
+      console.log(post.price);
+      console.log(post.description);
+      // Add the post to the list of search results
+      searchResults.push(post);
+    }
+    // Send the list of search results to the VP Result page to display
+    res.send(searchResults);
+  });
+=======
   // Extract posts from Posts table in database based on user's search params 
   let searchResults = [];
   database.query(getPosts, function (error, results) {
@@ -151,6 +238,10 @@ app.get('/VPResult', (req, res) => {
   // Send the database results to the frontend
   res.send(JSON.stringify(searchResults));
   
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
   console.log('Finished sending database results');
   
   });
@@ -159,4 +250,4 @@ app.get('/VPResult', (req, res) => {
 });
 
 
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+app.listen(port, async () => console.log(`Server is listening on port ${port}`));

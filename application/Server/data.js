@@ -14,7 +14,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 //app.use(express.static('public'));
+<<<<<<< HEAD
 
+=======
+>>>>>>> updated.Mconventions
+
+// VERY IMPORTANT: Configures the server so that requests to any route 
+// is served the index.html file in the production build
+// app.use(express.static(path.join(__dirname, 'build')));
+
+// // VERY IMPORTANT: Respond to any route requests with the index.html file
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // VERY IMPORTANT: Configures the server so that requests to any route 
 // is served the index.html file in the production build
@@ -52,24 +64,42 @@ database.connect((err) => {
 
 // store holds the user search parameters globally
 let store = [];
+<<<<<<< HEAD
+=======
 
 <<<<<<< HEAD
 // Send user search parameters to server
 app.post('/VPResult', async (req, res) => {
+>>>>>>> updated.Mconventions
 
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+// Send user search parameters to server
+app.post('/VPResult', async (req, res) => {
+
+=======
+>>>>>>> Stashed changes
   console.log('Posted data. Data is:');
 =======
 // Send user search parameters to server 
 app.post('/VPResult', (req, res) => {
   console.log();
   console.log('Got a post request. Request body is:');
+<<<<<<< Updated upstream
 >>>>>>> origin
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
   console.log(req.body);
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
   res.send(req.body);
 
+<<<<<<< Updated upstream
 });
 
 <<<<<<< HEAD
@@ -78,6 +108,18 @@ app.get('/VPResult_getTest', async (req, res) => {
   console.log("result getTest: ", req.body)
 });
 
+=======
+});
+
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+app.get('/VPResult_getTest', async (req, res) => {
+  res.send(req.body)
+  console.log("result getTest: ", req.body)
+});
+
+>>>>>>> Stashed changes
 
 app.get('/VPResult', async (req, res) => {
 
@@ -86,6 +128,10 @@ app.get('/VPResult', async (req, res) => {
   // console.log(req.body.category);
   // console.log(req.body.searchTerm);
 =======
+<<<<<<< Updated upstream
+=======
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
 // Get the search params and assign to separate variables
 app.get('/VPResult', (req, res) => {
   console.log();
@@ -95,7 +141,14 @@ app.get('/VPResult', (req, res) => {
   let storeLength = store.length;
   console.log('Category is: ' + store[storeLength - 1].category);
   console.log('Search term is: ' + store[storeLength - 1].searchTerm);
+<<<<<<< Updated upstream
 >>>>>>> origin
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
 
   // Set the category and search term from the user's input
   const category = store[storeLength - 1].category;
@@ -124,12 +177,26 @@ app.get('/VPResult', (req, res) => {
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
 <<<<<<< HEAD
+<<<<<<< Updated upstream
     getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR
       description LIKE '%` + searchTerm + `%')`;
 =======
       getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
       description LIKE '%` + searchTerm + `%'`;
 >>>>>>> origin
+=======
+      getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
+      description LIKE '%` + searchTerm + `%'`;
+=======
+<<<<<<< HEAD
+    getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR
+      description LIKE '%` + searchTerm + `%')`;
+=======
+      getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
+      description LIKE '%` + searchTerm + `%'`;
+>>>>>>> origin
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
@@ -209,7 +276,14 @@ app.get('/VPResult', (req, res) => {
   // Send the database results to the frontend
   res.send(JSON.stringify(searchResults));
   
+<<<<<<< Updated upstream
 >>>>>>> origin
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
   console.log('Finished sending database results');
   
   });

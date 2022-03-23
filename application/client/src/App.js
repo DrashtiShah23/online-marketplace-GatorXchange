@@ -38,10 +38,19 @@ function App() {
                 <Route path='/AboutMicheas' element={<AboutMicheas />} />
 
 <<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
                 <Route path='/VPTestHome' element={<VPTestHome />} />
                 <Route path='/VPResult' element={<VPResult />} />
                 <Route path='/upload' element={<Test />} />
 =======
+<<<<<<< Updated upstream
+=======
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
             <Route exact path='/' element={<VPTestHome/>} />
             <Route path='/about' element={<About/>} />
             <Route path='/login' element={<Login/>} />

@@ -24,9 +24,18 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
 <<<<<<< HEAD
+<<<<<<< Updated upstream
     "nodemon": "^2.0.15",
 =======
 >>>>>>> origin
+=======
+=======
+<<<<<<< HEAD
+    "nodemon": "^2.0.15",
+=======
+>>>>>>> origin
+>>>>>>> updated.Mconventions
+>>>>>>> Stashed changes
     "path": "^0.12.7",
     "rebuild": "^0.1.2",
     "run-script": "^0.1.1",

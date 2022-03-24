@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Index';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import Home from './pages/index';
@@ -13,7 +13,7 @@ import AboutDrashti from './pages/About/AboutDrashti';
 import AboutMary from './pages/About/AboutMary';
 import AboutJavier from './pages/About/Aboutjavier';
 import AboutMicheas from './pages/About/AboutMicheas';
-
+// import SearchBar from './components/SearchBar.js'
 import VPTestHome from './pages/VPTestHome'; // Vertical prototype test home page
 import VPResult from './pages/VPResult'; // Vertical prototype search result page
 import Test from './pages/Test'
@@ -24,40 +24,20 @@ function App() {
         <Router>
             <Navbar />
             <Routes>
-
                 <Route exact path='/' element={<Home />} />
-                <Route path='/about' element={<About />} />
+                <Route path="/about" element={<About />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
-
                 <Route path='/AboutWilfredo' element={<AboutWilfredo />} />
                 <Route path='/AboutThomas' element={<AboutThomas />} />
                 <Route path='/AboutDrashti' element={<AboutDrashti />} />
                 <Route path='/AboutMary' element={<AboutMary />} />
                 <Route path='/AboutJavier' element={<AboutJavier />} />
                 <Route path='/AboutMicheas' element={<AboutMicheas />} />
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
                 <Route path='/VPTestHome' element={<VPTestHome />} />
                 <Route path='/VPResult' element={<VPResult />} />
                 <Route path='/upload' element={<Test />} />
-=======
->>>>>>> updated.Mconventions
-            <Route exact path='/' element={<VPTestHome/>} />
-            <Route path='/about' element={<About/>} />
-            <Route path='/login' element={<Login/>} />
-            <Route path='/SignUp' element={<SignUp/>} />
-            
-            <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
-            <Route path='/AboutThomas' element={<AboutThomas/>} />
-            <Route path='/AboutDrashti' element={<AboutDrashti/>} />
-            <Route path='/AboutMary' element={<AboutMary/>} />
-            <Route path='/AboutJavier' element={<AboutJavier/>} />
-            <Route path='/AboutMicheas' element={<AboutMicheas/>} />
->>>>>>> origin
-
+                {/* <Route exact path='/' element={<VPTestHome />} /> */}
             </Routes>
         </Router>
     );

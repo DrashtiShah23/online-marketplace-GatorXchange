@@ -4,23 +4,25 @@ const config = require('../database/database')
 const mysql = require("mysql2")
 
 const router = express.Router();
+const database = mysql.createConnection({
+    user: process.env.USER,
+    host: process.env.HOST,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE_NAME
 
-const db_pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'Life_Cost_Tracker_DB',
-    waitForConnections: true,
-    connectionLimit: 50,
-    queueLimit: 0
-})
+    // Hard coding the MySQL credentials for build version
+    // user: "admin",
+    // host: "localhost",
+    // password: "team1",
+    // database: "csc648-team1-db"
+});
 
 
 
 
-router.get('/', async (req, res) => {
-    res.send("USERS SERVER")
-})
+// router.get('/', async (req, res) => {
+//     res.send("USERS SERVER")
+// })
 
 
 

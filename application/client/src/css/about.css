@@ -7,19 +7,19 @@
 }
 
 header {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+     width: 100%;
+     height: 200px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 }
 
 .about-section {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+     width: 100%;
+     height: 100px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 }
 
 /* Grid System for cards */
@@ -96,4 +96,7 @@ h3 {
 .btn-learn-more:hover {
     background-color: whitesmoke;
     color: steelblue;
+}
+.text{
+word-break: break-all;
 }

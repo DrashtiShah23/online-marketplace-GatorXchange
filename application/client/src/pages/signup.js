@@ -37,7 +37,6 @@ const Signup = () => {
                     <div>
                         <label>Password: </label>
                         <input input type="password" required name="password" placeholder="Password" class="text-input"
-
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />

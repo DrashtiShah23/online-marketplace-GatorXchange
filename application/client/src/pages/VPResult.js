@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import '../css/about.css';
 import axios from 'axios';
 
+
 const VPResult = () => {
   let [results, updateResults] = useState([]);
   
@@ -11,7 +12,7 @@ const VPResult = () => {
       <div className="card" key={i}>
         <div className="card-content">
           <p>Category: {result.category}</p>
-          <p>Image: {result.image}</p>
+          <p>Image: <img src={result.image}/></p>
           <p>Title: {result.title}</p>
           <p>Price: ${result.price}.00</p>
           <p>Description: {result.description}</p>

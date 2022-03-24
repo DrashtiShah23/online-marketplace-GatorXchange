@@ -33,14 +33,12 @@ const VPTestHome = () => {
           
           // Redirect to the vertical prototype result page after form submission
           navigate("/VPResult", { replace: true });
-          //<VPResult />
-          
+
         //}
       })
       .catch((err) => {
         if (err.response) {
-          console.log(err.response.status);
-          console.log('Server responded');
+          console.log('Server status is: ' + err.response.status);
         }
         else if (err.request) {
           console.log(err.request);

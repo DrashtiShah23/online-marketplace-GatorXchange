@@ -83,7 +83,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 
 // VERY IMPORTANT: Configures the server so that requests to any route 

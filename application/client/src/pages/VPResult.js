@@ -20,9 +20,9 @@ const VPResult = () => {
     </div>
     )
   });
-  // Get the pst of search results from database and store it in the results array
+  // Get the list of search results from database and store it in the results array
   const getSearchResults = () => {
-    axios.get('/VPResult')
+    axios.get('/search')
       .then((res) => {
         // Create a copy of the database results returned
         results = [...res.data];

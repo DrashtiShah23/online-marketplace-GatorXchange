@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../css/about.css';
 import VPResult from './VPResult';
@@ -7,7 +6,8 @@ import VPResult from './VPResult';
 const VPTestHome = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
-  let navigate = useNavigate();
+  const [searchSubmitted, setSearchSubmitted] = useState(false);
+  
 
   const handleSubmit = (e) => {
     // Don't refresh the page upon submitting search queries
@@ -19,22 +19,22 @@ const VPTestHome = () => {
       searchTerm: searchTerm,
     };
     
-    axios.post('/VPResult', searchParams)
+    axios.post('/search', searchParams)
       .then((res) => {
         // If status is OK, alert the user of submission success and that they
         // will be redirected to another page that displays the search results
-        //if (res.status === 200) {
-          alert('Received search params. Redirecting to show search results...');
+        if (res.status === 200) {
+          
           console.log(res.data);
           console.log('Data submitted is:');
           console.log(searchParams);
           console.log('Category input is: ' + searchParams.category);
           console.log('Search term input is ' + searchParams.searchTerm);
           
-          // Redirect to the vertical prototype result page after form submission
-          navigate("/VPResult", { replace: true });
-
-        //}
+          // Set the state of search submitted to true so search results dsplay
+          setSearchSubmitted(true);
+          
+        }
       })
       .catch((err) => {
         if (err.response) {
@@ -48,9 +48,10 @@ const VPTestHome = () => {
         console.log(err);
       });
     
-    // Reset the search term and category values after submission
+    // Reset the search term, category, and search submitted state values after submission
     setSearchTerm('');
-    setCategory('');  
+    setCategory('');
+    setSearchSubmitted(false);  
   }
 
   return (
@@ -68,6 +69,10 @@ const VPTestHome = () => {
           </select>
           <input name="searchTerm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
           <button type="submit" onClick={handleSubmit}>Search</button>  
+      </div>
+      <div>
+        {/* Display a list of search results each time user submits a search */}
+        {searchSubmitted ? <VPResult />: null}
       </div>
     </div>
 

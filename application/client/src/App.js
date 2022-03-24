@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Index';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import Home from './pages/index';
@@ -30,7 +30,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
          
-                <Route path='/VPResult' element={<VPResult />} />
+                
                 <Route path='/upload' element={<Test />} />
             
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />

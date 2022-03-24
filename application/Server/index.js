@@ -126,7 +126,7 @@ database.connect((err) => {
 let store = [];
 
 // Send user search parameters to server 
-app.post('/VPResult', (req, res) => {
+app.post('/search', (req, res) => {
   console.log();
   console.log('Got a post request. Request body is:');
   console.log(req.body);
@@ -138,7 +138,7 @@ app.post('/VPResult', (req, res) => {
 });
 
 // Get the search params and assign to separate variables
-app.get('/VPResult', (req, res) => {
+app.get('/search', (req, res) => {
   console.log();
   console.log(store);
   console.log('Get request received the following request body:');

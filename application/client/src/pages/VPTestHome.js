@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../css/about.css';
 import VPResult from './VPResult';
 
+
 const VPTestHome = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
@@ -12,7 +13,7 @@ const VPTestHome = () => {
   const handleSubmit = (e) => {
     // Don't refresh the page upon submitting search queries
     e.preventDefault();
-    
+
     // Create search parameters that will be used for SQL queries into the database
     const searchParams = {
       category: category,
@@ -61,14 +62,14 @@ const VPTestHome = () => {
       </header>
       {/* Get user search params */}
       <div>
-          <select name="categories" id="categories" value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option>Select a category</option>
-            <option value="books">Books</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothes">Clothes</option>
-          </select>
-          <input name="searchTerm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
-          <button type="submit" onClick={handleSubmit}>Search</button>  
+        <select name="categories" id="categories" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option>Select a category</option>
+          <option value="books">Books</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothes">Clothes</option>
+        </select>
+        <input name="searchTerm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        <button type="submit" onClick={handleSubmit}>Search</button>
       </div>
       <div>
         {/* Display a list of search results each time user submits a search */}

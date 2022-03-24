@@ -77,3 +77,6 @@ img{
   padding: 20px;
   border-radius: 5px;
 }
+.text{
+  word-break: break-all;
+}

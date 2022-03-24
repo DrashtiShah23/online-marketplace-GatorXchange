@@ -14,7 +14,6 @@ function Test() {
             method: 'POST',
             body: formData,
         })
-
         if (response) setStatus(response.statusText)
     }
 
@@ -29,7 +28,7 @@ function Test() {
     return (
         <div className='Test'>
             <h1>Upload to server</h1>
-            {image.preview && <img src={image.preview} alt={'fuck'} width='100' height='100' />}
+            {image.preview && <img src={image.preview} alt={'idk'} width='100' height='100' />}
             <hr></hr>
             <form onSubmit={handleSubmit}>
                 <input type='file' name='file' onChange={handleFileChange}></input>

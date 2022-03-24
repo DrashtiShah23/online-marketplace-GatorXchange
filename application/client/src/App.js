@@ -13,7 +13,7 @@ import AboutDrashti from './pages/About/AboutDrashti';
 import AboutMary from './pages/About/AboutMary';
 import AboutJavier from './pages/About/Aboutjavier';
 import AboutMicheas from './pages/About/AboutMicheas';
-
+// import SearchBar from './components/SearchBar.js'
 import VPTestHome from './pages/VPTestHome'; // Vertical prototype test home page
 import VPResult from './pages/VPResult'; // Vertical prototype search result page
 import Test from './pages/Test'
@@ -25,13 +25,11 @@ function App() {
             <Navbar />
             <Routes>
 
+                {/* <Route exact path='/' element={<Home />} /> */}
                 <Route exact path='/' element={<VPTestHome/>} />
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
-         
-                
-                <Route path='/upload' element={<Test />} />
             
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
                 <Route path='/AboutThomas' element={<AboutThomas/>} />
@@ -39,7 +37,9 @@ function App() {
                 <Route path='/AboutMary' element={<AboutMary/>} />
                 <Route path='/AboutJavier' element={<AboutJavier/>} />
                 <Route path='/AboutMicheas' element={<AboutMicheas/>} />
-
+                
+                <Route path='/upload' element={<Test />} />
+                
             </Routes>
         </Router>
     );

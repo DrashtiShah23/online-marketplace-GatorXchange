@@ -26,7 +26,6 @@ const VPResult = () => {
       .then((res) => {
         // Create a copy of the database results returned
         results = [...res.data];
-        
         console.log(results);
         
         // Update the state of the results array
@@ -37,9 +36,10 @@ const VPResult = () => {
         console.log('Failed to get search results' + err);
       })
   }
-  
-    useEffect(() => {
-    // Get the search queries to display the correct search results
+
+
+  useEffect(() => {
+    // Call this function when VPResult component is rendered
     getSearchResults();
   }, []);
 
@@ -48,7 +48,7 @@ const VPResult = () => {
       <header>
         <h1>Vertical Prototype Search Results</h1>
       </header>
-    
+
       <div>
         <h3>Number of Results returned: {results.length}</h3>
         <h3>Here are your search results!</h3>
@@ -58,9 +58,8 @@ const VPResult = () => {
         {/* Display the list of results from the database */}
         {displayResults}
       </div>
-
     </div>
-    );
+  );
 };
 
 export default VPResult;

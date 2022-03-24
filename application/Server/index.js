@@ -18,15 +18,42 @@ const app = express();
 const PORT = 3001;
 
 
+// const { Server } = require("socket.io")
+const logger = require("morgan")
+// const homeRouter = require('./routers/home.js')
+// const usersRouter = require('./routers/users.js')
+// // const VpRouter = require('./routers/VPResult.js')
+// const uploadRouter = require('./routers/upload.js')
+// // const chatRouter = require('./routers/chat.js')
+// const http = require("http")
+
+// const server = http.createServer(app)
+// const config = require('./database/database.js')
+// const router = express.Router()
+// const PORT = 80
+
+
+// Use express middleware to parse req body into json
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cookieParser());
+app.use(cors())
+app.use(express.json());
 app.use(helmet())
 app.use(morgan("common"))
-app.use(express.json());
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(bodyParser.json());
+app.use(logger("common"))
+
+
+
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["192.168.1.66"],
     methods: ["GET", "POST", "UPDATE"],
     credentials: true,
   })
@@ -43,6 +70,17 @@ app.use(
   },
   )
 );
+
+app.use(express.static('public'));
+
+// VERY IMPORTANT: Configures the server so that requests to any route 
+// is served the index.html file in the production build
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// VERY IMPORTANT: Respond to any route requests with the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 
 app.post("/register", async (req, res) => {
@@ -61,7 +99,6 @@ app.post("/login", async (req, res) => {
 
 })
 
-
 // Test endpoints for testing backend. Ignore
 app.post('/test', (req, res) => {
   req.body.name = '123'
@@ -76,31 +113,10 @@ app.get('/test', (req, res) => {
 })
 
 
-// Use express middleware to parse req body into json
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-
-app.use(express.static('public'));
-
-
-// VERY IMPORTANT: Configures the server so that requests to any route 
-// is served the index.html file in the production build
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// // // VERY IMPORTANT: Respond to any route requests with the index.html file
-app.get('/', (req, res) => {
-  //res.send('Hello world!');
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
-
 // Create a connection to the database using account info
 const database = mysql.createConnection({
-  user: process.env.USER,
   host: process.env.HOST,
+  user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE_NAME
   
@@ -115,8 +131,8 @@ const database = mysql.createConnection({
 database.connect((err) => {
   // If connection to database failed, throw an error
   if (err) {
-      console.error('Error connecting to database: ' + err.stack);
-      return;
+    console.error('Error connecting to database: ' + err.stack);
+    return;
   }
   console.log('MySQL connected');
 
@@ -134,7 +150,7 @@ app.post('/search', (req, res) => {
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
   res.send(req.body);
-  
+
 });
 
 // Get the search params and assign to separate variables
@@ -142,7 +158,7 @@ app.get('/search', (req, res) => {
   console.log();
   console.log(store);
   console.log('Get request received the following request body:');
-  
+
   let storeLength = store.length;
   console.log('Category is: ' + store[storeLength - 1].category);
   console.log('Search term is: ' + store[storeLength - 1].searchTerm);
@@ -166,7 +182,7 @@ app.get('/search', (req, res) => {
   }
   // User entered a search term and selected a category
   else if (searchTerm != '' && category != '') {
-    getPosts = 
+    getPosts =
       `SELECT * 
       FROM posts 
       INNER JOIN categories 
@@ -187,7 +203,7 @@ app.get('/search', (req, res) => {
   }
   // User did not enter a search term but selected a category
   else if (searchTerm == '' && category != '') {
-    getPosts = 
+    getPosts =
       `SELECT * 
       FROM posts 
       INNER JOIN categories 
@@ -236,10 +252,27 @@ app.get('/search', (req, res) => {
   console.log('Finished sending database results');
   
   });
-  
-  
-});
 
+
+});
+/*  Socket communication with Server */
+// const io = require('socket.io');
+
+// io.on('connection',socket => {
+//   console.log('new pogi entered ');
+//     socket.emit('Welcome', 'pogi');
+//     socket.on('send-message', message => {
+//       console.log(message);
+//       socket.broadcast.emit('chat-message', message);
+//     });
+// });
+
+/* Routers */
+// app.use('/home', homeRouter);
+// app.use('/user', usersRouter);
+// app.use('/vpresult', VpRouter);
+// app.use('/upload', uploadRouter);
+// app.use('/chat', chatRouter);
 
 
 
@@ -250,3 +283,9 @@ app.get('/search', (req, res) => {
 
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+
+
+
+// server.listen(PORT, async () => {
+//   console.log(`server is running on port ${PORT}`)
+// })

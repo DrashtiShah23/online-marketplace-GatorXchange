@@ -25,38 +25,20 @@ function App() {
             <Navbar />
             <Routes>
 
-                <Route exact path='/' element={<Home />} />
+                <Route exact path='/' element={<VPTestHome/>} />
                 <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
-
-                <Route path='/AboutWilfredo' element={<AboutWilfredo />} />
-                <Route path='/AboutThomas' element={<AboutThomas />} />
-                <Route path='/AboutDrashti' element={<AboutDrashti />} />
-                <Route path='/AboutMary' element={<AboutMary />} />
-                <Route path='/AboutJavier' element={<AboutJavier />} />
-                <Route path='/AboutMicheas' element={<AboutMicheas />} />
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-                <Route path='/VPTestHome' element={<VPTestHome />} />
+         
                 <Route path='/VPResult' element={<VPResult />} />
                 <Route path='/upload' element={<Test />} />
-=======
->>>>>>> updated.Mconventions
-            <Route exact path='/' element={<VPTestHome/>} />
-            <Route path='/about' element={<About/>} />
-            <Route path='/login' element={<Login/>} />
-            <Route path='/SignUp' element={<SignUp/>} />
             
-            <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
-            <Route path='/AboutThomas' element={<AboutThomas/>} />
-            <Route path='/AboutDrashti' element={<AboutDrashti/>} />
-            <Route path='/AboutMary' element={<AboutMary/>} />
-            <Route path='/AboutJavier' element={<AboutJavier/>} />
-            <Route path='/AboutMicheas' element={<AboutMicheas/>} />
->>>>>>> origin
+                <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
+                <Route path='/AboutThomas' element={<AboutThomas/>} />
+                <Route path='/AboutDrashti' element={<AboutDrashti/>} />
+                <Route path='/AboutMary' element={<AboutMary/>} />
+                <Route path='/AboutJavier' element={<AboutJavier/>} />
+                <Route path='/AboutMicheas' element={<AboutMicheas/>} />
 
             </Routes>
         </Router>

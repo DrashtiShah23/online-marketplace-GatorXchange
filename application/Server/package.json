@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "data.js",
+  "main": "index.js",
   "scripts": {
     "restart": "cd ../ && pm2 startOrRestart ecosystem.config.js",
+    "setup": "cd ../ && pm2 deploy ecosystem.config.js production setup",
     "deploy": "cd ../ && pm2 deploy ecosystem.config.js production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,15 +22,8 @@
     "helmet": "^5.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     "nodemon": "^2.0.15",
-=======
->>>>>>> origin
->>>>>>> updated.Mconventions
     "path": "^0.12.7",
     "rebuild": "^0.1.2",
     "run-script": "^0.1.1",

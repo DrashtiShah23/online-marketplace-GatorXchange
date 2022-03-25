@@ -16,7 +16,7 @@ import AboutMicheas from './pages/About/AboutMicheas';
 // import SearchBar from './components/SearchBar.js'
 import VPTestHome from './pages/VPTestHome'; // Vertical prototype test home page
 import VPResult from './pages/VPResult'; // Vertical prototype search result page
-import Test from './pages/Test'
+import Test from './components/Test'
 
 // import LearnMore from '.pages/learnMore'
 function App() {

@@ -7,24 +7,35 @@ const bcrypt = require("bcrypt")
 const socketio = require("socket.io")
 const helmet = require('helmet');
 const morgan = require('morgan');
+const logger = require("morgan")
 const path = require('path');
 // Configures database environment variables
 require('dotenv').config();
 const mysql = require("mysql2");
 //const database = require('./config/database');
 
+const { Server } = require("socket.io")
+
+/* Routers */
+const homeRouter = require('./routers/home.js')
+const usersRouter = require('./routers/users.js')
+const VpRouter = require('./routers/VPResult.js')
+const uploadRouter = require('./routers/upload.js')
+// const chatRouter = require('./routers/chat.js')
+
 // Express app uses port 3001
 const app = express();
 const PORT = 3001;
 
+const http = require("http")
+const server = http.createServer(app)
+const config = require('./database/database.js')
+const router = express.Router()
+
 
 // const { Server } = require("socket.io")
-const logger = require("morgan")
-// const homeRouter = require('./routers/home.js')
-// const usersRouter = require('./routers/users.js')
-// // const VpRouter = require('./routers/VPResult.js')
-// const uploadRouter = require('./routers/upload.js')
-// // const chatRouter = require('./routers/chat.js')
+
+
 // const http = require("http")
 
 // const server = http.createServer(app)
@@ -39,7 +50,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
@@ -50,10 +60,9 @@ app.use(morgan("common"))
 app.use(logger("common"))
 
 
-
 app.use(
   cors({
-    origin: ["192.168.1.66"],
+    origin: ["localhost:3000http://localhost:3000"],
     methods: ["GET", "POST", "UPDATE"],
     credentials: true,
   })
@@ -71,16 +80,29 @@ app.use(
   )
 );
 
-app.use(express.static('public'));
 
-// VERY IMPORTANT: Configures the server so that requests to any route 
-// is served the index.html file in the production build
+
+/*************************************************************************** 
+  VERY IMPORTANT DO NOT CHANGE THE CODE BLOCK BELOW. DEPLOYING TO
+  PRODUCTION WILL NOT WORK WITHOUT THIS CODE 
+
+  Configures the server so that requests to any route is served the 
+  index.html file in the client production build folder
+
+***************************************************************************/
+app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// VERY IMPORTANT: Respond to any route requests with the index.html file
+// Respond to any route requests with the index.html file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
+/*************************************************************************** 
+  VERY IMPORTANT DO NOT CHANGE THE ABOVE CODE BLOCK. DEPLOYING TO
+  PRODUCTION WILL NOT WORK WITHOUT THIS CODE
+
+***************************************************************************/
 
 
 app.post("/register", async (req, res) => {
@@ -267,19 +289,6 @@ app.get('/search', (req, res) => {
 //     });
 // });
 
-/* Routers */
-// app.use('/home', homeRouter);
-// app.use('/user', usersRouter);
-// app.use('/vpresult', VpRouter);
-// app.use('/upload', uploadRouter);
-// app.use('/chat', chatRouter);
-
-
-
-// app.use('/home', homeRouter)
-// app.use('/user', usersRouter)
-// app.use('/vpresult', VpRouter)
-// app.use('/upload', uploadRouter)
 
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

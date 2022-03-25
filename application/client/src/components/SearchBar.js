@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+/* testing */
 export default function SearchBar({ placeholder, data }) {
     return (
         <div className="search">

@@ -11,31 +11,31 @@ const appendMessage = message => {
 const messageElement = ({ timestamp, user, message }) =>
     $('<div>', { class: 'message' })
         .text(message)
-        .prepend(timestampElement(timestamp), userElement(user))
+        .prepend(timestampElement(timestamp), userElement(user));
 
 const timestampElement = time => {
     const element = $('<time>', {
         class: 'timeago',
         datetime: moment(time).format()
-    }).text(moment(time).format('hh:mm:ss'))
+    }).text(moment(time).format('hh:mm:ss'));
 
     return element[0]
-}
+};
 
 const userElement = userName =>
-    $('<span>', { class: 'user' }).text(userName)[0]
+    $('<span>', { class: 'user' }).text(userName)[0];
 
 const userJoined = data =>
-    appendMessage(messageElement(Object.assign(data, { message: ' joined' })))
+    appendMessage(messageElement(Object.assign(data, { message: ' joined' })));
 
 const messageReceived = data =>
     appendMessage(messageElement(
-        Object.assign(data, { user: `${data.user} said` })
-    ))
+        Object.assign(data, { user: `${data.user} said` });
+    ));
 
 const intializeSocket = () => {
-    socket.on(USER_JOINED, userJoined)
-    socket.on(MESSAGE_SEND, messageReceived)
+    socket.on(USER_JOINED, userJoined);
+    socket.on(MESSAGE_SEND, messageReceived);
 }
 
 $(document).ready(() => {
@@ -48,15 +48,15 @@ $(document).ready(() => {
         $('#chat-area').show()
 
         intializeSocket()
-        socket.emit(USER_JOINED, { user, timestamp: Date.now() })
+        socket.emit(USER_JOINED, { user, timestamp: Date.now() });
 
         return false
-    })
+    });
 
     $('#chat-area button').click(event => {
         const message = $('#chat-area input').val()
         $('#chat-area input').val('')
 
-        socket.emit(MESSAGE_SEND, { user, timestamp: Date.now(), message })
-    })
-})
+        socket.emit(MESSAGE_SEND, { user, timestamp: Date.now(), message });
+    });
+});

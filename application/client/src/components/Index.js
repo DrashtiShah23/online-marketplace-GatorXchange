@@ -1,6 +1,7 @@
 
 import React from "react";
-import { Placeholder, Form, FormControl, Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { Placeholder, FormControl, Nav, Navbar, NavDropdown, Container, Col, Row, Dropdown, DropdownButton, InputGroup } from "react-bootstrap";
+// import { InputGroup } from "react-bootstrap/InputGroup"
 import { ReactComponent as Logo } from "./logo.svg";
 // import {ReactComponent as Form} from "./SearchBar.js"
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,9 +11,12 @@ export default function Index() {
   return (
 
 
+    /* React-bootstrap components please read websites documentation to style. ENJOY*/
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="/">
         <Logo
+          animation="border"
+          as="span"
           width="100"
           height="100"
           className="d-inline-block align-left"
@@ -20,15 +24,24 @@ export default function Index() {
         GatorXChange
       </Navbar.Brand>
       <Container>
-      <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="ms-auto"
-          arial-label="<Search>"
-        />
-        <Placeholder.Button variant={"outline-warning"}>Search</Placeholder.Button>
-      </Form>
+        <Row>
+          <Col lg={true} />
+          <InputGroup className="mb-auto">
+            <DropdownButton
+              variant="outline-secondary"
+              title="Dropdown"
+              id="input-group-dropdown-1"
+            >
+              <Dropdown.Item href="#">Action</Dropdown.Item>
+              <Dropdown.Item href="#">Another action</Dropdown.Item>
+              <Dropdown.Item href="#">Something else here</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="#">Separated link</Dropdown.Item>
+            </DropdownButton>
+            <FormControl aria-label="Text input with dropdown button" />
+            <Placeholder.Button variant={"outline-warning"}>Search</Placeholder.Button>
+          </InputGroup>
+        </Row>
       </Container>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -48,10 +61,13 @@ export default function Index() {
         <Nav>
           <Nav.Link href="About">About</Nav.Link>
           <Nav.Link eventKey={2} href="#memes">
-            {/* Dank memes */}
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
+
+
   );
+
+
 };

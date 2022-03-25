@@ -7,12 +7,12 @@ import AboutJavier from "./About/Aboutjavier";
 import AboutDrashti from "./About/AboutDrashti";
 import AboutMary from "./About/AboutMary";
 import AboutMicheas from "./About/AboutMicheas";
-import javi from "./images/javi.jpg"
-import drashti from "./images/drashti.jpeg"
-import mary from './images/mary.jpg'
-import thomas from './images/thomas.jpg'
-import wilfredo from './images/wilfredo.jpg'
-import Mike from './images/Mike.jpg'
+const javi = "/images/javi.jpg"
+const drashti = "/images/drashti.jpeg"
+const mary = '/images/mary.jpg'
+const thomas = '/images/thomas.jpg'
+const wilfredo = '/images/wilfredo.jpg'
+const Mike = '/images/Mike.jpg'
 
 const About = () => {
   return (

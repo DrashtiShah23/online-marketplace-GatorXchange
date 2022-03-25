@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "data.js",
+  "main": "index.js",
   "scripts": {
     "restart": "cd ../ && pm2 startOrRestart ecosystem.config.js",
+    "setup": "cd ../ && pm2 deploy ecosystem.config.js production setup",
     "deploy": "cd ../ && pm2 deploy ecosystem.config.js production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,7 +23,6 @@
     "http": "0.0.1-security",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "npm-check-updates": "^12.5.4",

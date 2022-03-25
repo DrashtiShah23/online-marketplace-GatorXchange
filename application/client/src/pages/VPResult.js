@@ -3,36 +3,34 @@ import '../css/about.css';
 import axios from 'axios';
 
 
-
-
 const VPResult = () => {
   let [results, updateResults] = useState([]);
-  let [result2, setResult2] = useState([])
-
-  // Display the pst of search results received from database
-  const post = results.map((result, i) => {
+  
+  // This function displays the list of search results received from database
+  const displayResults = results.map((result, i) => {
     return (
       <div className="card" key={i}>
         <div className="card-content">
           <p>Category: {result.category}</p>
-          <p>Image: {result.image}</p>
+          <p>Image: <img src={result.image}/></p>
           <p>Title: {result.title}</p>
-          <p>Price: {result.price}</p>
+          <p>Price: ${result.price}.00</p>
           <p>Description: {result.description}</p>
         </div>
-      </div>
+    </div>
     )
   });
-  // Get the pst of search results from database and store it in the results array
+  // Get the list of search results from database and store it in the results array
   const getSearchResults = () => {
-    axios.get('/VPResult')
+    axios.get('/search')
       .then((res) => {
         // Create a copy of the database results returned
-        results = [test];
-        // results = [...res.data];
+        results = [...res.data];
         console.log(results);
-        // Update the results array state
+        
+        // Update the state of the results array
         updateResults(results);
+
       })
       .catch((err) => {
         console.log('Failed to get search results' + err);
@@ -41,7 +39,7 @@ const VPResult = () => {
 
 
   useEffect(() => {
-    // Get the search queries to display the correct search results
+    // Call this function when VPResult component is rendered
     getSearchResults();
   }, []);
 
@@ -57,23 +55,8 @@ const VPResult = () => {
       </div>
 
       <div className="card-container">
-
-        {/* Display the pst of results from the database */}
-        {
-          results.map((result, i) => {
-            return (
-              <div className="card" key={i}>
-                <div className="card-content">
-                  <p>Category: {result.category}</p>
-                  <p>Image: {result.image}</p>
-                  <p>Title: {result.title}</p>
-                  <p>Price:$ ({result.price}).00</p>
-                  <p>Description: {result.description}</p>
-                </div>
-              </div>
-            )
-          })
-        }
+        {/* Display the list of results from the database */}
+        {displayResults}
       </div>
     </div>
   );

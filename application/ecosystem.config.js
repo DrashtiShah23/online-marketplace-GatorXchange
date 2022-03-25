@@ -2,12 +2,12 @@ module.exports = {
   apps: [{
     name: 'prod-server',
     cwd:'/home/ubuntu/prod/source/application',
-    script: './Server/data.js',
+    script: './Server/index.js',
   }],
   deploy: {
     production: {
       user: 'ubuntu',
-      host: '54.193.97.229',
+      host: '13.57.228.138',
       key: '~/.ssh/team1.pem',
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',

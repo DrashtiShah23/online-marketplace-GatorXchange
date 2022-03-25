@@ -1,35 +1,51 @@
-const dotenv = require("dotenv")
-dotenv.config()
-require('dotenv').config();
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const bcrypt = require("bcrypt")
-const { Server } = require("socket.io")
-const helmet = require("helmet")
+const socketio = require("socket.io")
+const helmet = require('helmet');
+const morgan = require('morgan');
 const logger = require("morgan")
-const path = require("path")
-const mysql = require("mysql2")
+const path = require('path');
+// Configures database environment variables
+require('dotenv').config();
+const mysql = require("mysql2");
+// const database = require('../config/database');
+
+const { Server } = require("socket.io")
+
+/* Routers */
 const homeRouter = require('./routers/home.js')
 const usersRouter = require('./routers/users.js')
 // const VpRouter = require('./routers/VPResult.js')
 const uploadRouter = require('./routers/upload.js')
-const chatRouter = require('./routers/chat.js')
+// const chatRouter = require('./routers/chat.js')
 const http = require("http")
 const app = express();
+const PORT = 3001;
 
 const server = http.createServer(app)
-const config = require('./database/database.js')
+// const config = require('./database/database.js')
 const router = express.Router()
-// app.use(express.static(path.join(__dirname, 'build')));
-const PORT = 3001
 
 
+// const { Server } = require("socket.io")
 
 
+// const http = require("http")
 
+// const server = http.createServer(app)
+// const config = require('./database/database.js')
+// const router = express.Router()
+// const PORT = 80
+
+
+// Use express middleware to parse req body into json
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(bodyParser.json());
@@ -38,8 +54,8 @@ app.use(cookieParser());
 app.use(cors())
 app.use(express.json());
 app.use(helmet())
+app.use(morgan("common"))
 app.use(logger("common"))
-
 
 
 app.use(
@@ -63,6 +79,30 @@ app.use(
 );
 
 
+
+/*************************************************************************** 
+  VERY IMPORTANT DO NOT CHANGE THE CODE BLOCK BELOW. DEPLOYING TO
+  PRODUCTION WILL NOT WORK WITHOUT THIS CODE 
+
+  Configures the server so that requests to any route is served the 
+  index.html file in the client production build folder
+
+***************************************************************************/
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Respond to any route requests with the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+/*************************************************************************** 
+  VERY IMPORTANT DO NOT CHANGE THE ABOVE CODE BLOCK. DEPLOYING TO
+  PRODUCTION WILL NOT WORK WITHOUT THIS CODE
+
+***************************************************************************/
+
+
 app.post("/register", async (req, res) => {
   const firstname = req.body.firstName;
   const lastname = req.body.lastName;
@@ -70,15 +110,12 @@ app.post("/register", async (req, res) => {
   const username = req.body.Username
   const password = req.body.passWord;
 
-
-
 })
 
 
 app.post("/login", async (req, res) => {
   const username = req.body.Username;
   const password = req.body.passWord;
-
 
 })
 
@@ -96,35 +133,13 @@ app.get('/test', (req, res) => {
 })
 
 
-
-// Use express middleware to parse req body into json
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-
-app.use(express.static('public'));
-
-
-// VERY IMPORTANT: Configures the server so that requests to any route 
-// is served the index.html file in the production build
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// VERY IMPORTANT: Respond to any route requests with the index.html file
-app.get('/', (req, res) => {
-  //res.send('Hello world!');
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
-
-
-/* Create a connection to the database using account info */
+// Create a connection to the database using account info
 const database = mysql.createConnection({
-  user: process.env.USER,
   host: process.env.HOST,
+  user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE_NAME
-
+  
   // Hard coding the MySQL credentials for build version
   // user: "admin",
   // host: "localhost",
@@ -143,11 +158,11 @@ database.connect((err) => {
 
 });
 
-// store holds the user search parameters globally
+// This store variable will store all user search parameters globally
 let store = [];
 
 // Send user search parameters to server 
-app.post('/VPResult', (req, res) => {
+app.post('/search', (req, res) => {
   console.log();
   console.log('Got a post request. Request body is:');
   console.log(req.body);
@@ -159,7 +174,7 @@ app.post('/VPResult', (req, res) => {
 });
 
 // Get the search params and assign to separate variables
-app.get('/VPResult', (req, res) => {
+app.get('/search', (req, res) => {
   console.log();
   console.log(store);
   console.log('Get request received the following request body:');
@@ -178,8 +193,12 @@ app.get('/VPResult', (req, res) => {
   let getPosts;
 
   // User clicked search button without any params. Display all posts from database
-  if (searchTerm == '' && category == '') {
-    getPosts = 'SELECT * FROM `csc648-team1-db`.`posts`';
+  if (searchTerm == '' && category == '' ) {
+    getPosts = 
+      `SELECT * 
+      FROM posts
+      INNER JOIN categories
+      ON posts.fk_category_id = categories.category_id`;
   }
   // User entered a search term and selected a category
   else if (searchTerm != '' && category != '') {
@@ -194,7 +213,12 @@ app.get('/VPResult', (req, res) => {
   }
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
-    getPosts = `SELECT * FROM posts WHERE title LIKE '%` + searchTerm + `%' OR 
+    getPosts = 
+      `SELECT * 
+      FROM posts 
+      INNER JOIN categories
+      ON posts.fk_category_id = categories.category_id
+      WHERE title LIKE '%` + searchTerm + `%' OR 
       description LIKE '%` + searchTerm + `%'`;
   }
   // User did not enter a search term but selected a category
@@ -206,15 +230,17 @@ app.get('/VPResult', (req, res) => {
       ON posts.fk_category_id = categories.category_id
       WHERE category = '` + category + `'`;
   }
-  // Extract posts from Posts table in database based on user's search params 
+
+  // Store the list of search results to send over to the VP Result page
   let searchResults = [];
+
+  // Extract posts from posts table in database based on user's search params
+  // TODO: Refactor the query into a execute statement so that it is cached resulting in faster performance   
   database.query(getPosts, function (error, results) {
     if (error) {
-      console.error('Error querying database: ' + error.stack);
-      return;
+        console.error('Error querying database: ' + error.stack);
+        return;
     }
-    //console.log(results);
-    // Store the list of search results to send over to the VP Result page
 
     // For every search result, create a post object containing relevant post info to display
     for (let i = 0; i < results.length; i++) {
@@ -234,18 +260,17 @@ app.get('/VPResult', (req, res) => {
       console.log('Post description: ' + post.description);
       console.log();
       // Add the post to the list of search results
-      console.log("posts: ", post)
+      console.log("posts: ", post) 
       searchResults.push(post);
-
     }
 
-    console.log('Database results array is: ' + JSON.stringify(searchResults));
-
-    // Send the database results to the frontend
-    res.send(JSON.stringify(searchResults));
-
-    console.log('Finished sending database results');
-
+  console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+  // Send the database results to the frontend
+  res.send(JSON.stringify(searchResults));
+  
+  console.log('Finished sending database results');
+  
   });
 
 
@@ -281,9 +306,10 @@ app.use('/upload', uploadRouter);
 
 
 
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 
 
 
-server.listen(PORT, async () => {
-  console.log(`server is running on port ${PORT}`)
-})
+// server.listen(PORT, async () => {
+//   console.log(`server is running on port ${PORT}`)
+// })

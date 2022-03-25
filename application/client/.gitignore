@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production
-#/build
+# production: comment this out when its time to deploy to production
+/build
 
 # misc
 .DS_Store

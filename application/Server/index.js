@@ -27,18 +27,14 @@ const app = express();
 const PORT = 3001;
 
 const server = http.createServer(app)
-// const config = require('./database/database.js')
+const config = require('./config/database.js')
 const router = express.Router()
 
 
 // const { Server } = require("socket.io")
-
-
 // const http = require("http")
-
 // const server = http.createServer(app)
 // const config = require('./database/database.js')
-// const router = express.Router()
 // const PORT = 80
 
 
@@ -88,7 +84,7 @@ app.use(
   index.html file in the client production build folder
 
 ***************************************************************************/
-app.use(express.static('public'));
+app.use('public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Respond to any route requests with the index.html file
@@ -123,13 +119,15 @@ app.post("/login", async (req, res) => {
 app.post('/test', (req, res) => {
   req.body.name = '123'
   req.body.email = '123@mail'
+  console.log(req.body);
   res.send(req.body);
-  console.log('Sent a message');
+  
+  console.log('Sent a name and email');
 })
 
 app.get('/test', (req, res) => {
-  res.send('got the data: ' + req.body.name);
-  console.log(req.body.name);
+  res.send('got a name: ' + req.query.name);
+  console.log(req.query.name);
 })
 
 
@@ -304,10 +302,15 @@ io.on('connection', async (socket) => {
 app.use('/upload', uploadRouter);
 // app.use('/chat', chatRouter);
 
+/* Routers */
+// app.use('/home', homeRouter);
+// app.use('/user', usersRouter);
+// app.use('/vpresult', VpRouter);
+app.use('/upload', uploadRouter);
+// app.use('/chat', chatRouter);
 
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
-
 
 
 // server.listen(PORT, async () => {

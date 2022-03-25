@@ -8,8 +8,8 @@ import {
 import { ThemeProvider } from 'styled-components';
 import { ReactComponent as Logo } from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
+import VPTestHome from '../pages/VPTestHome';
+import SearchBar from './SearchBar'
 
 
 export default function Index() {
@@ -28,25 +28,29 @@ export default function Index() {
         GatorXChange
       </Navbar.Brand>
       <Container>
-        <Row>
+        {/* <Row>
           <Col lg={true} />
           <InputGroup className="mb-auto">
             <DropdownButton
               variant="outline-secondary"
-              title="Catagories"
+              title="Categories"
               id="input-group-dropdown-1"
             >
               <Dropdown.Item href="#">Books</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item href="#">Electronics</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item href="#">clothes</Dropdown.Item>
+              <Dropdown.Item href="#">Clothes</Dropdown.Item>
             </DropdownButton>
             <FormControl aria-label="Text input with dropdown button" />
             <Placeholder.Button variant={"outline-warning"}>Search</Placeholder.Button>
+            
           </InputGroup>
-        </Row>
+          
+        </Row> */}
+        <SearchBar />  
       </Container>
+      
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto">

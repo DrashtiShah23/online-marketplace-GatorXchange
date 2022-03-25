@@ -14,7 +14,7 @@ const path = require("path")
 const mysql = require("mysql2")
 const homeRouter = require('./routers/home.js')
 const usersRouter = require('./routers/users.js')
-// const VpRouter = require('./routers/VPResult.js')
+const VpRouter = require('./routers/VPResult.js')
 const uploadRouter = require('./routers/upload.js')
 // const chatRouter = require('./routers/chat.js')
 const http = require("http")
@@ -24,7 +24,7 @@ const server = http.createServer(app)
 const config = require('./database/database.js')
 const router = express.Router()
 // app.use(express.static(path.join(__dirname, 'build')));
-const PORT = 80
+const PORT = 3001
 
 
 
@@ -44,7 +44,7 @@ app.use(logger("common"))
 
 app.use(
   cors({
-    origin: ["192.168.1.66"],
+    origin: ["localhost:3000http://localhost:3000"],
     methods: ["GET", "POST", "UPDATE"],
     credentials: true,
   })

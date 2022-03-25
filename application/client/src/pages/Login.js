@@ -3,9 +3,9 @@ import Axios from "axios"
 
 const Login = () => {
 
-    const [email, setEmail] = useState("")
-    const [passWord, setPassword] = useState("")
-    const [login, setLogin] = useState("")
+    const [email, setEmail] = useState("");
+    const [passWord, setPassword] = useState("");
+    const [login, setLogin] = useState("");
 
     const login_function = () => {
         Axios.post("http://localhost:3001/register",
@@ -14,11 +14,11 @@ const Login = () => {
                 passWord: passWord,
             }
         ).then((res) => {
-            setLogin(res.data)
+            setLogin(res.data);
         }).catch((err) => {
-            console.log("error")
-        })
-    }
+            console.log("error");
+        });
+    };
 
 
 
@@ -36,7 +36,7 @@ const Login = () => {
                 <p>Don't have an Account?<a href="/SignUp">Register</a></p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

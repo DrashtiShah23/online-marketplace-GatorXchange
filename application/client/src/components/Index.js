@@ -1,16 +1,20 @@
-
+import { GlobalStyles } from './Global.js';
+import { lightTheme, darkTheme } from './NavbarElements.js';
 import React from "react";
-import { Placeholder, FormControl, Nav, Navbar, NavDropdown, Container, Col, Row, Dropdown, DropdownButton, InputGroup } from "react-bootstrap";
-// import { InputGroup } from "react-bootstrap/InputGroup"
+import {
+  Button, Form, Placeholder, FormControl, Nav, Navbar, NavDropdown,
+  Container, Col, Row, Dropdown, DropdownButton, InputGroup
+} from "react-bootstrap";
+import { ThemeProvider } from 'styled-components';
 import { ReactComponent as Logo } from "./logo.svg";
-// import {ReactComponent as Form} from "./SearchBar.js"
 import "bootstrap/dist/css/bootstrap.min.css";
-// import SearchBar from "./SearchBar";
+
+
+
 
 export default function Index() {
   return (
-
-
+    
     /* React-bootstrap components please read websites documentation to style. ENJOY*/
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="/">
@@ -29,14 +33,14 @@ export default function Index() {
           <InputGroup className="mb-auto">
             <DropdownButton
               variant="outline-secondary"
-              title="Dropdown"
+              title="Catagories"
               id="input-group-dropdown-1"
             >
-              <Dropdown.Item href="#">Action</Dropdown.Item>
-              <Dropdown.Item href="#">Another action</Dropdown.Item>
-              <Dropdown.Item href="#">Something else here</Dropdown.Item>
+              <Dropdown.Item href="#">Books</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item href="#">Separated link</Dropdown.Item>
+              <Dropdown.Item href="#">Electronics</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="#">clothes</Dropdown.Item>
             </DropdownButton>
             <FormControl aria-label="Text input with dropdown button" />
             <Placeholder.Button variant={"outline-warning"}>Search</Placeholder.Button>
@@ -46,15 +50,14 @@ export default function Index() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto">
-          <NavDropdown title="Sign in" id="collapsible-nav-dropdown">
+          <NavDropdown title="Account" id="collapsible-nav-dropdown">
             <NavDropdown.Item
               href="Login">Sign in</NavDropdown.Item>
             <NavDropdown.Item href="SignUp">
               Register
             </NavDropdown.Item>
-            <NavDropdown.Divider />
+            {/* Example on how to set up */}
             <NavDropdown.Item href="#action/3.4">
-              Separated link
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
@@ -64,7 +67,7 @@ export default function Index() {
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+    </Navbar >
 
 
   );

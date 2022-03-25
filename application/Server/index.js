@@ -14,9 +14,9 @@ const path = require("path")
 const mysql = require("mysql2")
 const homeRouter = require('./routers/home.js')
 const usersRouter = require('./routers/users.js')
-const VpRouter = require('./routers/VPResult.js')
+// const VpRouter = require('./routers/VPResult.js')
 const uploadRouter = require('./routers/upload.js')
-// const chatRouter = require('./routers/chat.js')
+const chatRouter = require('./routers/chat.js')
 const http = require("http")
 const app = express();
 
@@ -44,7 +44,7 @@ app.use(logger("common"))
 
 app.use(
   cors({
-    origin: ["localhost:3000http://localhost:3000"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "UPDATE"],
     credentials: true,
   })
@@ -251,20 +251,30 @@ app.get('/VPResult', (req, res) => {
 
 });
 /*  Socket communication with Server */
-// const io = require('socket.io');
 
-// io.on('connection',socket => {
-//   console.log('new pogi entered ');
-//     socket.emit('Welcome', 'pogi');
-//     socket.on('send-message', message => {
-//       console.log(message);
-//       socket.broadcast.emit('chat-message', message);
-//     });
-// });
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+
+  },
+});
+
+
+
+io.on('connection', async (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+  socket.emit('Welcome', 'pogi');
+  
+  socket.on('Disconnect', async () => {
+    console.log('User disconnected', socket.id);
+    socket.broadcast.emit('chat-message', socket.id);
+  });
+});
 
 /* Routers */
-app.use('/home', homeRouter);
-app.use('/user', usersRouter);
+// app.use('/home', homeRouter);
+// app.use('/user', usersRouter);
 // app.use('/vpresult', VpRouter);
 app.use('/upload', uploadRouter);
 // app.use('/chat', chatRouter);

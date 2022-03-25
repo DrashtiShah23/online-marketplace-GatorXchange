@@ -11,6 +11,7 @@ function Test() {
         e.preventDefault()
         let formData = new FormData()
         formData.append('file', image.data)
+        /* end routes when user uploads image. */
         const response = await fetch('http://localhost:3001/upload/image', {
             method: 'POST',
             body: formData,

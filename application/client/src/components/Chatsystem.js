@@ -1,7 +1,9 @@
+import io from 'socket.io-client'
+
 import moment from 'moment'
 import { LOBBY, USER_JOINED, MESSAGE_SEND } from '../src/constants/events'
 
-const socket = io()
+const socket = io.connect('http://localhost:3001')
 
 const appendMessage = message => {
     $('.messages').append(message)

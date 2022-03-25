@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Container, Carousel } from 'react-bootstrap'
 const Home = () => {
     return (
+        /* testing img, will be actual items on the Database once the user connects */
         <Container>
             <Card>
             <Carousel>

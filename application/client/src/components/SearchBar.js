@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, InputGroup, Dropdown, DropdownButton, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
+import SearchResults from './SearchResults';
+import VPTestHome from '../pages/VPTestHome';
 
 export default function SearchBar({ placeholder, data }) {
     
@@ -8,6 +10,19 @@ export default function SearchBar({ placeholder, data }) {
   const [category, setCategory] = useState('');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
 
+  // Event handler for setting the category. Event represents the dropdown option value
+  // Can't get the dropdown option value using event.target.value like an input field
+  const handleCategory = (event) => {
+    //console.log(event)
+    setCategory(event);
+  }
+  // Event handler for setting the search term
+  const handleSearchTerm = (event) => {
+    //console.log(event.target.value)
+    setSearchTerm(event.target.value);
+  }
+
+  // Event handler for submitting the search parameters to send to backend
   const handleSubmit = (e) => {
       // Don't refresh the page upon submitting search queries
       e.preventDefault();
@@ -24,7 +39,6 @@ export default function SearchBar({ placeholder, data }) {
           // will be redirected to another page that displays the search results
           if (res.status === 200) {
             
-            console.log(res.data);
             console.log('Data submitted is:');
             console.log(searchParams);
             console.log('Category input is: ' + searchParams.category);
@@ -32,7 +46,7 @@ export default function SearchBar({ placeholder, data }) {
             
             // Set the state of search submitted to true so search results dsplay
             setSearchSubmitted(true);
-            
+            <VPTestHome userSearched={true}/>
           }
         })
         .catch((err) => {
@@ -48,8 +62,8 @@ export default function SearchBar({ placeholder, data }) {
         });
       
       // Reset the search term, category, and search submitted state values after submission
-      setSearchTerm('');
-      setCategory('');
+      // setSearchTerm('');
+      // setCategory('');
       setSearchSubmitted(false);  
   }
 
@@ -61,18 +75,21 @@ export default function SearchBar({ placeholder, data }) {
         <InputGroup className="mb-auto">    
         <DropdownButton
           variant="outline-secondary"
-          title="Categories"
+          // Default dropdown button title is All Categories and changes when a category is selected
+          title={category === "" ? "All Categories" : category}
           id="input-group-dropdown-1"
+          onSelect={handleCategory} // onSelect gets the value of the dropdown options. Can't use onChange
         >
-          <Dropdown.Item eventKey="books">Books</Dropdown.Item>
+          <Dropdown.Item eventKey="">All</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item eventKey="electronics">Electronics</Dropdown.Item>
+          <Dropdown.Item eventKey="Books">Books</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item eventKey="clothes">Clothes</Dropdown.Item>
+          <Dropdown.Item eventKey="Electronics">Electronics</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item eventKey="Clothes">Clothes</Dropdown.Item>
         </DropdownButton>
-        
-          <FormControl aria-label="Text input with dropdown button" />
-          <Button variant={"outline-warning"}>Search</Button>
+          <FormControl aria-label="Search term text" onChange={handleSearchTerm}/>
+          <Button variant={"outline-warning"} type="submit" onClick={handleSubmit}>Search</Button>
         </InputGroup>
         </Row>
       </Container>

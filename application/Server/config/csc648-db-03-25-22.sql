@@ -35,7 +35,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'books'),(2,'electronics'),(3,'clothes');
+INSERT INTO `categories` VALUES (1,'Books'),(2,'Electronics'),(3,'Clothes');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `posts` (
   KEY `posts to categories_idx` (`fk_category_id`),
   CONSTRAINT `posts to categories` FOREIGN KEY (`fk_category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `posts to users` FOREIGN KEY (`fk_sfsu_id`) REFERENCES `users` (`sfsu_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,'math textbook',30,'for calculus 101','/path/to/image','/path/to/thumbnail','2020-12-18 20:16:01',1,900000000,1),(2,'phone charger',15,'for iphone and includes wall adapter','/path/to/image','/path/to/thumbnail','2020-12-18 20:16:01',1,900000001,2),(3,'winter jacket',55,'black jacket to keep you warm','/path/to/image','/path/to/thumbnail','2020-12-18 20:16:01',1,900000002,3),(4,'economics textbook',30,'for economics and finance 101','/path/to/image','/path/to/thumbnail','2020-12-18 20:16:01',1,900000000,1),(5,'keyboard',35,'for iphone and includes wall adapter','/path/to/image','/path/to/thumbnail','2020-12-18 20:16:01',1,900000001,2);
+INSERT INTO `posts` VALUES (1,'Math textbook',30,'For calculus 101. Good condition','images/uploads/61d3810fff9a3435bd1f7e24cd32e552.jpeg','images/thumbnails/thumbnail-61d3810fff9a3435bd1f7e24cd32e552.jpeg','2020-12-18 20:16:01',1,900000000,1),(2,'Iphone charger',15,'Lightning to USB-A cable. Includes wall adapter','images/uploads/7784126fc893264d2002a3b7c70a0b5b.jpeg','images/thumbnails/thumbnail-7784126fc893264d2002a3b7c70a0b5b.jpeg','2020-12-18 20:16:01',1,900000001,2),(3,'Winter jacket',55,'Black jacket to keep you warm','images/uploads/541005802846b4cc24dbe9f98c1900e8.jpeg','images/thumbnails/thumbnail-541005802846b4cc24dbe9f98c1900e8.jpeg','2020-12-18 20:16:01',1,900000002,3),(4,'Economics textbook',30,'For economics and finance 101. Like new','images/uploads/32c33c0b5c90852f43923337763ebaa9.jpeg','images/thumbnails/thumbnail-32c33c0b5c90852f43923337763ebaa9.jpeg','2020-12-18 20:16:01',1,900000000,1),(5,'Classic black keyboard',35,'A USB keyboard to plug into your computer or laptop','images/uploads/5946bd9d0e145fbcf5f82f929714c5c7.jpeg','images/thumbnails/thumbnail-5946bd9d0e145fbcf5f82f929714c5c7.jpeg','2020-12-18 20:16:01',1,900000001,2),(6,'White t-shirt for sale',5,'Lightly used t-shirt. Very cheap.','images/uploads/0c9eb570ad2821506f0593caaaa716e1.jpeg','images/thumbnails/thumbnail-0c9eb570ad2821506f0593caaaa716e1.jpeg','2020-12-18 20:16:01',1,900000002,3);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-19 22:47:55
+-- Dump completed on 2022-03-25 20:22:45

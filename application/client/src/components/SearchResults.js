@@ -3,7 +3,7 @@ import '../css/about.css';
 import axios from 'axios';
 
 
-const VPResult = () => {
+const SearchResults = () => {
   let [results, updateResults] = useState([]);
   
   // This function displays the list of search results received from database
@@ -45,13 +45,8 @@ const VPResult = () => {
 
   return (
     <div className="container">
-      <header>
-        <h1>Vertical Prototype Search Results</h1>
-      </header>
-
       <div>
         <h3>Number of Results returned: {results.length}</h3>
-        <h3>Here are your search results!</h3>
       </div>
 
       <div className="card-container">
@@ -62,4 +57,4 @@ const VPResult = () => {
   );
 };
 
-export default VPResult;
+export default SearchResults;

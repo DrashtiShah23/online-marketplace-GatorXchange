@@ -245,17 +245,21 @@ app.get('/search', (req, res) => {
       let post = {
         category: results[i].category,
         image: results[i].photo_path,
+        thumbnail: results[i].thumbnail,
         title: results[i].title,
         price: results[i].price,
-        description: results[i].description
+        description: results[i].description,
+        creationDateTime: results[i].created
       };
       console.log();
       console.log(`Post ${i} sent over is: `);
       console.log('Post category: ' + post.category);
       console.log('Post image: ' + post.image);
+      console.log('Post thumbnail: ' + post.thumbnail);
       console.log('Post title: ' + post.title);
       console.log('Post price: ' + post.price);
       console.log('Post description: ' + post.description);
+      console.log('Post creation date/time: ' + post.created);
       console.log();
       // Add the post to the list of search results
       console.log("posts: ", post) 

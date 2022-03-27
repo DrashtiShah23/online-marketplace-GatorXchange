@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, InputGroup, Dropdown, DropdownButton, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import SearchResults from './SearchResults';
-import VPTestHome from '../pages/VPTestHome';
 
-export default function SearchBar({ placeholder, data }) {
+export default function SearchBar() {
     
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
+  let navigate = useNavigate();
 
   // Event handler for setting the category. Event represents the dropdown option value
   // Can't get the dropdown option value using event.target.value like an input field
@@ -25,8 +26,8 @@ export default function SearchBar({ placeholder, data }) {
   // Event handler for submitting the search parameters to send to backend
   const handleSubmit = (e) => {
       // Don't refresh the page upon submitting search queries
-      e.preventDefault();
-  
+      //e.preventDefault();
+      
       // Create search parameters that will be used for SQL queries into the database
       const searchParams = {
         category: category,
@@ -45,8 +46,10 @@ export default function SearchBar({ placeholder, data }) {
             console.log('Search term input is ' + searchParams.searchTerm);
             
             // Set the state of search submitted to true so search results dsplay
-            setSearchSubmitted(true);
-            <VPTestHome userSearched={true}/>
+            // setSearchSubmitted(true);
+            // <SearchResults userSearched={searchSubmitted}/>
+            navigate('/search');
+            
           }
         })
         .catch((err) => {
@@ -74,7 +77,7 @@ export default function SearchBar({ placeholder, data }) {
         <Col lg={true} />
         <InputGroup className="mb-auto">    
         <DropdownButton
-          variant="outline-secondary"
+          variant="outline-warning"
           // Default dropdown button title is All Categories and changes when a category is selected
           title={category === "" ? "All Categories" : category}
           id="input-group-dropdown-1"

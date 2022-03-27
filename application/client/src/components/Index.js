@@ -1,16 +1,11 @@
 import { GlobalStyles } from './Global.js';
 import { lightTheme, darkTheme } from './NavbarElements.js';
 import React from "react";
-import {
-  Button, Form, Placeholder, FormControl, Nav, Navbar, NavDropdown,
-  Container, Col, Row, Dropdown, DropdownButton, InputGroup
-} from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { ThemeProvider } from 'styled-components';
 import { ReactComponent as Logo } from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
-import VPTestHome from '../pages/VPTestHome';
 import SearchBar from './SearchBar'
-
 
 export default function Index() {
   return (
@@ -28,26 +23,6 @@ export default function Index() {
         GatorXChange
       </Navbar.Brand>
       <Container>
-        {/* <Row>
-          <Col lg={true} />
-          <InputGroup className="mb-auto">
-            <DropdownButton
-              variant="outline-secondary"
-              title="Categories"
-              id="input-group-dropdown-1"
-            >
-              <Dropdown.Item href="#">Books</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item href="#">Electronics</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item href="#">Clothes</Dropdown.Item>
-            </DropdownButton>
-            <FormControl aria-label="Text input with dropdown button" />
-            <Placeholder.Button variant={"outline-warning"}>Search</Placeholder.Button>
-            
-          </InputGroup>
-          
-        </Row> */}
         <SearchBar />  
       </Container>
       
@@ -72,7 +47,6 @@ export default function Index() {
         </Nav>
       </Navbar.Collapse>
     </Navbar >
-
 
   );
 

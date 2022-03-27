@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import axios from 'axios';
-import '../css/about.css';
-import SearchResults from '../components/SearchResults';
+import '../css/App.css';
 
-const VPTestHome = ({ userSearched = false }) => {
+const VPTestHome = () => {
   
   return (
     <div className="container">
@@ -12,9 +9,11 @@ const VPTestHome = ({ userSearched = false }) => {
       </header>
       
       <div>
-        {/* Display a list of search results each time user submits a search */}
-    
-        {userSearched ? <SearchResults /> : null}
+        <main>
+          <h2>The platform made for gators, by gators.</h2>
+          <br />
+          <h2>Try using our search bar above to browse products.</h2>
+        </main>
       </div>
     </div>
 

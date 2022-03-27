@@ -229,7 +229,7 @@ app.get('/search', (req, res) => {
       WHERE category = '` + category + `'`;
   }
 
-  // Store the list of search results to send over to the VP Result page
+  // Store the list of search results to send over to the Search Results page
   let searchResults = [];
 
   // Extract posts from posts table in database based on user's search params
@@ -249,7 +249,7 @@ app.get('/search', (req, res) => {
         title: results[i].title,
         price: results[i].price,
         description: results[i].description,
-        creationDateTime: results[i].created
+        dateTime: results[i].created
       };
       console.log();
       console.log(`Post ${i} sent over is: `);
@@ -259,7 +259,7 @@ app.get('/search', (req, res) => {
       console.log('Post title: ' + post.title);
       console.log('Post price: ' + post.price);
       console.log('Post description: ' + post.description);
-      console.log('Post creation date/time: ' + post.created);
+      console.log('Post creation date/time: ' + post.dateTime);
       console.log();
       // Add the post to the list of search results
       console.log("posts: ", post) 

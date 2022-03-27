@@ -1,12 +1,18 @@
+// Stylesheets
+import '../css/App.css';
+import '../css/about.css';
+
+// Library imports and individual team member's about pages
 import React from "react";
 import { Link } from "react-router-dom";
-import '../css/about.css';
 import AboutThomas from "./About/AboutThomas";
 import AboutWilfredo from "./About/AboutWilfredo";
 import AboutJavier from "./About/Aboutjavier";
 import AboutDrashti from "./About/AboutDrashti";
 import AboutMary from "./About/AboutMary";
 import AboutMicheas from "./About/AboutMicheas";
+
+// Team member images
 const javi = "/images/javi.jpg"
 const drashti = "/images/drashti.jpeg"
 const mary = '/images/mary.jpg'
@@ -23,7 +29,7 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/AboutDrashti" element={<AboutDrashti />}>
-              <img className="thumbnail" id='drashti' src={drashti} alt="placeholder-image" />
+              <img id='drashti' src={drashti} alt="" />
             </Link>
           </div>
           <div className="card-content">
@@ -47,10 +53,10 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/AboutMary" element={<AboutMary />}>
-              <img className="thumbnail"
+              <img
                 id='mary'
                 src={mary}
-                alt="placeholder-image"
+                alt=""
               />
             </Link>
           </div>
@@ -78,9 +84,9 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/AboutThomas" element={<AboutThomas />}>
-              <img className="thumbnail"
+              <img
                 src={thomas}
-                alt="Picture of Thomas"
+                alt=""
               />
             </Link>
           </div>
@@ -105,9 +111,9 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/AboutWilfredo" element={<AboutWilfredo />}>
-              <img className="thumbnail"
+              <img
                 src={wilfredo}
-                alt="Wilfredo Aceytuno"
+                alt=""
               />
             </Link>
           </div>
@@ -132,10 +138,10 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/AboutMicheas" element={<AboutMicheas />}>
-              <img className="thumbnail"
+              <img
                 id='Mike'
                 src={Mike}
-                alt="placeholder-image"
+                alt=""
               />
             </Link>
           </div>
@@ -160,10 +166,10 @@ const About = () => {
         <div className="card">
           <div className="card-content">
             <Link to="/Aboutjavier" element={<AboutJavier />}>
-              <img className="thumbnail"
+              <img
                 id='javi'
                 src={javi}
-                alt="placeholder-image"
+                alt=""
               />
             </Link>
           </div>

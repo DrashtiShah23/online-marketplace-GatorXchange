@@ -5,8 +5,7 @@ import axios from 'axios';
 
 const SearchResults = () => {
   let [results, updateResults] = useState([]);
-  const [searchSubmitted, setSearchSubmitted] = useState(false);
-
+  
   // This function displays the list of search results received from database
   const displayResults = results.map((result, i) => {
     return (
@@ -37,37 +36,30 @@ const SearchResults = () => {
   const getSearchResults = () => {
     axios.get('/search')
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         
         // Create a copy of the database results returned and then
         // update the state of the results array
         updateResults([...res.data]);
-        
-        setSearchSubmitted(!searchSubmitted);
-        
       })
       .catch((err) => {
         console.log('Failed to get search results');
         console.log(err);
-      })
-    setSearchSubmitted(false);
-    
-      
+      }); 
   }
-
+  
+  // Call this function when SearchResults component is rendered
   useEffect(() => {
     
-    // Call this function when SearchResults component is rendered
     // This will generate a side effect that depends on the results array
-    getSearchResults()
+    getSearchResults();
     
-    return () => {
-      // Cleanup any side effects
-      updateResults([]);
-      
-    }
-    // Render the search results page whenever the state of the results title value changes, 
-    // Without this dependency, this component will infinitely loop
+    /* 
+      Render the search results page whenever any dependency value changes 
+      Without a dependency array, this component will infinitely loop
+      In this case, an empty dependency array guarantees the getSearchResults
+      function runs only once. Add values if you want to control when the component re-renders
+    */
   }, []);
 
   return (
@@ -78,7 +70,7 @@ const SearchResults = () => {
         </header>
       </div>
       <div>
-        <h3>Number of results returned: {results.length}</h3>
+        <h2>Number of results returned: {results.length}</h2>
       </div>
       <div className="card-container">
         {/* Display the list of results from the database */}

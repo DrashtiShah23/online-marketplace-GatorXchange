@@ -41,14 +41,9 @@ const router = express.Router()
 // Use express middleware to parse req body into json
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
 app.use(cors())
-app.use(express.json());
 app.use(helmet())
 app.use(morgan("common"))
 app.use(logger("common"))
@@ -88,7 +83,7 @@ app.use('public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Respond to any route requests with the index.html file
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
@@ -168,7 +163,13 @@ app.post('/search', (req, res) => {
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
   res.send(req.body);
-
+  // console.log();
+  // console.log('Got a post request. Request body is:');
+  // console.log(req.body);
+  // console.log('Posted category: ' + req.body.category);
+  // console.log('Posted search term: ' + req.body.searchTerm);
+  // store.push(req.body);
+  // res.send(req.body);
 });
 
 // Get the search params and assign to separate variables

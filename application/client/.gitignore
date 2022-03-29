@@ -9,7 +9,7 @@
 /coverage
 
 # production: comment this out when its time to deploy to production
-/build
+# /build
 
 # misc
 .DS_Store

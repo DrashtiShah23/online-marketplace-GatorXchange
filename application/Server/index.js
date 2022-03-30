@@ -83,7 +83,7 @@ app.use('public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Respond to any route requests with the index.html file
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
@@ -128,16 +128,16 @@ app.get('/test', (req, res) => {
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE_NAME
+  // host: process.env.HOST,
+  // user: process.env.USER,
+  // password: process.env.PASSWORD,
+  // database: process.env.DATABASE_NAME
   
   // Hard coding the MySQL credentials for build version
-  // user: "admin",
-  // host: "localhost",
-  // password: "team1",
-  // database: "csc648-team1-db"
+  user: "admin",
+  host: "localhost",
+  password: "team1",
+  database: "csc648-team1-db"
 });
 
 // Establish a connection to the database

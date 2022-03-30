@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route }
 import Home from './pages/index';
 import About from './pages/about';
 import Login from './pages/Login';
-import SignUp from './pages/Signup';
+import SignUp from './pages/signup';
 import AboutWilfredo from './pages/About/AboutWilfredo';
 import AboutThomas from './pages/About/AboutThomas';
 import AboutDrashti from './pages/About/AboutDrashti';

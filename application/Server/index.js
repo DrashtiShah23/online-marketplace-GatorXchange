@@ -10,7 +10,7 @@ const morgan = require('morgan');
 const logger = require("morgan")
 const path = require('path');
 // Configures database environment variables
-require('dotenv').config();
+//require('dotenv').config();
 const mysql = require("mysql2");
 // const database = require('../config/database');
 

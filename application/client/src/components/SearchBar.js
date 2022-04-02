@@ -38,8 +38,7 @@ export default function SearchBar() {
       // Send a POST request to the server
       axios.post('/search', searchParams)
         .then((res) => {
-          // If status is OK, alert the user of submission success and that they
-          // will be redirected to another page that displays the search results
+          // If status is OK, redirect user to the search results page
           if (res.status === 200) {
             // For checking data is correct in inspector
             console.log('Data submitted is:');

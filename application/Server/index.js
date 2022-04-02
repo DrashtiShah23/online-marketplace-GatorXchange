@@ -12,7 +12,9 @@ const path = require('path');
 // Configures database environment variables
 //require('dotenv').config();
 const mysql = require("mysql2");
-// const database = require('../config/database');
+
+// const databasePool = require('./config/database.js');
+
 
 const { Server } = require("socket.io")
 
@@ -128,10 +130,6 @@ app.get('/test', (req, res) => {
 
 // Create a connection to the database using account info
 const database = mysql.createConnection({
-  // host: process.env.HOST,
-  // user: process.env.USER,
-  // password: process.env.PASSWORD,
-  // database: process.env.DATABASE_NAME
   
   // Hard coding the MySQL credentials for build version
   user: "admin",

@@ -7,6 +7,7 @@ import Home from './pages/index';
 import About from './pages/about';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
+import Post from './pages/Post'
 import AboutWilfredo from './pages/About/AboutWilfredo';
 import AboutThomas from './pages/About/AboutThomas';
 import AboutDrashti from './pages/About/AboutDrashti';
@@ -28,6 +29,7 @@ function App() {
                 {/* <Route exact path='/' element={<Home />} /> */}
                 <Route exact path='/' element={<VPTestHome/>} />
                 <Route path='/about' element={<About />} />
+                <Route path='/Post' element={<Post />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/search' element={<SearchResults />} />

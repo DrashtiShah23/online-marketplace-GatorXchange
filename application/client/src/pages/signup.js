@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import "../css/registration.css";
 import { Link } from 'react-router-dom';
+
 
 
 const Signup = () => {
@@ -8,60 +10,63 @@ const Signup = () => {
     const [lastName, setlastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [val, setVal] = useState(0);
 
     
 
     return (
         <div className="container">
             <div className="card">
-                <div className="card-content">
-                    <h1 className="form-title">Sign Up</h1>
-                    <div>
-                        <label>First Name* </label>
-                        <input input type="fname" required name="fname" placeholder="First Name" class="text-input"
-                            value={firstName}
-                            onChange={e => setfirstName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>Last Name* </label>
-                        <input input type="lname" required name="lname" placeholder="Last Name" class="text-input"
-                            value={lastName}
-                            onChange={e => setlastName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>SFSU ID*</label>
-                        <input
-                            placeholder="SFSU ID"
-                            onKeyPress={(event) => {
-                                if (!/[0-9]/.test(event.key)) {
-                                event.preventDefault();
-                                }
-                            }}
-                            />
-                    </div>
-                    <div>
-                        <label >Email* </label>
-                        <input input type="email" required name="email" placeholder="email" class="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>Password* </label>
-                        <input input type="password" required name="password" placeholder="Password" class="text-input"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
+                <h1>Sign Up</h1>
+
+                <div id="float-label">
+                    <input type="firstName" required
+                        value={firstName}
+                        onChange={e => setfirstName(e.target.value)}/>
+                    <label htmlFor="firstName">First Name*</label>
+                </div>
+                <div id="float-label">
+                    <input type="lastname" required 
+                        class="text-input"
+                        value={lastName}
+                        onChange={e => setlastName(e.target.value)}/>
+                    <label htmlFor="lastname">Last Name*</label>
+                </div>
+                <div id="float-label">
+                    <input value="sfsuID"
+                        pattern="[0-9]*"
+                        value={val}
+                        onChange={(e) =>
+                        setVal((v) => (e.target.validity.valid ? e.target.value : v))}/>
+                    <label htmlFor="sfsuID">SFSU ID*</label>
+                </div>
+                <div id="float-label">
+                    <input type="email" required
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}/>
+                    <label htmlFor="email">Email*</label>
+                </div>
+                <div id="float-label">
+                    <input type="password" required
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}/>
+                    <label htmlFor="password">Password*</label>
+                </div>
+
+                <div className="checkbox">          
+                    <input type="checkbox" id="TnC" checked={true}/>
+                    <label id="TnC"> I Agree with the    
+                        <Link to="#"> Terms and Condition </Link>
+                    </label>
+                </div>
                     
-                    <button>Signup</button>
+
+                    <button className="registerButton">Signup</button>
                     <div>
                         <p>Already have an Account?
                             <Link to="/Login">Login</Link></p>
                     </div>
-                </div>
+                
             </div>
         </div>
     );

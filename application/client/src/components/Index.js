@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from './SearchBar'
 import SearchResults from './SearchResults.js';
-import { NavLink } from 'react-router-dom';
+
 
 export default function Index() {
   return (

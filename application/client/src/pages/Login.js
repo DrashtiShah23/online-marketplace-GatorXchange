@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Axios from "axios"
 import { Link } from 'react-router-dom';
+import "../css/registration.css"
 
 const Login = () => {
 
@@ -27,14 +28,24 @@ const Login = () => {
         <div className="container">
             <div className="card">
                 <h1>Login</h1>
-                <label>Email</label>
-                    {/*event listener to parse binary code to set user values.*/}
-                    <input type="text" onChange={(e) => setEmail(e.target.value)} />
-                <label>Password</label>
-                    {/*event listener to parse binary code to set user values.*/}
-                    <input type="password" onChange={(e) => setPassword(e.target.value)} />
 
-                <button 
+                <div id="float-label">
+                    <input type="email" />
+
+                    <label htmlFor="email">
+                        E-mail
+                    </label>
+                </div>  
+                <div id="float-label">
+                    <input type="password" />
+
+                    <label htmlFor="password">
+                        Password
+                    </label>
+
+                </div>
+
+                <button className="registerButton"
                     onClick={login_function}>
                         Login
                 </button>

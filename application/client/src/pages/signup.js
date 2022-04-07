@@ -10,7 +10,7 @@ const Signup = () => {
     const [lastName, setlastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [val, setVal] = useState(0);
+    const [val, setVal] = useState();
 
     
 
@@ -54,7 +54,7 @@ const Signup = () => {
                 </div>
 
                 <div className="checkbox">          
-                    <input type="checkbox" id="TnC" checked={true}/>
+                    <input type="checkbox" id="TnC" checked={false}/>
                     <label id="TnC"> I Agree with the    
                         <Link to="#"> Terms and Condition </Link>
                     </label>

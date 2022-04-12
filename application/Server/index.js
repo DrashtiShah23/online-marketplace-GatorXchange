@@ -6,8 +6,7 @@ const cookieParser = require("cookie-parser")
 // const bcrypt = require("bcrypt")
 // const socketio = require("socket.io")
 // const helmet = require('helmet');
-// const morgan = require('morgan');
-// const logger = require("morgan")
+const logger = require("morgan");
 const path = require('path');
 const database = require('./config/database.js');
 const app = express();
@@ -38,12 +37,11 @@ const uploadRouter = require('./routers/upload.js')
 // Use express middleware to parse req body into json
 app.use(express.json());
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-// app.use(cookieParser());
-// app.use(cors())
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cookieParser());
+app.use(cors())
 // app.use(helmet())
-// app.use(morgan("common"))
-// app.use(logger("common"))
+app.use(logger('dev'))
 
 
 // app.use(
@@ -79,30 +77,8 @@ app.get('/test', (req, res) => {
   res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
 })
 
-// Create a connection to the database using account info
-// const database = mysql.createConnection({
-  
-//   // Hard coding the MySQL credentials for build version
-//   user: "admin",
-//   host: "localhost",
-//   password: "team1",
-//   database: "csc648-team1-db"
-// });
-
-// Establish a connection to the database
-// database.connect((err) => {
-//   // If connection to database failed, throw an error
-//   if (err) {
-//     console.error('Error connecting to database: ' + err.stack);
-//     return;
-//   }
-//   console.log('MySQL connected');
-
-// });
-
-
 app.post("/register", (req, res) => {
-  
+  // Get the account information
   const sfsu_id = req.body.id;
   const username = req.body.username;
   const email = req.body.email;
@@ -113,24 +89,57 @@ app.post("/register", (req, res) => {
   const createUser = 
     `INSERT INTO users
     (sfsu_id, username, email, password, type)` + `VALUES (?, ?, ?, ?, ?)`;
-    
+
   // Insert new user account into database
   database.query(createUser, [sfsu_id, username, email, password, type])
     .then(([results]) => {
+      // Account created successfully
       if (results && results.affectedRows) {
         console.log('Account created successfully!');
-        res.send('Account created successfully!');
+        res.status(200).send('Account created successfully!');
       }
+      // Account already exists
       else {
-        res.send('Account creation failed');
+        res.status(404).send('Account already exists. Create an account with different information.');
       }
+    })
+    .catch((err) => {
+      console.log('Error creating account in database with account info: ');
+      console.log(err);
+      return;
     });  
 });
 
-
-app.post("/login", async (req, res) => {
-  const username = req.body.username;
+// TODO: Setup session and cookies for login
+app.post("/login", (req, res) => {
+  // Get login info
+  const email = req.body.email;
   const password = req.body.password;
+
+  // Create the SQL query
+  const findUser =
+    `SELECT email, password 
+    FROM users 
+    WHERE email = '` + email + `' 
+    AND password = '` + password + `'`;
+
+  // Check the database whether an account with the username and password entered exists
+  database.query(findUser)
+    .then(([results]) => {
+      // Valid login info
+      if (results.length == 1) {
+        console.log('Account exists. Logging user in...');
+        res.status(200).send('Account exists. Logging user in...');
+      }
+      // Invalid login info
+      else
+        res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+    })
+    .catch((err) => {
+      console.log('Error querying database with login info:');
+      console.log(err);
+      return;
+    });
 
 });
 
@@ -145,7 +154,7 @@ app.post('/search', (req, res) => {
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
-  res.send(req.body);
+  res.sendStatus(200);
   
 });
 
@@ -247,7 +256,8 @@ app.get('/search', (req, res) => {
         console.log('Finished sending database results');
     })
     .catch((err) => {
-        console.error('Error querying database: ' + err.stack);
+        console.error('Error querying database: ');
+        console.log(err.stack);
         return;
     });
 
@@ -295,7 +305,7 @@ app.use('public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Respond to any route requests with the index.html file
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 

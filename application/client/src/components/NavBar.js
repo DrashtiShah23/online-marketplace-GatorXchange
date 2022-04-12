@@ -6,10 +6,9 @@ import { ThemeProvider } from 'styled-components';
 import { ReactComponent as Logo } from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from './SearchBar'
-import SearchResults from './SearchResults.js';
 
 
-export default function Index() {
+export default function NavBar() {
   return (
     <div>
       <h2>

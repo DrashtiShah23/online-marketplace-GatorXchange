@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';
+// import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { 
   Container, Row, InputGroup, Dropdown, DropdownButton, Form, FormControl, Button 
 } from 'react-bootstrap';
@@ -51,7 +51,7 @@ export default function SearchBar() {
             
             // Redirect to the search results page which renders the search results component
             window.location = '/search';
-            //navigate('/search');
+            // navigate('/search', {replace: true});
             // <Routes>
             // <Route path="/search" element={<SearchResults/>} />
             // </Routes>

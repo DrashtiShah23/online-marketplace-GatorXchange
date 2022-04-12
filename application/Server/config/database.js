@@ -1,17 +1,5 @@
-// const dotenv = require("dotenv")
-// dotenv.config()
-
-// let config = {}
-
-// config.database = {}
-
-// config.database.user = process.env.DATABASE_HOST || 'localhost'
-// config.database.password = process.env.DATABASE_PASSWORD || 'secret'
-// config.database.name = process.env.DATABASE_NAME || 'secret' 
-
-// module.exports = config
-
 const mysql = require("mysql2");
+// Configures database environment variables
 require('dotenv').config();
 
 const pool = mysql.createPool({
@@ -24,4 +12,6 @@ const pool = mysql.createPool({
   debug: false
 });
 
-module.exports = pool;
+const promisePool = pool.promise();
+
+module.exports = promisePool;

@@ -37,7 +37,7 @@ const SearchResults = () => {
     axios.get('/search')
       .then((res) => {
         //console.log(res.data);
-        
+
         // Create a copy of the database results returned and then
         // update the state of the results array
         updateResults([...res.data]);
@@ -45,7 +45,7 @@ const SearchResults = () => {
       .catch((err) => {
         console.log('Failed to get search results');
         console.log(err);
-      }); 
+      });
   }
   
   // Call this function when SearchResults component is rendered

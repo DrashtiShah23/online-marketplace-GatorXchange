@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { 
   Container, Row, InputGroup, Dropdown, DropdownButton, Form, FormControl, Button 
 } from 'react-bootstrap';
@@ -8,20 +9,22 @@ export default function SearchBar() {
   // Category and search term state variables  
   const [category, setCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  
+  // let navigate = useNavigate();
   
   // Event handler for setting the category. Event represents the dropdown option value
   // Can't get the dropdown option value using event.target.value like an input field
   const handleCategory = (event) => {
     
-    //console.log(event)
+    console.log(event)
     setCategory(event);
+    // console.log(event.target.value)
+    // setCategory(event.target.value);
     
   }
   // Event handler for setting the search term
   const handleSearchTerm = (event) => {
     
-    //console.log(event.target.value)
+    console.log(event.target.value)
     setSearchTerm(event.target.value);
   }
 
@@ -48,6 +51,11 @@ export default function SearchBar() {
             
             // Redirect to the search results page which renders the search results component
             window.location = '/search';
+            //navigate('/search');
+            // <Routes>
+            // <Route path="/search" element={<SearchResults/>} />
+            // </Routes>
+            // <Navigate to="/search" replace={true} />
           }
         })
         .catch((err) => {
@@ -63,8 +71,8 @@ export default function SearchBar() {
         });
       
       // Reset the search term, category, and search submitted state values after submission
-      setSearchTerm('');
-      setCategory('');
+      // setSearchTerm('');
+      // setCategory('');
   }
 
   return (
@@ -79,7 +87,7 @@ export default function SearchBar() {
             <Form.Group className="mb-auto">
               
               <InputGroup>
-                
+
                 {/* <Form.Select name="category" value={category} onChange={handleCategory}>
                   <option value="">All</option>
                   <option value="Books">Books</option>
@@ -106,7 +114,7 @@ export default function SearchBar() {
                 <FormControl aria-label="Search term" onChange={handleSearchTerm} name="searchTerm"/>
                 
                 <Button variant={"outline-warning"} type="submit">Search</Button>
-
+              
               </InputGroup>
             
             </Form.Group>

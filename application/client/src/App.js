@@ -1,5 +1,7 @@
 import React from 'react';
 import './css/App.css';
+import {Button, Alert}  from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/NavBar';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
@@ -8,6 +10,7 @@ import About from './pages/about';
 import Login from './pages/Login';
 import SignUp from './pages/signup';
 import Post from './pages/Post'
+import UserProfile from './pages/MyProfile'
 import AboutWilfredo from './pages/About/AboutWilfredo';
 import AboutThomas from './pages/About/AboutThomas';
 import AboutDrashti from './pages/About/AboutDrashti';
@@ -18,6 +21,8 @@ import AboutMicheas from './pages/About/AboutMicheas';
 import VPTestHome from './pages/VPTestHome';
 import SearchResults from './components/SearchResults';
 import Test from './components/Test'
+import MyProfile from './pages/MyProfile';
+
 
 
 function App() {
@@ -32,6 +37,7 @@ function App() {
                 <Route path='/Post' element={<Post />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
+                <Route path='/MyProfile' element={<MyProfile/>} />
                 <Route path='/search' element={<SearchResults />} />
                 
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
@@ -44,7 +50,9 @@ function App() {
                 <Route path='/upload' element={<Test />} />
                 
             </Routes>
+          
         </Router>
+        
     );
 }
 

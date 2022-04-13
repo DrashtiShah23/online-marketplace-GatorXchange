@@ -37,11 +37,27 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
+            <NavDropdown title="User Profile" id="collapsible-nav-dropdown">
+              <NavDropdown.Item
+                href="Myprofile">MyProfile</NavDropdown.Item>
+              <NavDropdown.Item href="MyPosts">
+                My Posts
+              </NavDropdown.Item>
+              {/* Example on how to set up */}
+              <NavDropdown.Item href="#action/3.4">
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          </Navbar.Collapse>
+
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto">
             <NavDropdown title="Account" id="collapsible-nav-dropdown">
               <NavDropdown.Item
-                href="Login">Sign in</NavDropdown.Item>
+                href="Login">Log in</NavDropdown.Item>
               <NavDropdown.Item href="SignUp">
-                Register
+                Sign up
               </NavDropdown.Item>
               {/* Example on how to set up */}
               <NavDropdown.Item href="#action/3.4">
@@ -54,6 +70,7 @@ export default function NavBar() {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        
       </Navbar >
     
     </div>

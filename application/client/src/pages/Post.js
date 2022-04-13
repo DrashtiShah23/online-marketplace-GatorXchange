@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
-
+import Form from 'react-bootstrap/Form'
 const Post = () => {
 
 
@@ -31,18 +31,6 @@ const Post = () => {
         </div>
         <div id="float-label">
           <input
-            type="category" placeholder="Category*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Category required!")}
-            required
-            class="text-input"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          {/* <label htmlFor="category">Category*</label> */}
-        </div>
-        <div id="float-label">
-          <input
             value="price" placeholder="Price*"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "Price required!")}
@@ -64,7 +52,35 @@ const Post = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
           {/* <label htmlFor="description">Description*</label> */}
-        </div><br/>
+        </div>
+        <div id="float-label">
+          <Form.Select aria-label="Catrgories">
+          <option>Select Category</option>
+            <option value="Books">Books</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothes">Clothes</option>
+        </Form.Select>
+          {/*<input
+            type="category" placeholder="Category*"
+            onFocus={(e) => (e.target.placeholder = "")}
+            onBlur={(e) => (e.target.placeholder = "Category required!")}
+            required
+            class="text-input"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+          { <label htmlFor="category">Category*</label> */}
+        </div>
+        <div id="float-label">
+          <Form.Select aria-label="Pickup">
+          <option>Select Pickup Location</option>
+            <option value="CesarChavezBldg">Cesar Chavez building </option>
+            <option value="Library ">J. Paul Leaonard Library </option>
+            <option value="AdminBldg">Administration building</option>
+            <option value="CafeRusso">Cafe Russo</option>
+            <option value="Quad">Quad</option>
+        </Form.Select>
+        </div>
 
         <div>
         <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
@@ -94,10 +110,6 @@ const Post = () => {
 
         <button className="registerButton">Post</button>
         <div>
-        <p>
-         Already have an Account?
-            <Link to="/Login">Login here</Link>
-          </p>
           {/* <p>
           Don't have an Account?
             <Link to="/SignUp">Register here</Link>

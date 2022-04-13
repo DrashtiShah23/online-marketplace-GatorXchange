@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../css/App.css';
 import axios from 'axios';
+import {Button} from 'react-bootstrap'
 
 
 const SearchResults = () => {
@@ -13,9 +14,9 @@ const SearchResults = () => {
         <div className="card-content">
           <p>Category: {result.category}</p>
         </div>
-        <div className="card-content">
+        {/* <div className="card-content">
           <p>Image: </p>
-        </div>
+        </div> */}
         <div className="card-content">
           <img className="thumbnail" src={result.thumbnail} alt=""/>
         </div>
@@ -27,6 +28,12 @@ const SearchResults = () => {
         </div>
         <div className="card-content">
           <p>Description: {result.description}</p>
+        </div>
+        <Button variant='primary'>
+            Contact Seller
+          </Button>
+        <div>
+          
         </div>
       </div>
     )

@@ -8,18 +8,15 @@ import {Button, Breadcrumb, Card} from 'react-bootstrap'
 const MyPosts = () => {
 
     return (
-       <div>
+        <div className="container">
+            <div className="card">
+                <h1>My MyPosts</h1>
         
-                    <Breadcrumb style={{color : "blue"}}>
-                    Post listing 1
-                    </Breadcrumb>
-                    <Breadcrumb>
-                   Post listing 2
-                    </Breadcrumb>
-                </div>
-       
-          
-                 
+                    
+            </div>
+        </div>
+
     )
-    }
+}
+
 export default MyPosts;

@@ -22,6 +22,7 @@ import VPTestHome from './pages/VPTestHome';
 import SearchResults from './components/SearchResults';
 import Test from './components/Test'
 import MyProfile from './pages/MyProfile';
+import MyPosts from './pages/MyPosts';
 
 
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/MyProfile' element={<MyProfile/>} />
+                <Route path='/MyPosts' element={<MyPosts/>} />
                 <Route path='/search' element={<SearchResults />} />
                 
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />

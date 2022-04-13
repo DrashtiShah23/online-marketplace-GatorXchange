@@ -12,6 +12,7 @@ const Post = () => {
   const [description, setDescription] = useState("");
   const [val, setVal] = useState();
   const [check, setcheckboxvalue] = useState(false);
+  const uploadFileEle = document.getElementById("fileInput");
 
   return (
     <div className="container">
@@ -63,11 +64,20 @@ const Post = () => {
             onChange={(e) => setDescription(e.target.value)}
           />
           {/* <label htmlFor="description">Description*</label> */}
+        </div><br/>
+
+        <div>
+        <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
+<br/>
+        <div>
+        <input  type="file"
+       id="avatar" name="avatar"
+       accept="image/png, image/jpeg"/>
+      
         </div>
 
-        <div></div>
-
         <div className="checkbox">
+        <br/>
         <input
             type="checkbox"
             required
@@ -84,10 +94,14 @@ const Post = () => {
 
         <button className="registerButton">Post</button>
         <div>
-          <p>
-            Already have an Account?
-            <Link to="/Login">Login</Link>
+        <p>
+         Already have an Account?
+            <Link to="/Login">Login here</Link>
           </p>
+          {/* <p>
+          Don't have an Account?
+            <Link to="/SignUp">Register here</Link>
+          </p> */}
         </div>
       </div>
     </div>

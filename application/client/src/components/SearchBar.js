@@ -23,9 +23,12 @@ export default function SearchBar() {
   }
   // Event handler for setting the search term
   const handleSearchTerm = (event) => {
-    
+    if(event.target.value.length >= 40){
+      window.alert("Search term shouldn't exceed 40 characters!")
+    }
     console.log(event.target.value)
     setSearchTerm(event.target.value);
+    
   }
 
   // Event handler for submitting the search parameters to send to backend

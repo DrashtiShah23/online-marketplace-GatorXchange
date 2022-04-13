@@ -30,19 +30,17 @@ const Login = () => {
                 <h1>Login</h1>
 
                 <div id="float-label">
-                    <input type="email" />
+                    <input type="email" placeholder= "Email*" 
+                    onFocus={(e) => e.target.placeholder = ""} 
+                    onBlur={(e) => e.target.placeholder = "Email required!"} />
 
-                    <label htmlFor="email">
-                        E-mail
-                    </label>
                 </div>  
                 <div id="float-label">
-                    <input type="password" />
+                    <input type="password" placeholder= "Password*" 
+                    onFocus={(e) => e.target.placeholder = ""} 
+                    onBlur={(e) => e.target.placeholder = "Password required!"}/>
 
-                    <label htmlFor="password">
-                        Password
-                    </label>
-
+                   
                 </div>
 
                 <button className="registerButton"

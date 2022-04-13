@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
-//import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import { render } from "react-dom";
-import { colours } from "nodemon/lib/config/defaults";
+
+
+
+
 
 const Signup = () => {
   const [firstName, setfirstName] = useState("");
@@ -13,7 +14,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
   const [val, setVal] = useState();
-  const [check, setcheckboxvalue] = useState(false);
+  const [setcheckboxvalue] = useState(false);
 
   return (
     <div className="container">
@@ -49,7 +50,7 @@ const Signup = () => {
             value="sfsuID"
             placeholder="SFSU ID*"
             onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "SFSU ID required!")}
+            onBlur={(e) => (e.target.placeholder = "920000000")}
             required
             pattern="[0-9]*"
             value={val}
@@ -60,29 +61,32 @@ const Signup = () => {
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
         <div id="float-label">
+          
           <input
             type="email"
             placeholder="Email*"
             onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Email required!")}
+            onBlur={(e) => (e.target.placeholder = "xyz@sfsu.edu")}
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {/* <label htmlFor="email">Email*</label> */}
+  
         </div>
         <div id="float-label">
           <input
             type="password"
             placeholder="Password*"
             onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Password required!")}
+            onBlur={(e) => (e.target.placeholder = "Atleast 3 characters required!")}
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)} 
           />
-        </div>
+          
+      </div>
 
+       
         <div id="float-label">
           <input
             type="confirmPassword"
@@ -93,9 +97,8 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfPassword(e.target.value)}
           />
-        </div>
 
-
+  </div>
 
         <div className="checkbox">
           <input

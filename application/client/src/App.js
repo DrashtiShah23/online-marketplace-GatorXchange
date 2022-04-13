@@ -1,16 +1,15 @@
 import React from 'react';
 import './css/App.css';
-import {Button, Alert}  from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css'
+
+
 import Navbar from './components/NavBar';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
-import Home from './pages/index';
+// import Home from './pages/index';
 import About from './pages/about';
 import Login from './pages/Login';
 import SignUp from './pages/signup';
 import Post from './pages/Post'
-import UserProfile from './pages/MyProfile'
 import AboutWilfredo from './pages/About/AboutWilfredo';
 import AboutThomas from './pages/About/AboutThomas';
 import AboutDrashti from './pages/About/AboutDrashti';
@@ -27,6 +26,7 @@ import MyPosts from './pages/MyPosts';
 
 
 function App() {
+    
     return (
         <Router>
             <Navbar />

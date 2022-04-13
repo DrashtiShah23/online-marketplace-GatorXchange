@@ -29,11 +29,11 @@ const SearchResults = () => {
         <div className="card-content">
           <p>Description: {result.description}</p>
         </div>
-
-        <div>
-          <Button variant='primary'>
+        <Button variant='primary'>
             Contact Seller
           </Button>
+        <div>
+          
         </div>
       </div>
     )

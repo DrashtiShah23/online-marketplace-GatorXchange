@@ -110,10 +110,10 @@ const Post = () => {
 
         <button className="registerButton">Post</button>
         <div>
-          {/* <p>
-          Don't have an Account?
-            <Link to="/SignUp">Register here</Link>
-          </p> */}
+          <p>
+          Already have an account?
+            <Link to="/Login">Login here</Link>
+          </p>
         </div>
       </div>
     </div>

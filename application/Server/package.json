@@ -4,19 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "restart": "cd ../ && pm2 startOrRestart ecosystem.config.js",
+    "setup": "cd ../ && pm2 deploy ecosystem.config.js production setup",
+    "deploy": "cd ../ && pm2 deploy ecosystem.config.js production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.1",
+    "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "express-session": "^1.17.2",
-    "mysql": "^2.18.1",
-    "socket.io": "^4.4.1"
+    "helmet": "^5.0.2",
+    "http": "0.0.1-security",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "npm-check-updates": "^12.5.4",
+    "path": "^0.12.7",
+    "rebuild": "^0.1.2",
+    "run-script": "^0.1.1",
+    "sharp": "^0.30.3",
+    "socket.io": "^4.4.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "pm2": "^5.2.0"
   }
 }

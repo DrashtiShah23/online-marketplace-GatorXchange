@@ -1,18 +1,18 @@
 module.exports = {
   apps: [{
-    name: 'csc648-03-sp22-Team01',
-    cwd:'/home/ubuntu/csc648-03-sp22-Team01/source',
-    script: './application/Server/index.js',
+    name: 'prod-server',
+    cwd:'/home/ubuntu/prod/source/application',
+    script: './Server/index.js',
   }],
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'ec2-54-183-182-205.us-west-1.compute.amazonaws.com',
+      host: '13.57.228.138',
       key: '~/.ssh/team1.pem',
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
-      path: '/home/ubuntu/csc648-03-sp22-Team01',
-      'post-deploy': 'npm install && pm2 startOrRestart /home/ubuntu/csc648-03-sp22-Team01/application/ecosystem.config.js'
+      path: '/home/ubuntu/prod',
+      'post-deploy': 'cd ./application/Server && npm install && cd ../ && pm2 reload ecosystem.config.js --env production && pm2 serve ./client/build 3000 --name prod-client'
     }
   }
 }

@@ -1,11 +1,12 @@
 
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaCentercode } from "react-icons/fa";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
-  
+
+
 export const Nav = styled.nav`
   background: #000000;
-  height: 85px;
+  height: 55px;
   display: flex;
   text-styled: center;
   justify-content: space-between;
@@ -53,3 +54,17 @@ white-space: nowrap; */
     display: none;
   }
 `;
+
+export const lightTheme = {
+  body: '#E2E2E2',
+  text: '#363537',
+  toggleBorder: '#FFF',
+  gradient: 'linear-gradient(#39598A, #79D7ED)',
+}
+
+export const darkTheme = {
+  body: '#363537',
+  text: '#FAFAFA',
+  toggleBorder: '#6B8096',
+  gradient: 'linear-gradient(#091236, #1E215D)',
+}

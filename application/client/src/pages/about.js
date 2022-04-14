@@ -1,51 +1,50 @@
-import React from "react";
-import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
+// Stylesheets
+import '../css/App.css';
 import '../css/about.css';
+
+// Library imports and individual team member's about pages
+import React from "react";
+import { Link } from "react-router-dom";
 import AboutThomas from "./About/AboutThomas";
 import AboutWilfredo from "./About/AboutWilfredo";
 import AboutJavier from "./About/Aboutjavier";
 import AboutDrashti from "./About/AboutDrashti";
 import AboutMary from "./About/AboutMary";
 import AboutMicheas from "./About/AboutMicheas";
-import javi from "./images/javi.jpg"
-import mary from "./images/mary.jpg";
 
+// Team member images
+const javi = "/images/javi.jpg"
+const drashti = "/images/drashti.jpeg"
+const mary = '/images/mary.jpg'
+const thomas = '/images/thomas.jpg'
+const wilfredo = '/images/wilfredo.jpg'
+const Mike = '/images/Mike.jpg'
 
 const About = () => {
   return (
     <div className="container">
-      <header className="aboutHeader">
-          <h1>  
-            Software Engineering class SFSU <br /> Spring, 2022 <br /> Section 03 <br /> Team 01 
-          </h1>
-      </header>
-
-      
       <div className="card-container">
-      
+
         {/*Drashti's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutDrashti" element={<AboutDrashti/>}>
-            <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
-            />
-          </Link>  
+            <Link to="/AboutDrashti" element={<AboutDrashti />}>
+              <img id='drashti' src={drashti} alt="" />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Drashti Pareshkumar Shah</h2>
           </div>
           <div className="card-content">
             <p className="title">Team Lead</p>
-            <p>Some text that describes me</p>
+            <p>Senior at SFSU pursuing computer science!</p>
             <p>dshah5@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutDrashti" element={<AboutDrashti/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutDrashti" element={<AboutDrashti />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -53,29 +52,30 @@ const About = () => {
         {/*Mary's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutMary" element={<AboutMary/>}> 
-          <img className="thumbnail"
-              id = 'mary'
-              src= {mary}
-              alt="placeholder-image" 
-            />
-          </Link>   
+            <Link to="/AboutMary" element={<AboutMary />}>
+              <img
+                id='mary'
+                src={mary}
+                alt=""
+              />
+            </Link>
           </div>
           <div className="card-content">
-            <h2>Mary</h2>
+            <h2>Mary Nicole Tangog</h2>
           </div>
           <div className="card-content">
+            <p className="title">Front End Lead</p>
             <p>
-              Computer Science Major <br/>
+              Computer Science Major <br />
               San Francisco State University
             </p>
             <p>mtangog@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutMary" element={<AboutMary/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutMary" element={<AboutMary />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -83,15 +83,15 @@ const About = () => {
         {/*Thomas's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutThomas" element={<AboutThomas/>}>  
-            <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
-            />
-          </Link>  
+            <Link to="/AboutThomas" element={<AboutThomas />}>
+              <img
+                src={thomas}
+                alt=""
+              />
+            </Link>
           </div>
           <div className="card-content">
-            <h2>Thomas</h2>
+            <h2>Thomas Nguyen</h2>
           </div>
           <div className="card-content">
             <p className="title">Back End Lead</p>
@@ -99,10 +99,10 @@ const About = () => {
             <p>tnguyen135@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/AboutThomas" element={<AboutThomas/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutThomas" element={<AboutThomas />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -110,12 +110,12 @@ const About = () => {
         {/*Wilfredo's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
-            <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
-            />
-          </Link>  
+            <Link to="/AboutWilfredo" element={<AboutWilfredo />}>
+              <img
+                src={wilfredo}
+                alt=""
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Wilfredo</h2>
@@ -126,10 +126,10 @@ const About = () => {
             <p>waceytun@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-          <Link to="/AboutWilfredo" element={<AboutWilfredo/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutWilfredo" element={<AboutWilfredo />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -137,26 +137,27 @@ const About = () => {
         {/*Micheas's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
-            <img className="thumbnail"
-              src="https://buildyourspechere.com/wp-content/uploads/2020/10/placeholder-image-person-jpg.jpg"
-              alt="placeholder-image" 
-            />
-          </Link>  
+            <Link to="/AboutMicheas" element={<AboutMicheas />}>
+              <img
+                id='Mike'
+                src={Mike}
+                alt=""
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Micheas</h2>
           </div>
           <div className="card-content">
-            <p className="title"></p>
-            <p>Some text that describes me</p>
-            <p>xyz@xyz.com</p>
+            <p className="title">Team Member</p>
+            <p>Computer Science Major at San Francisco State University</p>
+            <p>Mgebere@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-          <Link to="/AboutMicheas" element={<AboutMicheas/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/AboutMicheas" element={<AboutMicheas />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
@@ -164,13 +165,13 @@ const About = () => {
         {/*Javier's Card*/}
         <div className="card">
           <div className="card-content">
-          <Link to="/Aboutjavier" element={<AboutJavier/>}>
-            <img className="thumbnail"
-              id = 'javi'
-              src= {javi}
-              alt="placeholder-image" 
-            />
-          </Link>    
+            <Link to="/Aboutjavier" element={<AboutJavier />}>
+              <img
+                id='javi'
+                src={javi}
+                alt=""
+              />
+            </Link>
           </div>
           <div className="card-content">
             <h2>Javier</h2>
@@ -182,19 +183,19 @@ const About = () => {
             <p>jmarquez21@mail.sfsu.edu</p>
           </div>
           <div className="card-content">
-            <Link to="/Aboutjavier" element={<AboutJavier/>}>
-            <button className="btn-learn-more">
-            <h2>Learn More</h2>
-            </button>
+            <Link to="/Aboutjavier" element={<AboutJavier />}>
+              <button className="btn-learn-more">
+                <h2>Learn More</h2>
+              </button>
             </Link>
           </div>
         </div>
-        
+
       </div>
 
     </div>
   );
-}
+};
 
 
 

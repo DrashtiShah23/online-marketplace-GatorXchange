@@ -1,3 +1,13 @@
+/*****************************************************
+ * Purpose: Displays a list of search results
+ * based on the user's search parameters that is
+ * returned from the database
+ * Input: User's search parameters in search bar
+ * Output: A list of search result cards relating to 
+ * the user's search parameters
+ * Error Messages: None
+ * Author: Thomas Nguyen
+ *****************************************************/
 import { useState, useEffect } from 'react';
 import '../css/App.css';
 import axios from 'axios';

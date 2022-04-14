@@ -1,3 +1,10 @@
+/*********************************************************************
+ * Purpose: Vertical prototype of search results in Milestone 2
+ * Input: User's search parameters in search bar
+ * Output: A list of search results related to search parameters
+ * Error Messages: None
+ * Author: Thomas Nguyen
+ *********************************************************************/
 import { useState, useEffect } from 'react';
 import '../css/about.css';
 import axios from 'axios';

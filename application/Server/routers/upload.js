@@ -1,3 +1,12 @@
+/*******************************************************************
+ * Purpose: Test uploader for images. Can be migrated to creating
+ * a post page
+ * Input: Image to upload
+ * Output: Stores the image into the public/images/uploads folder 
+ * and a thumbnail version into public/images/thumbnails folder
+ * Error Messages: None
+ * Authors: Javier Marquez and Thomas Nguyen
+ *******************************************************************/
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');

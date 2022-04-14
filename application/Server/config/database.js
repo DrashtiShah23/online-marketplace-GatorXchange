@@ -1,3 +1,11 @@
+/*********************************************************************
+ * Purpose: Sets up a MySQL database pool that will handle connections
+ * and promises involving MySQL statements
+ * Input: Team 1's MySQL database credentials from .env file
+ * Output: A MySQL promise pool
+ * Error Messages: None
+ * Author: Thomas Nguyen and Javier Marquez
+ *********************************************************************/
 const mysql = require("mysql2");
 // Configures database environment variables
 require('dotenv').config();

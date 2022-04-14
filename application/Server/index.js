@@ -1,3 +1,14 @@
+/*********************************************************************
+ * Purpose: Starts the express app server to listen on port 3001 and
+ * contains all the API endpoints to call from the frontend. Also
+ * connects to the database upon starting and includes database logic
+ * for retrieving data from the MySQL database
+ * Input: None
+ * Output: Express app startup, database connection, and all backend
+ * functionality
+ * Error Messages: None
+ * Author: Thomas Nguyen and Javier Marquez
+ *********************************************************************/
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")

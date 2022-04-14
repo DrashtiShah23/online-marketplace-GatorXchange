@@ -1,0 +1,25 @@
+/*header*/
+.aboutHeader {
+    text-align: center;
+  }
+
+.about-section {
+     width: 100%;
+     height: 100px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.btn-learn-more {
+    background-color: steelblue;
+    color: whitesmoke;
+    text-align: center;
+    width: 100%;
+    transition: 0.5s;
+}
+
+.btn-learn-more:hover {
+    background-color: whitesmoke;
+    color: steelblue;
+}

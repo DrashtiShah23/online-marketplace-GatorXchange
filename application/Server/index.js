@@ -95,7 +95,14 @@ app.post("/register", (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-
+  
+  // Verify frontend data is correct
+  console.log()
+  console.log('SFSU ID received: ' + sfsu_id);
+  console.log('Username received: ' + username);
+  console.log('Email received: ' + email);
+  console.log('Password received: ' + password);
+  console.log()
   // Create the SQL insert statement
   const createUser = 
     `INSERT INTO users
@@ -111,6 +118,7 @@ app.post("/register", (req, res) => {
       }
       // Account already exists
       else {
+        console.log('Account already exists. Create an account with different information.');
         res.status(404).send('Account already exists. Create an account with different information.');
       }
     })
@@ -144,8 +152,10 @@ app.post("/login", (req, res) => {
         res.status(200).send('Account exists. Logging user in...');
       }
       // Invalid login info
-      else
+      else {
+        console.log('Account does not exist. Make sure your information is correct or create an account.');
         res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+      }
     })
     .catch((err) => {
       console.log('Error querying database with login info:');

@@ -7,7 +7,7 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP: http://3.101.39.111
+1. Server URL or IP: http://13.57.228.138
 2. SSH username: ubuntu
 3. SSH password or key: SSH key inside team1.pem file
     <br> If a ssh key is used please upload the key to the credentials folder.
@@ -22,7 +22,7 @@
 1. Move the copy of team1.pem file into your ~/.ssh folder (Usually hidden).
 2. Open terminal/cmd/powershell.
 3. Enter the following command on the team1.pem file: chmod 400 ~/.ssh/team1.pem
-4. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@3.101.39.111
+4. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@13.57.228.138
 5. You should see a welcome message by Ubuntu. You are now in the AWS virtual machine!
 
 # Most important things to Remember

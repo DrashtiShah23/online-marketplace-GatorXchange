@@ -7,7 +7,7 @@
  * Output: Express app startup, database connection, and all backend
  * functionality
  * Error Messages: None
- * Author: Thomas Nguyen and Javier Marquez
+ * Authors: Thomas Nguyen and Javier Marquez
  *********************************************************************/
 const express = require('express')
 const cors = require("cors")
@@ -88,21 +88,21 @@ app.get('/test', (req, res) => {
   res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
 })
 
+// Registration endpoint
 app.post("/register", (req, res) => {
   // Get the account information
-  const sfsu_id = req.body.id;
+  const sfsu_id = req.body.sfsu_id;
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const type = req.body.type;
-  
+
   // Create the SQL insert statement
   const createUser = 
     `INSERT INTO users
-    (sfsu_id, username, email, password, type)` + `VALUES (?, ?, ?, ?, ?)`;
+    (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
 
   // Insert new user account into database
-  database.query(createUser, [sfsu_id, username, email, password, type])
+  database.query(createUser, [sfsu_id, username, email, password, 1])
     .then(([results]) => {
       // Account created successfully
       if (results && results.affectedRows) {
@@ -121,6 +121,7 @@ app.post("/register", (req, res) => {
     });  
 });
 
+// Login endpoint
 // TODO: Setup session and cookies for login
 app.post("/login", (req, res) => {
   // Get login info

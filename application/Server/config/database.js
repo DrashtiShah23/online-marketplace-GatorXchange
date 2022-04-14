@@ -4,7 +4,7 @@
  * Input: Team 1's MySQL database credentials from .env file
  * Output: A MySQL promise pool
  * Error Messages: None
- * Author: Thomas Nguyen and Javier Marquez
+ * Authors: Thomas Nguyen and Javier Marquez
  *********************************************************************/
 const mysql = require("mysql2");
 // Configures database environment variables

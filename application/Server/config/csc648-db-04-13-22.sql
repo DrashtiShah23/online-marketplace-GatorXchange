@@ -88,7 +88,7 @@ CREATE TABLE `users` (
   `username` varchar(64) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `type` tinyint NOT NULL,
+  `registered` tinyint NOT NULL,
   PRIMARY KEY (`sfsu_id`),
   UNIQUE KEY `sfsu_id_UNIQUE` (`sfsu_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -102,7 +102,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (900000000,'user1','abc1@mail.com','password1',0),(900000001,'user2','abc2@mail.com','password2',1),(900000002,'user3','abc3@mail.com','password3',2),(900000003,'user4','abc4@mail.com','password4',3);
+INSERT INTO `users` VALUES (900000000,'user1','abc1@mail.com','password1',1),(900000001,'user2','abc2@mail.com','password2',1),(900000002,'user3','abc3@mail.com','password3',1),(900000003,'user4','abc4@mail.com','password4',1),(900000004,'test','test@mail.sfsu.edu','password5',1),(900000005,'test1','test1@mail.sfsu.edu','password6',1),(900000006,'test2','test2@mail.sfsu.edu','password7',1),(900000007,'test3','test3@mail.sfsu.edu','password7',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -115,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-25 20:22:45
+-- Dump completed on 2022-04-13 22:36:18

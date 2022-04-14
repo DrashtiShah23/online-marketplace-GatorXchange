@@ -1,3 +1,11 @@
+/******************************************************
+ * Purpose: Allows the user to search for a post by 
+ * selecting a category and entering a search term
+ * Input: Category, Search Term
+ * Output: Renders the search results page
+ * Error Messages: None
+ * Author: Thomas Nguyen
+ ******************************************************/
 import React, { useState } from "react";
 // import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';
 import {

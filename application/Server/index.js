@@ -1,3 +1,14 @@
+/*********************************************************************
+ * Purpose: Starts the express app server to listen on port 3001 and
+ * contains all the API endpoints to call from the frontend. Also
+ * connects to the database upon starting and includes database logic
+ * for retrieving data from the MySQL database
+ * Input: None
+ * Output: Express app startup, database connection, and all backend
+ * functionality
+ * Error Messages: None
+ * Authors: Thomas Nguyen and Javier Marquez
+ *********************************************************************/
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require("body-parser")
@@ -77,21 +88,28 @@ app.get('/test', (req, res) => {
   res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
 })
 
+// Registration endpoint
 app.post("/register", (req, res) => {
   // Get the account information
-  const sfsu_id = req.body.id;
+  const sfsu_id = req.body.sfsu_id;
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const type = req.body.type;
   
+  // Verify frontend data is correct
+  console.log()
+  console.log('SFSU ID received: ' + sfsu_id);
+  console.log('Username received: ' + username);
+  console.log('Email received: ' + email);
+  console.log('Password received: ' + password);
+  console.log()
   // Create the SQL insert statement
   const createUser = 
     `INSERT INTO users
-    (sfsu_id, username, email, password, type)` + `VALUES (?, ?, ?, ?, ?)`;
+    (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
 
   // Insert new user account into database
-  database.query(createUser, [sfsu_id, username, email, password, type])
+  database.query(createUser, [sfsu_id, username, email, password, 1])
     .then(([results]) => {
       // Account created successfully
       if (results && results.affectedRows) {
@@ -100,6 +118,7 @@ app.post("/register", (req, res) => {
       }
       // Account already exists
       else {
+        console.log('Account already exists. Create an account with different information.');
         res.status(404).send('Account already exists. Create an account with different information.');
       }
     })
@@ -110,6 +129,7 @@ app.post("/register", (req, res) => {
     });  
 });
 
+// Login endpoint
 // TODO: Setup session and cookies for login
 app.post("/login", (req, res) => {
   // Get login info
@@ -132,8 +152,10 @@ app.post("/login", (req, res) => {
         res.status(200).send('Account exists. Logging user in...');
       }
       // Invalid login info
-      else
+      else {
+        console.log('Account does not exist. Make sure your information is correct or create an account.');
         res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+      }
     })
     .catch((err) => {
       console.log('Error querying database with login info:');

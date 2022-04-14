@@ -1,3 +1,12 @@
+/*********************************************************************
+ * Purpose: Sets app build version up for deploying to production
+ * Input: Team 1's remote repository
+ * Output: A copy of the repository inside the AWS Ubuntu virtual
+ * machine to serve the prod-client and prod-server
+ * Error Messages: Deployment setup fails if the previous repo copy
+ * inside the virtual machine was not removed prior to redeploying
+ * Author: Thomas Nguyen
+ *********************************************************************/
 module.exports = {
   apps: [{
     name: 'prod-server',

@@ -1,3 +1,10 @@
+/*********************************************************************
+ * Purpose: Vertical prototype of home page in Milestone 2
+ * Input: None
+ * Output: Plain text for now. Will be edited later
+ * Error Messages: None
+ * Author: Thomas Nguyen
+ *********************************************************************/
 import '../css/App.css';
 
 const VPTestHome = () => {
@@ -7,7 +14,6 @@ const VPTestHome = () => {
       <header>
         <h1>Vertical Prototype Test Home Page</h1>
       </header>
-      
       <div>
         <main>
           <h2>The platform made for gators, by gators.</h2>

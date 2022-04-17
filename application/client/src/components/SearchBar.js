@@ -66,7 +66,8 @@ export default function SearchBar() {
           console.log("Search term input is " + searchParams.searchTerm);
 
           // Redirect to the search results page which renders the search results component
-          window.location = "/search";
+          // window.location = "/search";
+          window.location.replace('/search');
           // navigate('/search', {replace: true});
           // <Routes>
           // <Route path="/search" element={<SearchResults/>} />

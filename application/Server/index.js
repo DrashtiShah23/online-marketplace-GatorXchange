@@ -274,7 +274,9 @@ app.get('/search', (req, res) => {
         console.log('Database results array is: ' + JSON.stringify(searchResults));
   
         // Send the database results to the frontend
+        
         res.send(JSON.stringify(searchResults));
+        res.redirect('/search');
         console.log('Finished sending database results');
     })
     .catch((err) => {
@@ -327,7 +329,7 @@ app.use('public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Respond to any route requests with the index.html file
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 

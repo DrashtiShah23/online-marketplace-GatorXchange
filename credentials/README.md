@@ -9,9 +9,9 @@
 
 1. Server URL or IP: http://3.101.143.240
 2. SSH username: ubuntu
-3. SSH password or key: SSH key inside team1.pem file
+3. SSH password or key: team1.pem file
     <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.
+4. Database URL or IP and port used: localhost:3306 or 3.101.143.240 and port 3306
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
 5. Database username: admin
 6. Database password: team1
@@ -25,15 +25,15 @@
 5. You should see a welcome message by Ubuntu. You are now in the AWS virtual machine!
 
 ### Instructions for logging into the remote database:
-1. SSH into the AWS Ubuntu virtual machine
+1. SSH into the AWS Ubuntu virtual machine.
 2. Enter the command: "mysql -u admin -h localhost -p" or "sudo mysql -u admin -h localhost -p" 
 3. You will be prompted for a password. Enter: "team1"
 4. A MySQL message will show up on the screen. This means you logged into the database correctly.
 5. Enter the command: "show databases;"
 6. You will see a list of databases. Now enter the command: "use csc648-team1-db;"
 7. The previous command selects the csc648-team1-db as the current database to use. You can now run SQL statements like
-"select * from posts;" or "select * from users;" to display data from the posts table or users table
-8. Once done, enter: "exit" to exit out of the MySQL shell
+"select * from posts;" or "select * from users;" to display data from the posts table or users table.
+8. Once done, enter: "exit" to exit out of the MySQL shell.
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>

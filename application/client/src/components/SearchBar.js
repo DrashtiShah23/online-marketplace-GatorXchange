@@ -19,11 +19,13 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
+import SearchResults from './SearchResults';
 
 export default function SearchBar() {
   // Category and search term state variables
   const [category, setCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchSubmitted, setSearchSubmitted] = useState(false);
   // let navigate = useNavigate();
 
   // Event handler for setting the category. Event represents the dropdown option value
@@ -66,12 +68,13 @@ export default function SearchBar() {
           console.log("Search term input is " + searchParams.searchTerm);
 
           // Redirect to the search results page which renders the search results component
-          window.location = "/search";
+          // window.location = "/search";
           // navigate('/search', {replace: true});
           // <Routes>
           // <Route path="/search" element={<SearchResults/>} />
           // </Routes>
           // <Navigate to="/search" replace={true} />
+          setSearchSubmitted(true);
         }
       })
       .catch((err) => {
@@ -88,6 +91,7 @@ export default function SearchBar() {
     // Reset the search term, category, and search submitted state values after submission
     // setSearchTerm('');
     // setCategory('');
+    setSearchSubmitted(false);
   };
 
   return (
@@ -104,7 +108,8 @@ export default function SearchBar() {
                   <option value="Clothes">Clothes</option>
                 </Form.Select> */}
                 <DropdownButton
-                  variant="outline-warning"
+                  variant="warning"
+                  menuVariant="dark"
                   // Default dropdown button title is All Categories and changes when a category is selected
                   title={category === "" ? "All Categories" : category}
                   id="categories"
@@ -128,7 +133,7 @@ export default function SearchBar() {
                   name="searchTerm"
                 />
 
-                <Button variant={"outline-warning"} type="submit">
+                <Button variant={"warning"} type="submit">
                   Search
                 </Button>
               </InputGroup>
@@ -136,6 +141,10 @@ export default function SearchBar() {
           </Form>
         </Row>
       </Container>
+      
+      {/* Display a list of search results each time user submits a search */}
+      {searchSubmitted ? <SearchResults />: null}
+      
     </div>
   );
 }

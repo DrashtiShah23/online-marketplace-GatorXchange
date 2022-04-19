@@ -16,9 +16,10 @@ const Post = () => {
 
   return (
     <div className="container">
-      <h1>ADD POST</h1>
+      <h1>POST AN ITEM</h1>
       <div className="card">
-        <div id="float-label">
+        <div id="post-label">
+          <Form.Label>Title</Form.Label>
           <input
             type="title" placeholder="Title*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -29,7 +30,8 @@ const Post = () => {
           />
           {/* <label htmlFor="title">Title*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
+          <Form.Label>Price</Form.Label>
           <input
             value="price" placeholder="Price*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -42,7 +44,8 @@ const Post = () => {
           />
           {/* <label htmlFor="price">Price*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
+          <Form.Label>Description</Form.Label>
           <input
             type="description" placeholder="Description*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -53,7 +56,7 @@ const Post = () => {
           />
           {/* <label htmlFor="description">Description*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
           <Form.Select aria-label="Catrgories">
           <option>Select Category</option>
             <option value="Books">Books</option>
@@ -71,7 +74,7 @@ const Post = () => {
           />
           { <label htmlFor="category">Category*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
           <Form.Select aria-label="Pickup">
           <option>Select Pickup Location</option>
             <option value="CesarChavezBldg">Cesar Chavez building </option>
@@ -82,7 +85,8 @@ const Post = () => {
         </Form.Select>
         </div>
 
-        <div>
+        <div className="upload-img">
+        <h6>UPLOAD IMAGE</h6>
         <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
 <br/>
         <div>

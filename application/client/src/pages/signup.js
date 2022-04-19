@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 
 
@@ -21,7 +22,8 @@ const Signup = () => {
       <div className="card">
         <h1>Sign Up</h1>
 
-        <div id="float-label">
+        <div id="signup-label">
+          <Form.Label>First Name</Form.Label>
           <input
             type="text"
             placeholder="FirstName*"
@@ -33,7 +35,8 @@ const Signup = () => {
           />
           {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
-        <div id="float-label">
+        <div id="signup-label">
+          <Form.Label>Last Name</Form.Label>
           <input
             type="text"
             placeholder="LastName*"
@@ -45,7 +48,8 @@ const Signup = () => {
           />
           {/* <label htmlFor="lastname">Last Name*</label> */}
         </div>
-        <div id="float-label">
+        <div id="signup-label">
+          <Form.Label>SFSU ID</Form.Label>
           <input
             value="sfsuID"
             placeholder="SFSU ID*"
@@ -60,8 +64,8 @@ const Signup = () => {
           />
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
-        <div id="float-label">
-          
+        <div id="signup-label">
+          <Form.Label>Email</Form.Label>
           <input
             type="email"
             placeholder="Email*"
@@ -73,7 +77,8 @@ const Signup = () => {
           />
   
         </div>
-        <div id="float-label">
+        <div id="signup-label">
+          <Form.Label>Password</Form.Label>
           <input
             type="password"
             placeholder="Password*"
@@ -87,7 +92,8 @@ const Signup = () => {
       </div>
 
        
-        <div id="float-label">
+        <div id="signup-label">
+          <Form.Label>Confirm Password</Form.Label>
           <input
             type="confirmPassword"
             placeholder="Confirm Password*"

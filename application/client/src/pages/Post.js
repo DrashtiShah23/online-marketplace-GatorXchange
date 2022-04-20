@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "../css/registration.css";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
+import '../css/post.css';
+
 const Post = () => {
-
-
-
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -46,8 +44,8 @@ const Post = () => {
         </div>
         <div id="post-label">
           <Form.Label>Description</Form.Label>
-          <input
-            type="description" placeholder="Description*"
+          <textarea classname="post-input"
+            placeholder="Description*" cols="50" rows="2"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "Description required!")}
             required
@@ -57,7 +55,7 @@ const Post = () => {
           {/* <label htmlFor="description">Description*</label> */}
         </div>
         <div id="post-label">
-          <Form.Select aria-label="Catrgories">
+          <Form.Select aria-label="Categories">
           <option>Select Category</option>
             <option value="Books">Books</option>
             <option value="Electronics">Electronics</option>
@@ -85,6 +83,8 @@ const Post = () => {
         </Form.Select>
         </div>
 
+      <div className="container2"> 
+        <fieldset>
         <div className="upload-img">
         <h6>UPLOAD IMAGE</h6>
         <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
@@ -111,7 +111,6 @@ const Post = () => {
           </label>
         </div>
         
-
         <button className="registerButton">Post</button>
         <div>
           <p>
@@ -119,6 +118,8 @@ const Post = () => {
             <Link to="/Login">Login here</Link>
           </p>
         </div>
+        </fieldset>
+      </div>
       </fieldset>
     </div>
   );

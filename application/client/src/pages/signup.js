@@ -23,7 +23,7 @@ const Signup = () => {
         <h1>Sign Up</h1>
 
         <div id="signup-label">
-          <Form.Label>First Name</Form.Label>
+          <Form.Label className="formLabel">First Name</Form.Label>
           <input
             type="text"
             placeholder="FirstName*"
@@ -36,7 +36,7 @@ const Signup = () => {
           {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
         <div id="signup-label">
-          <Form.Label>Last Name</Form.Label>
+          <Form.Label className="formLabel">Last Name</Form.Label>
           <input
             type="text"
             placeholder="LastName*"
@@ -49,7 +49,7 @@ const Signup = () => {
           {/* <label htmlFor="lastname">Last Name*</label> */}
         </div>
         <div id="signup-label">
-          <Form.Label>SFSU ID</Form.Label>
+          <Form.Label className="formLabel">SFSU ID</Form.Label>
           <input
             value="sfsuID"
             placeholder="SFSU ID*"
@@ -65,7 +65,7 @@ const Signup = () => {
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
         <div id="signup-label">
-          <Form.Label>Email</Form.Label>
+          <Form.Label className="formLabel">Email</Form.Label>
           <input
             type="email"
             placeholder="Email*"
@@ -78,7 +78,7 @@ const Signup = () => {
   
         </div>
         <div id="signup-label">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="formLabel">Password</Form.Label>
           <input
             type="password"
             placeholder="Password*"
@@ -93,7 +93,7 @@ const Signup = () => {
 
        
         <div id="signup-label">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label className="formLabel">Confirm Password</Form.Label>
           <input
             type="confirmPassword"
             placeholder="Confirm Password*"

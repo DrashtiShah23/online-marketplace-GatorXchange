@@ -16,8 +16,8 @@ const Post = () => {
 
   return (
     <div className="container">
+      <fieldset>
       <h1>POST AN ITEM</h1>
-      <div className="card">
         <div id="post-label">
           <Form.Label>Title</Form.Label>
           <input
@@ -119,7 +119,7 @@ const Post = () => {
             <Link to="/Login">Login here</Link>
           </p>
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };

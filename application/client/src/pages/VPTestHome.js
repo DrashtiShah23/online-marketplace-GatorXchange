@@ -105,7 +105,6 @@ const VPTestHome = () => {
           </Modal.Footer>
         </Modal>
       {/*---------------------*/}
-    <SearchBar />
         </main>
       </div>
     </div>

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "../css/registration.css";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
+import '../css/post.css';
+
 const Post = () => {
-
-
-
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -16,9 +14,10 @@ const Post = () => {
 
   return (
     <div className="container">
-      <h1>ADD POST</h1>
-      <div className="card">
-        <div id="float-label">
+      <fieldset>
+      <h1>POST AN ITEM</h1>
+        <div id="post-label">
+          <Form.Label>Title</Form.Label>
           <input
             type="title" placeholder="Title*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -29,7 +28,8 @@ const Post = () => {
           />
           {/* <label htmlFor="title">Title*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
+          <Form.Label>Price</Form.Label>
           <input
             value="price" placeholder="Price*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -42,9 +42,10 @@ const Post = () => {
           />
           {/* <label htmlFor="price">Price*</label> */}
         </div>
-        <div id="float-label">
-          <input
-            type="description" placeholder="Description*"
+        <div id="post-label">
+          <Form.Label>Description</Form.Label>
+          <textarea classname="post-input"
+            placeholder="Description*" cols="50" rows="2"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "Description required!")}
             required
@@ -53,8 +54,8 @@ const Post = () => {
           />
           {/* <label htmlFor="description">Description*</label> */}
         </div>
-        <div id="float-label">
-          <Form.Select aria-label="Catrgories">
+        <div id="post-label">
+          <Form.Select aria-label="Categories">
           <option>Select Category</option>
             <option value="Books">Books</option>
             <option value="Electronics">Electronics</option>
@@ -71,7 +72,7 @@ const Post = () => {
           />
           { <label htmlFor="category">Category*</label> */}
         </div>
-        <div id="float-label">
+        <div id="post-label">
           <Form.Select aria-label="Pickup">
           <option>Select Pickup Location</option>
             <option value="CesarChavezBldg">Cesar Chavez building </option>
@@ -82,7 +83,10 @@ const Post = () => {
         </Form.Select>
         </div>
 
-        <div>
+      <div className="container2"> 
+        <fieldset>
+        <div className="upload-img">
+        <h6>UPLOAD IMAGE</h6>
         <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
 <br/>
         <div>
@@ -107,7 +111,6 @@ const Post = () => {
           </label>
         </div>
         
-
         <button className="registerButton">Post</button>
         <div>
           <p>
@@ -115,7 +118,9 @@ const Post = () => {
             <Link to="/Login">Login here</Link>
           </p>
         </div>
+        </fieldset>
       </div>
+      </fieldset>
     </div>
   );
 };

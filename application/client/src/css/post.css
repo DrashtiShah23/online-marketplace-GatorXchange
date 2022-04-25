@@ -1,0 +1,11 @@
+h1,h6{
+    text-align: center;
+    padding: 5%;
+}
+.Label{
+    float: left;
+    display: inline;
+}
+.post-input{
+    display: inline;
+}

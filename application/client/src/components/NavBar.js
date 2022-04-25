@@ -11,9 +11,9 @@ import SearchBar from './SearchBar'
 export default function NavBar() {
   return (
     <div>
-      <h2>
+      <p>
       SFSU Software Engineering Project CSC 648-848, Spring 2022. For Demonstration Only
-      </h2>
+      </p>
       {/* React-bootstrap components please read websites documentation to style. ENJOY*/}
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/">

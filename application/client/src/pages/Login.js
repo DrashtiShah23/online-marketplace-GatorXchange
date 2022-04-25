@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import "../css/registration.css";
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,8 @@ const Login = () => {
       <div className="card">
         <h1>Login</h1>
 
-        <div id="float-label">
+        <div id="login-label">
+          <Form.Label>Email</Form.Label>
           <input
             type="email"
             placeholder="Email*"
@@ -34,7 +36,8 @@ const Login = () => {
             onBlur={(e) => (e.target.placeholder = "Email required!")}
           />
         </div>
-        <div id="float-label">
+        <div id="login-label">
+          <Form.Label>Password</Form.Label>
           <input
             type="password"
             placeholder="Password*"

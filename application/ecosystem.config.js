@@ -1,3 +1,12 @@
+/*********************************************************************
+ * Purpose: Sets app build version up for deploying to production
+ * Input: Main branch of Team 1's remote repository
+ * Output: A copy of the repository inside the AWS Ubuntu virtual
+ * machine to serve the prod-client and prod-server
+ * Error Messages: Deployment setup fails if the previous repo copy
+ * inside the virtual machine was not removed prior to redeploying
+ * Author: Thomas Nguyen
+ *********************************************************************/
 module.exports = {
   apps: [{
     name: 'prod-server',
@@ -7,7 +16,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: '13.57.228.138',
+      host: '3.101.143.240',
       key: '~/.ssh/team1.pem',
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',

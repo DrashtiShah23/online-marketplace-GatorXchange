@@ -40,6 +40,37 @@ INSERT INTO `categories` VALUES (1,'Books'),(2,'Electronics'),(3,'Clothes');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `messages` (
+  `message_id` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(4096) NOT NULL,
+  `created` datetime NOT NULL,
+  `fk_sfsu_id` int NOT NULL,
+  `fk_post_id` int NOT NULL,
+  PRIMARY KEY (`message_id`),
+  UNIQUE KEY `message_id_UNIQUE` (`message_id`),
+  KEY `fk_sfsu_id_idx` (`fk_sfsu_id`),
+  KEY `fk_post_id_idx` (`fk_post_id`),
+  CONSTRAINT `fk_post_id` FOREIGN KEY (`fk_post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_sfsu_id` FOREIGN KEY (`fk_sfsu_id`) REFERENCES `users` (`sfsu_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `messages`
+--
+
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `posts`
 --
 
@@ -88,7 +119,7 @@ CREATE TABLE `users` (
   `username` varchar(64) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `type` tinyint NOT NULL,
+  `registered` tinyint NOT NULL,
   PRIMARY KEY (`sfsu_id`),
   UNIQUE KEY `sfsu_id_UNIQUE` (`sfsu_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -102,7 +133,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (900000000,'user1','abc1@mail.com','password1',0),(900000001,'user2','abc2@mail.com','password2',1),(900000002,'user3','abc3@mail.com','password3',2),(900000003,'user4','abc4@mail.com','password4',3);
+INSERT INTO `users` VALUES (900000000,'user1','abc1@mail.com','password1',1),(900000001,'user2','abc2@mail.com','password2',1),(900000002,'user3','abc3@mail.com','password3',1),(900000003,'user4','abc4@mail.com','password4',1),(900000004,'test','test@mail.sfsu.edu','password5',1),(900000005,'test1','test1@mail.sfsu.edu','password6',1),(900000006,'test2','test2@mail.sfsu.edu','password7',1),(900000007,'test3','test3@mail.sfsu.edu','password7',1),(900000008,'test4','test4@mail.sfsu.edu','password7',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -115,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-25 20:22:45
+-- Dump completed on 2022-04-14  2:38:03

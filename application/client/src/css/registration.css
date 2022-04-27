@@ -112,6 +112,7 @@ input, select {
 }
 .registerButton{
     border: none;
+    align: center;
     margin: .5cm;
     outline: 0;
     display: inline-block;

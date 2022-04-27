@@ -9,3 +9,26 @@ h1,h6{
 .post-input{
     display: inline;
 }
+#post-label{
+    margin: 5%;
+}
+.registerButton{
+    border: none;
+    margin: .5cm;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(95, 95, 95);
+    text-align: center;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 20cm;
+}
+.registerButton:hover {
+    background-color: #4A217B;
+    }
+
+.container2{
+    text-align: center;
+}

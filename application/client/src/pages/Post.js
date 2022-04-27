@@ -56,7 +56,7 @@ const Post = () => {
         </div>
         <div id="post-label">
           <Form.Select aria-label="Categories">
-          <option>Select Category</option>
+          <option>Select Category*</option>
             <option value="Books">Books</option>
             <option value="Electronics">Electronics</option>
             <option value="Clothes">Clothes</option>
@@ -74,7 +74,7 @@ const Post = () => {
         </div>
         <div id="post-label">
           <Form.Select aria-label="Pickup">
-          <option>Select Pickup Location</option>
+          <option>Select Pickup Location*</option>
             <option value="CesarChavezBldg">Cesar Chavez building </option>
             <option value="Library ">J. Paul Leaonard Library </option>
             <option value="AdminBldg">Administration building</option>
@@ -94,30 +94,8 @@ const Post = () => {
        id="avatar" name="avatar"
        accept="image/png, image/jpeg"/>
       
-        </div>
-
-        <div className="checkbox">
-        <br/>
-        <input
-            type="checkbox"
-            required
-            id="TnC"
-            onChange={(e) => setcheckboxvalue(e.target.value)}
-          />
-          <label id="TnC">
-            {" "}
-            I Agree with the
-            <Link to="/"> Terms and Conditions </Link>
-          </label>
-        </div>
-        
+        </div>   
         <button className="registerButton">Post</button>
-        <div>
-          <p>
-          Already have an account?
-            <Link to="/Login">Login here</Link>
-          </p>
-        </div>
         </fieldset>
       </div>
       </fieldset>

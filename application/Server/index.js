@@ -9,15 +9,15 @@
  * Error Messages: None
  * Authors: Thomas Nguyen and Javier Marquez
  *********************************************************************/
-const express = require('express')
-const cors = require("cors")
-const bodyParser = require("body-parser")
-const cookieParser = require("cookie-parser")
-// const session = require("express-session")
-// const bcrypt = require("bcrypt")
-// const socketio = require("socket.io")
+const express = require('express');
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+// const session = require("express-session");
+// const socketio = require("socket.io");
 // const helmet = require('helmet');
 const logger = require("morgan");
+const bcrypt = require("bcrypt");
 const path = require('path');
 const database = require('./config/database.js');
 const app = express();
@@ -29,7 +29,7 @@ const PORT = 3001;
 // const homeRouter = require('./routers/home.js')
 // const usersRouter = require('./routers/users.js')
 // const VpRouter = require('./routers/VPResult.js')
-const uploadRouter = require('./routers/upload.js')
+const uploadRouter = require('./routers/upload.js');
 // const chatRouter = require('./routers/chat.js')
 // const http = require("http")
 
@@ -50,9 +50,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
-app.use(cors())
-// app.use(helmet())
-app.use(logger('dev'))
+app.use(cors());
+// app.use(helmet());
+app.use(logger('dev'));
 
 
 // app.use(
@@ -75,18 +75,28 @@ app.use(logger('dev'))
 //   )
 // );
 
-// Test endpoints for testing backend. Ignore
+// Test endpoint for testing post in backend. Ignore
 app.post('/test', (req, res) => {
   console.log(req.body);
-  res.send('Sending a name and email to server: ' + req.body.name + ', ' + req.body.email);
+  //res.send('Sending a name and email to server: ' + req.body.name + ', ' + req.body.email);
   console.log('Sending a name and email to server');
-})
 
+  const saltRounds = 10;
+  const hashedPassword = bcrypt.hash(req.body.name, saltRounds)
+  .then((hashedPassword) => {
+    console.log(hashedPassword);
+    res.send(hashedPassword);
+  });
+  
+
+});
+
+// Test endpoint for testing get in backend. Ignore
 app.get('/test', (req, res) => {
   console.log('Name is: ' + req.body.name);
   console.log('Email is: ' + req.body.email);
   res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
-})
+});
 
 // Registration endpoint
 app.post("/register", (req, res) => {
@@ -97,36 +107,49 @@ app.post("/register", (req, res) => {
   const password = req.body.password;
   
   // Verify frontend data is correct
-  console.log()
+  console.log();
   console.log('SFSU ID received: ' + sfsu_id);
   console.log('Username received: ' + username);
   console.log('Email received: ' + email);
   console.log('Password received: ' + password);
-  console.log()
-  // Create the SQL insert statement
-  const createUser = 
-    `INSERT INTO users
-    (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
+  console.log();
 
-  // Insert new user account into database
-  database.query(createUser, [sfsu_id, username, email, password, 1])
-    .then(([results]) => {
-      // Account created successfully
-      if (results && results.affectedRows) {
-        console.log('Account created successfully!');
-        res.status(200).send('Account created successfully!');
-      }
-      // Account already exists
-      else {
-        console.log('Account already exists. Create an account with different information.');
-        res.status(404).send('Account already exists. Create an account with different information.');
-      }
+  
+  // Auto generate the salt and hash the password
+  const saltRounds = 10;
+  bcrypt.hash(password, saltRounds)
+    .then((hashedPassword) => {
+      console.log(hashedPassword);
+        // Create the SQL insert statement
+      const createUser = 
+        `INSERT INTO users
+        (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
+      
+      // Insert new user account into database
+      database.query(createUser, [sfsu_id, username, email, hashedPassword, 1])
+        .then(([results]) => {
+          // Account created successfully
+          if (results && results.affectedRows) {
+            console.log('Account created successfully!');
+            res.status(200).send('Account created successfully!');
+          }
+          // Account already exists
+          else {
+            console.log('Account already exists. Create an account with different information.');
+            res.status(404).send('Account already exists. Create an account with different information.');
+          }
+        })
+        .catch((err) => {
+          console.log('Error creating account in database with account info: ');
+          console.log(err);
+          return;
+        });
     })
     .catch((err) => {
-      console.log('Error creating account in database with account info: ');
+      console.log('Error hashing password: ');
       console.log(err);
-      return;
-    });  
+      res.status(404).send('Error hashing password');
+    });
 });
 
 // Login endpoint

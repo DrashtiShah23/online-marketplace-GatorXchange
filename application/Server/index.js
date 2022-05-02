@@ -82,13 +82,11 @@ app.post('/test', (req, res) => {
   console.log('Sending a name and email to server');
 
   const saltRounds = 10;
-  const hashedPassword = bcrypt.hash(req.body.name, saltRounds)
-  .then((hashedPassword) => {
-    console.log(hashedPassword);
-    res.send(hashedPassword);
+  bcrypt.hash(req.body.name, saltRounds)
+    .then((hashedPassword) => {
+      console.log(hashedPassword);
+      res.send(hashedPassword);
   });
-  
-
 });
 
 // Test endpoint for testing get in backend. Ignore
@@ -120,7 +118,7 @@ app.post("/register", (req, res) => {
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => {
       console.log(hashedPassword);
-        // Create the SQL insert statement
+      // Create the SQL insert statement
       const createUser = 
         `INSERT INTO users
         (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;

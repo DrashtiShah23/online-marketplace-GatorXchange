@@ -23,15 +23,14 @@ const Signup = () => {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
-          }
-  
+          } 
           form.classList.add('was-validated')
         }, false)
       })
   })();
   return (
-  <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" noValidate>
-    <div className="container">
+  <form class="row row-cols-lg-auto g-3 align-items-center was-validated" noValidate>
+    <div className="container" >
         <h1>Sign Up</h1>
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validName">Name</Form.Label>
@@ -46,9 +45,6 @@ const Signup = () => {
             value={Name}
             onChange={(e) => setName(e.target.value)}
           />
-          <div class="invalid-feedback">
-            Enter Name.
-          </div>
           {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
         {/* <div id="signup-label">
@@ -74,10 +70,8 @@ const Signup = () => {
           <input
             class="form-control"
             id="validID"
-            value="sfsuID"
            // placeholder="SFSU ID*"
             //onFocus={(e) => (e.target.placeholder = "")}
-           // onBlur={(e) => (e.target.placeholder = "000000000")}
             required
             pattern="().{9,}"
             value={id}
@@ -150,13 +144,11 @@ const Signup = () => {
             id="validCheck"
             type="checkbox"
             required
-            id="TnC"
             onChange={(e) => setcheckboxvalue(e.target.value)}
           />
           <div class="invalid-feedback">
             Please accept terms and conditions to register
           </div>
-         
           <label id="TnC">
             {" "}
             I Agree with the

@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 const Signup = () => {
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
+  const [Name, setName] = useState("");
+  //const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
-  const [val, setVal] = useState();
+  const [id, setID] = useState();
   const [setcheckboxvalue] = useState(false);
 
 // Prevents form from being submitted if form is not valid
@@ -30,38 +30,36 @@ const Signup = () => {
       })
   })();
   return (
-  <form class="needs-validation" noValidate>
+  <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" noValidate>
     <div className="container">
-      <div className="card">
         <h1>Sign Up</h1>
-
-        <div id="signup-label">
-          <Form.Label className="formLabel" class="form-label" for = "validFirstName">First Name</Form.Label>
+        <div class="col-12">
+          <Form.Label className="formLabel" class="form-label" for = "validName">Name</Form.Label>
           <input
             class="form-control" 
-            id= "validFirstName"
+            id= "validName"
             type="text"
             //placeholder="FirstName*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "First Name")}
+            //onFocus={(e) => (e.target.placeholder = "")}
+            //onBlur={(e) => (e.target.placeholder = "First Name")}
             required
-            value={firstName}
-            onChange={(e) => setfirstName(e.target.value)}
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
           />
           <div class="invalid-feedback">
-            Enter a First Name.
+            Enter Name.
           </div>
           {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
-        <div id="signup-label">
+        {/* <div id="signup-label">
           <Form.Label className="formLabel" class="form-label" for = "validLastName">Last Name</Form.Label>
           <input
             class="form-control"
             id="validLastName"
             type="text"
             //placeholder="LastName*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Last Name")}
+            //onFocus={(e) => (e.target.placeholder = "")}
+            //onBlur={(e) => (e.target.placeholder = "Last Name")}
             required
             value={lastName}
             onChange={(e) => setlastName(e.target.value)}
@@ -69,22 +67,23 @@ const Signup = () => {
           <div class="invalid-feedback">
             Enter a Last Name.
           </div>
-          {/* <label htmlFor="lastname">Last Name*</label> */}
-        </div>
-        <div id="signup-label">
+          {/* <label htmlFor="lastname">Last Name*</label> 
+        </div> */}
+        <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validID">SFSU ID</Form.Label>
           <input
             class="form-control"
             id="validID"
             value="sfsuID"
            // placeholder="SFSU ID*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "000000000")}
+            //onFocus={(e) => (e.target.placeholder = "")}
+           // onBlur={(e) => (e.target.placeholder = "000000000")}
             required
-            pattern="{9,}"
-            value={val}
+            pattern="().{9,}"
+            value={id}
             onChange={(e) =>
-              setVal((v) => (e.target.validity.valid ? e.target.value : v))
+              //setVal((v) => (e.target.validity.valid ? e.target.value : v))
+              setID(e.target.value)
             }
           />
           <div class="invalid-feedback">
@@ -92,7 +91,7 @@ const Signup = () => {
           </div>
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
-        <div id="signup-label">
+        <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validEmail">Email</Form.Label>
           <input
             class="form-control"
@@ -102,6 +101,7 @@ const Signup = () => {
           //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "xyz@sfsu.edu")}
             required
+            pattern=".+@sfsu\.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -109,7 +109,7 @@ const Signup = () => {
             Enter a SFSU email.
           </div>  
         </div>
-        <div id="signup-label">
+        <div class="col-12">
           <Form.Label class="form-label" for ="validPassword">Password</Form.Label>
           <input
             class="form-control"
@@ -127,7 +127,7 @@ const Signup = () => {
           "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
           </div>
       </div>
-        <div id="signup-label">
+        <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validConfirmPassword">Confirm Password</Form.Label>
           <input
             class="form-control"
@@ -153,6 +153,9 @@ const Signup = () => {
             id="TnC"
             onChange={(e) => setcheckboxvalue(e.target.value)}
           />
+          <div class="invalid-feedback">
+            Please accept terms and conditions to register
+          </div>
          
           <label id="TnC">
             {" "}
@@ -169,7 +172,6 @@ const Signup = () => {
           </p>
         </div>
       </div>
-    </div>
     </form>
   );
 };

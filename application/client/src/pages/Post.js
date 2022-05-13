@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import '../css/post.css';
+import axios from "axios";
 
 const Post = () => {
   const [title, setTitle] = useState("");
@@ -11,13 +12,14 @@ const Post = () => {
   const [val, setVal] = useState();
   const [check, setcheckboxvalue] = useState(false);
   const uploadFileEle = document.getElementById("fileInput");
+   
 
   return (
     <div className="container">
       <fieldset>
       <h1>POST AN ITEM</h1>
         <div id="post-label">
-          <Form.Label>Title</Form.Label>
+          <Form.Label>Title*: </Form.Label>
           <input
             type="title" placeholder="Title*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -29,7 +31,7 @@ const Post = () => {
           {/* <label htmlFor="title">Title*</label> */}
         </div>
         <div id="post-label">
-          <Form.Label>Price</Form.Label>
+          <Form.Label>Price*: </Form.Label>
           <input
             value="price" placeholder="Price*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -43,7 +45,7 @@ const Post = () => {
           {/* <label htmlFor="price">Price*</label> */}
         </div>
         <div id="post-label">
-          <Form.Label>Description</Form.Label>
+          <Form.Label>Description*: </Form.Label>
           <textarea classname="post-input"
             placeholder="Description*" cols="50" rows="2"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -95,6 +97,7 @@ const Post = () => {
        accept="image/png, image/jpeg"/>
       
         </div>   
+        <p>The post will be approved by the admin within 24-48 hrs after the upload</p>
         <button className="registerButton">Post</button>
         </fieldset>
       </div>

@@ -6,13 +6,13 @@ import { Form } from "react-bootstrap";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [passWord, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
 
   const login_function = () => {
     Axios.post("http://localhost:3001/register", {
-      userName: email,
-      passWord: passWord,
+      email: email,
+      password: password,
     })
       .then((res) => {
         setLogin(res.data);
@@ -24,37 +24,42 @@ const Login = () => {
 
   return (
     <div className="container">
-      <div className="card">
+      <div className="field">
         <h1>Login</h1>
 
-        <div id="login-label">
-          <Form.Label>Email</Form.Label>
+        <div class="col-12">
+          <Form.Label className="formLabel" class="form-label">Email</Form.Label>
           <input
+            class="form-control" 
             type="email"
-            placeholder="Email*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Email required!")}
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
+          {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
-        <div id="login-label">
-          <Form.Label>Password</Form.Label>
+
+        <div class="col-12">
+          <Form.Label className="formLabel" class="form-label">Password</Form.Label>
           <input
+            class="form-control" 
             type="password"
-            placeholder="Password*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Password required!")}
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+          {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
 
-     
 
-        <button className="registerButton" onClick={login_function}>
-          Login
-        </button>
-        <Link to="Forgotpassword">Forgot Password</Link>
-        <p>
-          Don't have an Account?<Link to="/Signup">Register</Link>
-        </p>
+
+          <button className="registerButton" onClick={login_function}>
+            Login
+          </button>
+          <Link to="Forgotpassword">Forgot Password</Link>
+          <p>
+            Don't have an Account? <Link to="/Signup">Register</Link>
+          </p>
       </div>
     </div>
   );

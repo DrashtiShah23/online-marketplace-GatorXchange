@@ -31,6 +31,7 @@ const Signup = () => {
   return (
   <form class="row row-cols-lg-auto g-3 align-items-center was-validated" noValidate>
     <div className="container" >
+      <div className="field">
         <h1>Sign Up</h1>
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validName">Name</Form.Label>
@@ -162,6 +163,7 @@ const Signup = () => {
             Already have an Account?
             <Link to="/Login">Login</Link>
           </p>
+        </div>
         </div>
       </div>
     </form>

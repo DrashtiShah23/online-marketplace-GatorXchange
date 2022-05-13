@@ -16,8 +16,9 @@ const Post = () => {
 
   return (
     <div className="container">
-      <fieldset>
-      <h1>POST AN ITEM</h1>
+      <div className="field-Post">
+        <h1> Post an Item </h1>
+
         <div id="post-label">
           <Form.Label>Title*: </Form.Label>
           <input
@@ -57,6 +58,7 @@ const Post = () => {
           {/* <label htmlFor="description">Description*</label> */}
         </div>
         <div id="post-label">
+          <Form.Label> Categories* </Form.Label>
           <Form.Select aria-label="Categories">
           <option>Select Category*</option>
             <option value="Books">Books</option>
@@ -75,6 +77,8 @@ const Post = () => {
           { <label htmlFor="category">Category*</label> */}
         </div>
         <div id="post-label">
+          <Form.Label>Location* </Form.Label>
+          <div className="post-pickup">
           <Form.Select aria-label="Pickup">
           <option>Select Pickup Location*</option>
             <option value="CesarChavezBldg">Cesar Chavez building </option>
@@ -82,27 +86,23 @@ const Post = () => {
             <option value="AdminBldg">Administration building</option>
             <option value="CafeRusso">Cafe Russo</option>
             <option value="Quad">Quad</option>
-        </Form.Select>
+          </Form.Select>
+          </div>
+        </div>
+        <div className="upload-img">
+          <h5>UPLOAD IMAGE</h5>
+          {/* <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label> */}
+          <input  type="file"
+            id="avatar" name="avatar"
+            accept="image/png, image/jpeg"/>
         </div>
 
-      <div className="container2"> 
-        <fieldset>
-        <div className="upload-img">
-        <h6>UPLOAD IMAGE</h6>
-        <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
-<br/>
-        <div>
-        <input  type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg"/>
-      
-        </div>   
         <p>The post will be approved by the admin within 24-48 hrs after the upload</p>
         <button className="registerButton">Post</button>
-        </fieldset>
-      </div>
-      </fieldset>
+
     </div>
+  </div>
+
   );
 };
 

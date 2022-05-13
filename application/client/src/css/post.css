@@ -1,16 +1,50 @@
-h1,h6{
+h1,h5{
     text-align: center;
     padding: 1%;
+    color: black;
+}
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    }
+.field-Post{
+    background-color: #d0bbeb;
+    max-width: 1000px;
 }
 .Label{
     float: left;
     display: inline;
 }
-.post-input{
+input{
     display: inline;
+    padding: 2%;
+    width: 50%;
+    flex: 0 0 200px;
+    margin-left: 160px;
+    height: 50px;
+}
+textarea{
+    margin-left: 8%;
 }
 #post-label{
     margin: 5%;
+    width: 1000px;
+}
+.form-select{
+    width: 500px;
+    margin-left: 10%;
+    display: inline
+}
+.post-pickup{
+    display: inline;
+    margin-left: 3%;
+}
+.upload-img{
+    text-align: center;
+    padding: 5%;
 }
 .registerButton{
     border: none;
@@ -24,6 +58,8 @@ h1,h6{
     cursor: pointer;
     width: 50%;
     border-radius: 20cm;
+    margin-left:25%;
+    margin-right:25%;
 }
 .registerButton:hover {
     background-color: #4A217B;

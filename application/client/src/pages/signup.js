@@ -29,7 +29,7 @@ const Signup = () => {
       })
   })();
   return (
-  <form class="row row-cols-lg-auto g-3 align-items-center was-validated" noValidate>
+  <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" noValidate>
     <div className="container" >
       <div className="field">
         <h1>Sign Up</h1>
@@ -96,7 +96,7 @@ const Signup = () => {
           //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "xyz@sfsu.edu")}
             required
-            pattern=".+@sfsu\.com"
+            pattern=".+@sfsu\.edu"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -140,7 +140,7 @@ const Signup = () => {
           </div>
       </div>
 
-        <div className="checkbox" for = "validCheck">
+        <div className="checkbox" class="was-validated"for = "validCheck">
           <input
             id="validCheck"
             type="checkbox"

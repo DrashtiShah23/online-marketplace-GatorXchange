@@ -68,13 +68,13 @@ export default function SearchBar() {
           console.log("Search term input is " + searchParams.searchTerm);
 
           // Redirect to the search results page which renders the search results component
-          window.location = "/search";
+          //window.location = "/search";
           // navigate('/search', {replace: true});
           // <Routes>
           // <Route path="/search" element={<SearchResults/>} />
           // </Routes>
           // <Navigate to="/search" replace={true} />
-          //setSearchSubmitted(true);
+          setSearchSubmitted(true);
         }
       })
       .catch((err) => {
@@ -91,7 +91,7 @@ export default function SearchBar() {
     // Reset the search term, category, and search submitted state values after submission
     // setSearchTerm('');
     // setCategory('');
-   // setSearchSubmitted(false);
+    setSearchSubmitted(false);
   };
 
   return (

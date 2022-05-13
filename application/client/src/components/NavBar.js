@@ -27,7 +27,7 @@ export default function NavBar() {
           GatorXChange
         </Navbar.Brand>
         <Container>
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Container>
         
         <Nav>

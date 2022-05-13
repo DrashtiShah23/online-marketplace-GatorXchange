@@ -11,6 +11,7 @@
  import {Button} from 'react-bootstrap'
  import { Form } from "react-bootstrap";
  import { Modal } from "react-bootstrap";
+ import SearchBar from '../components/SearchBar';
  import '../css/App.css';
  
  const VPTestHome = () => {
@@ -58,10 +59,12 @@
    }, []);
    
    return (
+     
      <div className="container">  
        <h1>Welcome to GatorXChange <br/> The platform made for gators, by gators.</h1>
-      
-       <div className="card-container">      
+       <SearchBar />
+       <div className="card-container"> 
+    
        {displayProductsHome}
          <main>      
            {/* "contact seller" pop up sample MODAL */}

@@ -42,6 +42,8 @@ label.form-label{
 }
 h1{
   color: #4A217B;
+  padding: 1%;
+  text-align: center;
 }
   .link-button {
       background-color: transparent;

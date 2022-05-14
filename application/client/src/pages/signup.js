@@ -27,14 +27,6 @@ const Signup = () => {
           }
           form.classList.add('was-validated')
         }, false)
-        
-        form.addEventListener('click', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-          form.classList.add('was-validated')
-        }, false)
       })
   })();
 
@@ -92,8 +84,10 @@ axios
 // setCategory('');
 // setSearchSubmitted(false);
 };
-  return (
-  <form class="row row-cols-lg-auto g-3 align-items-center needs-validation" onSubmit={handleSubmit} noValidate>
+  return (  
+  <form 
+    class="row row-cols-lg-auto g-3 align-items-center needs-validation" onSubmit={handleSubmit} noValidate
+  >
     {/* <Form onSubmit={handleSubmit}> */}
     <div className="container" >
       <div className="field">
@@ -130,7 +124,7 @@ axios
             }
           />
           <div class="invalid-feedback">
-            Enter a valid SFSU ID(9 digits).
+            Enter a valid SFSU ID(9 digits)
           </div>
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
@@ -149,7 +143,7 @@ axios
             onChange={(e) => setEmail(e.target.value)}
           />
           <div class="invalid-feedback">
-            Enter a SFSU email.
+            Enter a SFSU email
           </div>  
         </div>
         <div class="col-12">
@@ -167,7 +161,7 @@ axios
             onChange={(e) => setPassword(e.target.value)}
           />
           <div class="invalid-feedback">
-          "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
           </div>
       </div>
         <div class="col-12">
@@ -175,7 +169,7 @@ axios
           <input
             class="form-control"
             id="validConfirmPassword"
-            type="confirmPassword"
+            type="password"
             placeholder="Confirm Password"
             //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "Confirm Password required!")}
@@ -201,11 +195,11 @@ axios
             <Link to="/"> Terms and Conditions </Link>
           </label>
           <div class="invalid-feedback">
-            Please accept terms and conditions to register*
+            Please accept terms and conditions before register
           </div>
         </div>
 
-        <button className="registerButton" >Signup</button>
+        <button className="registerButton" type="submit">Signup</button>
         <div>
           <p>
             Already have an Account?
@@ -216,7 +210,6 @@ axios
       </div>
       {/* </Form> */}
     </form>
-    
   );
 };
 

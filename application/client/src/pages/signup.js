@@ -215,7 +215,7 @@ const Signup = () => {
           <div>
             <p> 
               Already have an Account?
-              <Link to="/Login">Login</Link>  {/** having a link directing to login if they already have an accounrt */}
+              <Link to="/Login"> Login</Link>  {/** having a link directing to login if they already have an accounrt */}
             </p>
           </div>
         </div>

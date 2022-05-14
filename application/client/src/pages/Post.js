@@ -21,6 +21,7 @@ const Post = () => {
 
         <div id="post-label">
           <Form.Label>Title*: </Form.Label>
+          <div className="post-title">
           <input
             type="title" placeholder="Title*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -29,10 +30,12 @@ const Post = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          </div>
           {/* <label htmlFor="title">Title*</label> */}
         </div>
         <div id="post-label">
           <Form.Label>Price*: </Form.Label>
+          <div className="post-price">
           <input
             value="price" placeholder="Price*"
             onFocus={(e) => (e.target.placeholder = "")}
@@ -43,6 +46,7 @@ const Post = () => {
               setPrice((v) => (e.target.validity.valid ? e.target.value : v))
             }
           />
+          </div>
           {/* <label htmlFor="price">Price*</label> */}
         </div>
         <div id="post-label">

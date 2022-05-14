@@ -28,10 +28,21 @@ input{
 }
 textarea{
     margin-left: 8%;
+    height: 5%;
 }
 #post-label{
-    margin: 5%;
+    margin: 3%;
     width: 1000px;
+
+}
+.post-title{
+    display: inline;
+    margin-left: 1%;
+}
+.post-price{
+    display: inline;
+
+
 }
 .form-select{
     width: 500px;
@@ -44,7 +55,8 @@ textarea{
 }
 .upload-img{
     text-align: center;
-    padding: 5%;
+    padding: 1%;
+
 }
 .registerButton{
     border: none;
@@ -56,9 +68,9 @@ textarea{
     background-color: rgb(95, 95, 95);
     text-align: center;
     cursor: pointer;
-    width: 50%;
+    width: 30%;
     border-radius: 20cm;
-    margin-left:25%;
+    margin-left:35%;
     margin-right:25%;
 }
 .registerButton:hover {

@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
-  //const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
@@ -88,7 +87,6 @@ axios
   <form 
     class="row row-cols-lg-auto g-3 align-items-center needs-validation" onSubmit={handleSubmit} noValidate
   >
-    {/* <Form onSubmit={handleSubmit}> */}
     <div className="container" >
       <div className="field">
         <h1>Sign Up</h1>
@@ -99,34 +97,25 @@ axios
             id= "validName"
             type="text"
             placeholder="Username"
-            //onFocus={(e) => (e.target.placeholder = "")}
-           //onBlur={(e) => (e.target.placeholder = "First Name")}
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validID">SFSU ID*</Form.Label>
           <input
             class="form-control"
             id="validID"
-           // placeholder="SFSU ID*"
-            //onFocus={(e) => (e.target.placeholder = "")}
             required
             pattern="\d{8}[0-9]"
             placeholder="*********"
             value={sfsu_id}
-            onChange={(e) =>
-              //setVal((v) => (e.target.validity.valid ? e.target.value : v))
-              setID(e.target.value)
-            }
+            onChange={(e) => setID(e.target.value)}
           />
           <div class="invalid-feedback">
             Enter a valid SFSU ID(9 digits)
           </div>
-          {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validEmail">SFSU Email*</Form.Label>
@@ -135,8 +124,6 @@ axios
             id="validEmail"
             type="email"
             placeholder="@sfsu.edu"
-          //onFocus={(e) => (e.target.placeholder = "")}
-            //onBlur={(e) => (e.target.placeholder = "xyz@sfsu.edu")}
             required
             pattern=".+@sfsu\.edu"
             value={email}
@@ -153,8 +140,6 @@ axios
             id= "validPassword"
             type="password"
             placeholder="Password"
-            //onFocus={(e) => (e.target.placeholder = "")}
-            //onBlur={(e) => (e.target.placeholder = "Atleast 3 characters required!")}
             required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             value={password}
@@ -171,8 +156,6 @@ axios
             id="validConfirmPassword"
             type="password"
             placeholder="Confirm Password"
-            //onFocus={(e) => (e.target.placeholder = "")}
-            //onBlur={(e) => (e.target.placeholder = "Confirm Password required!")}
             required
             value={confirmPassword}
             onChange={(e) => setConfPassword(e.target.value)}
@@ -208,7 +191,6 @@ axios
         </div>
         </div>
       </div>
-      {/* </Form> */}
     </form>
   );
 };

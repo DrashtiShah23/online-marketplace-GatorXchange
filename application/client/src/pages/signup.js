@@ -189,15 +189,14 @@ axios
       </div>
 
         <div className="checkbox" for = "validCheck">
-          <input
+          <input class="signup-check"
             id="validCheck"
             type="checkbox"
             required
             onChange={(e) => setcheckboxvalue(e.target.value)}
           />
-          
+
           <label id="TnC">
-            {" "}
             I Agree with the
             <Link to="/"> Terms and Conditions </Link>
           </label>

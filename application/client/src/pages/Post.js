@@ -1,6 +1,16 @@
+/*****************************************************
+ * Purpose: Allows the user to create an account on the
+ * GatorXchange website by filling out the registration
+ * form. The users enter sfsu id, SFSU email along with
+ * username and password and so they are verified to
+ * create and use the website, hence ensuring safety for SFSU
+ * staff, students and faculty.
+ * Error Messages: None
+ * Author: Mary Tangog, Drashti Shah
+ *****************************************************/
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
+import { Link } from "react-router-dom";
 import '../css/post.css';
 import axios from "axios";
 
@@ -12,8 +22,51 @@ const Post = () => {
   const [val, setVal] = useState();
   const [check, setcheckboxvalue] = useState(false);
   const uploadFileEle = document.getElementById("fileInput");
-   
+ 
+  // Event handler for submitting the post information to send to backend
+  const handleSubmit = (e) => {
+    // Don't refresh the page upon submitting post queries
+    e.preventDefault();
+    // Prevents form from being submitted if form is not valid
 
+    // Create post parameters that will be used for SQL queries into the database
+    const postData = {
+      title: title,
+      category: category,
+      price: price,
+      description: description,
+    };
+    // Send a POST request to the server
+    axios
+      .post("/post", postData)
+      .then((res) => {
+        // If status is OK, redirect user to the home page
+        if (res.status === 200) {
+          // For checking data is correct in inspector
+          console.log("Data submitted is:");
+          console.log(postData);
+          console.log("Title input is: " + postData.username);
+          console.log("Category input is " + postData.email);
+          console.log("Price input is " + postData.password);
+          console.log("Description input is " + postData.id);
+
+          // Redirect to the home page after successfully creating an account
+          window.location = "/";
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log("Server status is: " + err.response.status);
+        } else if (err.request) {
+          console.log(err.request);
+          console.log("Network error or server is offline");
+        }
+        console.log("Upload of the post failed :(");
+        console.log(err);
+      });
+  };
+  
+/** Creating a post form where the user enters the details of the post */
   return (
     <div className="container">
       <div className="field-Post">
@@ -28,13 +81,13 @@ const Post = () => {
             onBlur={(e) => (e.target.placeholder = "Title required!")}
             required
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)} /** setting the title by using the event handler e */
           />
           </div>
-          {/* <label htmlFor="title">Title*</label> */}
+
         </div>
         <div id="post-label">
-          <Form.Label>Price*: </Form.Label>
+          <Form.Label>Price*:</Form.Label>
           <div className="post-price">
           <input
             value="price" placeholder="Price*"
@@ -43,11 +96,11 @@ const Post = () => {
             pattern="[0-9]*"
             value={val}
             onChange={(e) =>
-              setPrice((v) => (e.target.validity.valid ? e.target.value : v))
+              setPrice((v) => (e.target.validity.valid ? e.target.value : v)) /** setting the price by using the event handler e */
             }
           />
           </div>
-          {/* <label htmlFor="price">Price*</label> */}
+
         </div>
         <div id="post-label">
           <Form.Label>Description*: </Form.Label>
@@ -57,9 +110,8 @@ const Post = () => {
             onBlur={(e) => (e.target.placeholder = "Description required!")}
             required
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)} /** setting the description by using the event handler e */
           />
-          {/* <label htmlFor="description">Description*</label> */}
         </div>
         <div id="post-label">
           <Form.Label> Categories* </Form.Label>
@@ -69,16 +121,7 @@ const Post = () => {
             <option value="Electronics">Electronics</option>
             <option value="Clothes">Clothes</option>
         </Form.Select>
-          {/*<input
-            type="category" placeholder="Category*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Category required!")}
-            required
-            class="text-input"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          { <label htmlFor="category">Category*</label> */}
+          
         </div>
         <div id="post-label">
           <Form.Label>Location* </Form.Label>
@@ -94,15 +137,19 @@ const Post = () => {
           </div>
         </div>
         <div className="upload-img">
-          <h5>UPLOAD IMAGE</h5>
-          {/* <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label> */}
+          <h5>Upload image of the item</h5>
+         
           <input  type="file"
             id="avatar" name="avatar"
             accept="image/png, image/jpeg"/>
         </div>
 
         <p>The post will be approved by the admin within 24-48 hrs after the upload</p>
-        <button className="registerButton">Post</button>
+        <button className="postButton" onSubmit={handleSubmit}>Post</button>
+        {/* Having a cancel link so users can be directed to home page */}
+        <Link className ="cancel-link"to ="/" c>Cancel</Link>
+        <div></div>
+        <div></div>
 
     </div>
   </div>

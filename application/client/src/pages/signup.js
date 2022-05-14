@@ -24,7 +24,15 @@ const Signup = () => {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
-          } 
+          }
+          form.classList.add('was-validated')
+        }, false)
+        
+        form.addEventListener('click', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
           form.classList.add('was-validated')
         }, false)
       })
@@ -91,38 +99,20 @@ axios
       <div className="field">
         <h1>Sign Up</h1>
         <div class="col-12">
-          <Form.Label className="formLabel" class="form-label" for = "validName">Username*</Form.Label>
+          <Form.Label className="formLabel" class="form-label is-valid" for = "validName">Username*</Form.Label>
           <input
-            class="form-control" 
+            class="form-control needs-validation" 
             id= "validName"
             type="text"
-            //placeholder="FirstName*"
+            placeholder="Username"
             //onFocus={(e) => (e.target.placeholder = "")}
-            //onBlur={(e) => (e.target.placeholder = "First Name")}
+           //onBlur={(e) => (e.target.placeholder = "First Name")}
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           {/* <label htmlFor="firstName">First Name*</label> */}
         </div>
-        {/* <div id="signup-label">
-          <Form.Label className="formLabel" class="form-label" for = "validLastName">Last Name</Form.Label>
-          <input
-            class="form-control"
-            id="validLastName"
-            type="text"
-            //placeholder="LastName*"
-            //onFocus={(e) => (e.target.placeholder = "")}
-            //onBlur={(e) => (e.target.placeholder = "Last Name")}
-            required
-            value={lastName}
-            onChange={(e) => setlastName(e.target.value)}
-          />
-          <div class="invalid-feedback">
-            Enter a Last Name.
-          </div>
-          {/* <label htmlFor="lastname">Last Name*</label> 
-        </div> */}
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label" for = "validID">SFSU ID*</Form.Label>
           <input
@@ -131,7 +121,8 @@ axios
            // placeholder="SFSU ID*"
             //onFocus={(e) => (e.target.placeholder = "")}
             required
-            pattern="().{9,}"
+            pattern="\d{8}[0-9]"
+            placeholder="*********"
             value={sfsu_id}
             onChange={(e) =>
               //setVal((v) => (e.target.validity.valid ? e.target.value : v))
@@ -139,7 +130,7 @@ axios
             }
           />
           <div class="invalid-feedback">
-            Enter a valid SFSU ID.
+            Enter a valid SFSU ID(9 digits).
           </div>
           {/* <label htmlFor="sfsuID">SFSU ID*</label> */}
         </div>
@@ -149,7 +140,7 @@ axios
             class="form-control"
             id="validEmail"
             type="email"
-           // placeholder="Email*"
+            placeholder="@sfsu.edu"
           //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "xyz@sfsu.edu")}
             required
@@ -167,8 +158,8 @@ axios
             class="form-control"
             id= "validPassword"
             type="password"
-           // placeholder="Password*"
-            onFocus={(e) => (e.target.placeholder = "")}
+            placeholder="Password"
+            //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "Atleast 3 characters required!")}
             required
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -185,7 +176,7 @@ axios
             class="form-control"
             id="validConfirmPassword"
             type="confirmPassword"
-            placeholder="Confirm Password*"
+            placeholder="Confirm Password"
             //onFocus={(e) => (e.target.placeholder = "")}
             //onBlur={(e) => (e.target.placeholder = "Confirm Password required!")}
             required
@@ -197,7 +188,7 @@ axios
           </div>
       </div>
 
-        <div className="checkbox" class="was-validated"for = "validCheck">
+        <div className="checkbox" for = "validCheck">
           <input
             id="validCheck"
             type="checkbox"

@@ -41,7 +41,7 @@ input{
     height: 50px;
 }
 textarea{
-    margin-left: 8%;
+    margin-left: 8.8%;
     height: 5%;
 }
 #post-label{
@@ -55,17 +55,18 @@ textarea{
 }
 .post-price{
     display: inline;
+    margin-left: 0.3%;
 
 
 }
 .form-select{
     width: 500px;
-    margin-left: 10%;
+    margin-left: 10.2%;
     display: inline
 }
 .post-pickup{
     display: inline;
-    margin-left: 3%;
+    margin-left: 2.6%;
 }
 .upload-img{
     text-align: center;
@@ -100,4 +101,12 @@ textarea{
   
 .cancel-link:hover{
     color: red;
+  }
+
+  .post-para{
+    text-align: center;
+    margin: .01%;
+    font-size: 15pt;
+    color: #4A217B;
+    
   }

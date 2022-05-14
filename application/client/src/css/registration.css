@@ -25,7 +25,7 @@
   
   
   /* Display the columns below each other instead of side by side on small screens */
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 780px) {
   .column {
       width: 80%;
       display: block;
@@ -106,9 +106,7 @@ h1{
     color: #4A217B;
     
   }
-  .post-label{
-    margin: 5%;
-  }
+  
   .col-12{
     padding: 10px;
   }

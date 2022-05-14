@@ -48,7 +48,7 @@ const Signup = () => {
     e.preventDefault();
     // Prevents form from being submitted if form is not valid
 
-    // Create search parameters that will be used for SQL queries into the database
+    // Create registration parameters that will be used for SQL queries into the database
     const userData = {
       username: username,
       email: email,

@@ -211,6 +211,7 @@ const Signup = () => {
           <button className="registerButton" type="submit">
             Signup
           </button>
+          <Link className ="cancel-link"to ="/" c>Cancel</Link>
           <div>
             <p> 
               Already have an Account?

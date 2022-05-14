@@ -1,3 +1,13 @@
+/*****************************************************
+ * Purpose: To use customised css for registration
+ * and some buttons for login which use the same labels
+ * Output: A specific color, size background etc all 
+ * used in registration form and login form 
+ * the user's search parameters
+ * Error Messages: None
+ * Author: Wilfredo Aceytuno, Drashti Shah, Mary Tangog
+ *****************************************************/
+
 .App {
   text-align: center;
   }

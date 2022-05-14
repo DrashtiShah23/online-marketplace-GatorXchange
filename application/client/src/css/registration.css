@@ -43,7 +43,7 @@
 .field{
   padding: 5%;
   width: 1000px;
-  background-color: #f1df94;
+  background-color:  #f1df94;
   float: center;
 }
 label.form-label{
@@ -89,18 +89,18 @@ h1{
       display: inline-block;
       padding: 8px;
       color: rgb(255, 255, 255);
-      background-color: rgb(95, 95, 95);
+      background-color: green;
       text-align: center;
       cursor: pointer;
-      width: 50%;
+      width: 23%;
       border-radius: 20cm;
   }
   .registerButton:hover {
-    background-color: #FCCB06;
+    background-color: purple;
     }
 
   p{
-    text-align: center;
+    text-align: left;
     margin: .01%;
     font-size: 15pt;
     color: #4A217B;
@@ -126,4 +126,12 @@ h1{
     margin-left: 12px;
     height: 50px;
     vertical-align: middle;   
+}
+
+.cancel-link{
+  color:rgb(95, 95, 95);
+}
+
+.cancel-link:hover{
+  color: red;
 }

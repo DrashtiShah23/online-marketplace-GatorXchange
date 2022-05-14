@@ -1,13 +1,12 @@
 /*****************************************************
- * Purpose: Allows the user to create an account on the
- * GatorXchange website by filling out the registration
- * form. The users enter sfsu id, SFSU email along with
- * username and password and so they are verified to
- * create and use the website, hence ensuring safety for SFSU
- * staff, students and faculty.
+ * Purpose: Allows the user to create a post from their 
+ * account to buy or sell. Ensures if the user is logged in 
+ * if not the users are given the link to register for
+ * an account at the bottom.
  * Error Messages: None
  * Author: Mary Tangog, Drashti Shah
  *****************************************************/
+
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";

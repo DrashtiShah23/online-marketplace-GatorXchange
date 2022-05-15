@@ -1,7 +1,21 @@
-h1,h5{
+/*****************************************************
+ * Purpose: To use customised css for creating a post 
+ * form.
+ * Output: A specific color, size background etc all 
+ * used in registration form and login form 
+ * the user's search parameters
+ * Error Messages: None
+ * Author: Wilfredo Aceytuno, Drashti Shah, Mary Tangog
+ *****************************************************/
+h1{
     text-align: center;
     padding: 1%;
     color: black;
+}
+h5{
+    text-align: center; 
+    color: black; 
+    padding: 0.02%;
 }
 .container {
     width: 100%;
@@ -11,7 +25,7 @@ h1,h5{
     align-items: center;
     }
 .field-Post{
-    background-color: #d0bbeb;
+    background-color: #f1df94;
     max-width: 1000px;
 }
 .Label{
@@ -26,7 +40,7 @@ input{
     height: 50px;
 }
 textarea{
-    margin-left: 8%;
+    margin-left: 8.8%;
     height: 5%;
 }
 #post-label{
@@ -40,37 +54,38 @@ textarea{
 }
 .post-price{
     display: inline;
+    margin-left: 0.3%;
 
 
 }
 .form-select{
     width: 500px;
-    margin-left: 10%;
+    margin-left: 10.2%;
     display: inline
 }
 .post-pickup{
     display: inline;
-    margin-left: 3%;
+    margin-left: 2.6%;
 }
 .upload-img{
     text-align: center;
     padding: 1%;
 
 }
-.registerButton{
+.postButton{
     border: none;
     margin: .5cm;
     outline: 0;
     display: inline-block;
     padding: 8px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 95, 95);
+    background-color: green;
     text-align: center;
     cursor: pointer;
-    width: 30%;
+    width: 23%;
     border-radius: 20cm;
-    margin-left:35%;
-    margin-right:25%;
+    margin-left:28%;
+    margin-right:2%;
 }
 .registerButton:hover {
     background-color: #4A217B;
@@ -87,3 +102,18 @@ textarea{
 .post-price{
     margin-left: 160px;
 }
+.cancel-link{
+    color:rgb(95, 95, 95);
+  }
+  
+.cancel-link:hover{
+    color: red;
+  }
+
+  .post-para{
+    text-align: center;
+    margin: .01%;
+    font-size: 15pt;
+    color: #4A217B;
+    
+  }

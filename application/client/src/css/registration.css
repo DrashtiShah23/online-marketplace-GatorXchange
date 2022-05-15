@@ -1,3 +1,13 @@
+/*****************************************************
+ * Purpose: To use customised css for registration
+ * and some buttons for login which use the same labels
+ * Output: A specific color, size background etc all 
+ * used in registration form and login form 
+ * the user's search parameters
+ * Error Messages: None
+ * Author: Wilfredo Aceytuno, Drashti Shah, Mary Tangog
+ *****************************************************/
+
 .App {
   text-align: center;
   }
@@ -15,7 +25,7 @@
   
   
   /* Display the columns below each other instead of side by side on small screens */
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 780px) {
   .column {
       width: 80%;
       display: block;
@@ -75,26 +85,24 @@ h1{
       display: inline-block;
       padding: 8px;
       color: rgb(255, 255, 255);
-      background-color: rgb(95, 95, 95);
+      background-color: green;
       text-align: center;
       cursor: pointer;
-      width: 50%;
+      width: 23%;
       border-radius: 20cm;
   }
   .registerButton:hover {
-    background-color: #FCCB06;
+    background-color: purple;
     }
 
   p{
-    text-align: center;
+    text-align: left;
     margin: .01%;
     font-size: 15pt;
     color: #4A217B;
     
   }
-  .post-label{
-    margin: 5%;
-  }
+  
   .col-12{
     padding: 10px;
   }
@@ -121,4 +129,17 @@ h1{
   flex-direction: column;
   align-items: center;
   background-color: #f1df94;
+}
+
+.cancel-link{
+    color:rgb(95, 95, 95);
+    margin-left: 40%;
+}
+
+.cancel-link:hover{
+  color: red;
+}
+
+.hasAccount{
+  margin-left: 15%;
 }

@@ -5,12 +5,7 @@
  * Error Messages: None
  * Author: Thomas Nguyen
  *********************************************************************/
- //import SearchBar from '../components/SearchBar';
- import axios from 'axios';
- import React, { useState} from "react";
- import {Button} from 'react-bootstrap'
- import { Form } from "react-bootstrap";
- import { Modal } from "react-bootstrap";
+ import React from "react";
  import SearchBar from '../components/SearchBar';
  import '../css/App.css';
  

@@ -8,12 +8,11 @@
  * Author: Wilfredo Aceytuno, Drashti Shah, Mary Tangog
  *****************************************************/
 
-.App {
+  .App {
   text-align: center;
   }
 
-  /* Three columns side by side */
-  
+  /* Three columns side by side */ 
   .container {
   width: 100%;
   display: flex;
@@ -22,55 +21,59 @@
   align-items: center;
   }
 
-  
-  
   /* Display the columns below each other instead of side by side on small screens */
   @media screen and (max-width: 780px) {
-  .column {
+    .column {
       width: 80%;
       display: block;
+    }
   }
-}
+
     /* Responsive design */
-    @media screen and (min-width: 40em) {
-      .card {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-      }
+  @media screen and (min-width: 40em) {
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
-   
-.field{
-  padding: 5%;
-  width: 100%;
-}
-label.form-label{
-  color: #4A217B;
-  font-size: 20pt;
-}
-h1{
-  color: #4A217B;
-  padding: 1%;
-  text-align: center;
-}
+  }
+
+  .field{
+    padding: 5%;
+    width: 100%;
+  }
+
+  label.form-label{
+    color: #4A217B;
+    font-size: 20pt;
+  }
+
+  h1{
+    color: #4A217B;
+    padding: 1%;
+    text-align: center;
+  }
+
   .link-button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      display: inline;
-      margin: 0;
-      padding: 0;
-    }
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
   /*------signup-------*/
   #signup-label{
     margin: .5%;
   }
+
   input.form-control, select {
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-
+    word-break: break-all;
   }
   /*-------------*/
   
@@ -91,6 +94,7 @@ h1{
       width: 23%;
       border-radius: 20cm;
   }
+
   .registerButton:hover {
     background-color: purple;
     }
@@ -99,8 +103,7 @@ h1{
     text-align: left;
     margin: .01%;
     font-size: 15pt;
-    color: #4A217B;
-    
+    color: #4A217B;  
   }
   
   .col-12{
@@ -120,26 +123,44 @@ h1{
     margin-left: 12px;
     height: 50px;
     vertical-align: middle;   
-}
+  }
 
-.containerRegistration{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f1df94;
-}
+  .containerRegistration{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1df94;
+  }
 
-.cancel-link{
+  .cancel-link{
     color:rgb(95, 95, 95);
     margin-left: 40%;
-}
+  }
 
-.cancel-link:hover{
+  .cancel-link:hover{
   color: red;
-}
+  }
 
-.hasAccount{
-  margin-left: 15%;
-}
+  .hasAccount{
+    margin-left: 15%;
+  }
+
+  .passwordErrorMessage{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: red;
+  }
+
+  .invalid-feedback{
+    color: red;
+  }
+
+  .requiredPassword{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .9em;
+    color: red;
+  }

@@ -25,7 +25,6 @@ const Signup = () => {
 
   // Prevents form from being submitted if form is not valid
   (function () {
-    "use strict";
     var forms = document.querySelectorAll(".needs-validation");
     Array.prototype.slice.call(forms).forEach(function (form) {
       form.addEventListener(
@@ -87,8 +86,7 @@ const Signup = () => {
 
    const check = function() {
 
-    if (document.getElementById('validPassword').value == document.getElementById('validConfirmPassword').value) {
-      document.getElementById('confirmMessage').style.color = 'green';
+    if (document.getElementById('validPassword').value === document.getElementById('validConfirmPassword').value) {
       document.getElementById('confirmMessage').innerHTML = '';
     } 
     else {
@@ -174,10 +172,14 @@ const Signup = () => {
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               value={password}
               onChange={(e) => {setPassword(e.target.value); check()}} /** setting the password by using the event handler e */
-            />
+            />         
             <div class="invalid-feedback">
-              Must contain at least one number and one uppercase and lowercase
-              letter, and at least 8 or more characters
+             <div class="requiredPassword">Must contain: <br/>
+                one number <br/>
+                one uppercase <br/>
+                one lowercase <br/>
+                8 characters or more <br/>
+             </div> 
             </div>
           </div>
           <div class="col-12">
@@ -197,7 +199,7 @@ const Signup = () => {
               value={confirmPassword}
               onChange={(e) => {setConfPassword(e.target.value); check()}} /** confirming the password by using the event handler e */           
             />
-            <span id='confirmMessage'></span>
+            <span class="passwordErrorMessage"id='confirmMessage'></span>
             <div class="invalid-feedback">Password is required</div>
           </div>
 

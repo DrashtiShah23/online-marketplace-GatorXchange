@@ -84,6 +84,18 @@ const Signup = () => {
         console.log(err);
       });
   };
+
+   const check = function() {
+
+    if (document.getElementById('validPassword').value == document.getElementById('validConfirmPassword').value) {
+      document.getElementById('confirmMessage').style.color = 'green';
+      document.getElementById('confirmMessage').innerHTML = '';
+    } 
+    else {
+      document.getElementById('confirmMessage').style.color = 'red';
+      document.getElementById('confirmMessage').innerHTML = 'Password is not matching';
+    } 
+  }
   return (
   <div className="containerRegistration" >
     <form
@@ -161,7 +173,7 @@ const Signup = () => {
               required
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               value={password}
-              onChange={(e) => setPassword(e.target.value)} /** setting the password by using the event handler e */
+              onChange={(e) => {setPassword(e.target.value); check()}} /** setting the password by using the event handler e */
             />
             <div class="invalid-feedback">
               Must contain at least one number and one uppercase and lowercase
@@ -183,9 +195,10 @@ const Signup = () => {
               placeholder="Confirm Password"
               required
               value={confirmPassword}
-              onChange={(e) => setConfPassword(e.target.value)} /** confirming the password by using the event handler e */
+              onChange={(e) => {setConfPassword(e.target.value); check()}} /** confirming the password by using the event handler e */           
             />
-            <div class="invalid-feedback">Passwords must match</div>
+            <span id='confirmMessage'></span>
+            <div class="invalid-feedback">Password is required</div>
           </div>
 
           {/* Ensuring the checkbox is checked while filling the forms, 
@@ -212,7 +225,7 @@ const Signup = () => {
           <button className="registerButton" type="submit">
             Signup
           </button>
-          <Link className ="cancel-link"to ="/" c>Cancel</Link>
+          <Link className ="cancel-link"to ="/" >Cancel</Link>
           <div className="hasAccount">
             <p> 
               Already have an Account?

@@ -83,13 +83,15 @@ axios
 // setCategory('');
 // setSearchSubmitted(false);
 };
-  return (  
+  return (
+  <div className="containerRegistration" >
   <form 
     class="row row-cols-lg-auto g-3 align-items-center needs-validation" onSubmit={handleSubmit} noValidate
   >
-    <div className="container" >
       <div className="field">
+        <div>
         <h1>Sign Up</h1>
+        </div>
         <div class="col-12">
           <Form.Label className="formLabel" class="form-label is-valid" for = "validName">Username*</Form.Label>
           <input
@@ -189,9 +191,9 @@ axios
             <Link to="/Login">Login</Link>
           </p>
         </div>
-        </div>
       </div>
     </form>
+    </div>
   );
 };
 

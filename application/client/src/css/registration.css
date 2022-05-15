@@ -32,9 +32,7 @@
    
 .field{
   padding: 5%;
-  width: 1000px;
-  background-color: #f1df94;
-  float: center;
+  width: 100%;
 }
 label.form-label{
   color: #4A217B;
@@ -59,8 +57,6 @@ h1{
     margin: .5%;
   }
   input.form-control, select {
-    width: 50%;
-    padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
@@ -116,4 +112,13 @@ h1{
     margin-left: 12px;
     height: 50px;
     vertical-align: middle;   
+}
+
+.containerRegistration{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1df94;
 }

@@ -99,23 +99,21 @@ const Signup = () => {
     <form
       /* on submitting this form it will be sent to the database and the account will be 
   created successfully if the fields are filled correctly */
-      class="row row-cols-lg-auto g-3 align-items-center needs-validation"
+      className="row row-cols-lg-auto g-3 align-items-center needs-validation"
       onSubmit={handleSubmit}
       noValidate
     >
       <div className="container">
         <div className="field">
           <h1>Sign Up</h1>
-          <div class="col-12">
+          <div className="col-12">
             <Form.Label
-              className="formLabel"
-              class="form-label is-valid"
-              for="validName"
+              className="formLabel form-label is-valid"
             >
               Username*
             </Form.Label>
             <input
-              class="form-control needs-validation"
+              className="form-control needs-validation"
               id="validName"
               type="text"
               placeholder="Username"
@@ -124,12 +122,12 @@ const Signup = () => {
               onChange={(e) => setUsername(e.target.value)}  /** setting the username by using the event handler e */
             />
           </div>
-          <div class="col-12">
-            <Form.Label className="formLabel" class="form-label" for="validID">
+          <div className="col-12">
+            <Form.Label className="formLabel form-label">
               SFSU ID*
             </Form.Label>
             <input
-              class="form-control"
+              className="form-control"
               id="validID"
               required
               pattern="\d{8}[0-9]"
@@ -137,18 +135,16 @@ const Signup = () => {
               value={sfsu_id}
               onChange={(e) => setID(e.target.value)} /** setting the SFSU ID by using the event handler e */
             />
-            <div class="invalid-feedback">Enter a valid SFSU ID(9 digits)</div>
+            <div className="invalid-feedback">Enter a valid SFSU ID(9 digits)</div>
           </div>
-          <div class="col-12">
+          <div className="col-12">
             <Form.Label
-              className="formLabel"
-              class="form-label"
-              for="validEmail"
+              className="formLabel form-label"
             >
               SFSU Email*
             </Form.Label>
             <input
-              class="form-control"
+              className="form-control"
               id="validEmail"
               type="email"
               placeholder="@sfsu.edu"
@@ -157,14 +153,14 @@ const Signup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)} /** setting the email by using the event handler e */
             />
-            <div class="invalid-feedback">Enter a SFSU email</div>
+            <div className="invalid-feedback">Enter a SFSU email</div>
           </div>
-          <div class="col-12">
-            <Form.Label class="form-label" for="validPassword">
+          <div className="col-12">
+            <Form.Label className="form-label">
               Password*
             </Form.Label>
             <input
-              class="form-control"
+              className="form-control"
               id="validPassword"
               type="password"
               placeholder="Password"
@@ -173,8 +169,8 @@ const Signup = () => {
               value={password}
               onChange={(e) => {setPassword(e.target.value); check()}} /** setting the password by using the event handler e */
             />         
-            <div class="invalid-feedback">
-             <div class="requiredPassword">Must contain: <br/>
+            <div className="invalid-feedback">
+             <div className="requiredPassword">Must contain: <br/>
                 one number <br/>
                 one uppercase <br/>
                 one lowercase <br/>
@@ -182,16 +178,14 @@ const Signup = () => {
              </div> 
             </div>
           </div>
-          <div class="col-12">
+          <div className="col-12">
             <Form.Label
-              className="formLabel"
-              class="form-label"
-              for="validConfirmPassword"
+              className="formLabel form-label"
             >
               Confirm Password*
             </Form.Label>
             <input
-              class="form-control"
+              className="form-control"
               id="validConfirmPassword"
               type="password"
               placeholder="Confirm Password"
@@ -199,16 +193,16 @@ const Signup = () => {
               value={confirmPassword}
               onChange={(e) => {setConfPassword(e.target.value); check()}} /** confirming the password by using the event handler e */           
             />
-            <span class="passwordErrorMessage"id='confirmMessage'></span>
-            <div class="invalid-feedback">Password is required</div>
+            <span className="passwordErrorMessage"id='confirmMessage'></span>
+            <div className="invalid-feedback">Password is required</div>
           </div>
 
           {/* Ensuring the checkbox is checked while filling the forms, 
               thereby users agree to the terms and conditions of the website */}
 
-          <div className="checkbox" for="validCheck">
+          <div className="checkbox">
             <input
-              class="signup-check"
+              className="signup-check"
               id="validCheck"
               type="checkbox"
               required
@@ -219,7 +213,7 @@ const Signup = () => {
               I Agree with the
               <Link to="/"> Terms and Conditions </Link>
             </label>
-            <div class="invalid-feedback">
+            <div className="invalid-feedback">
               Please accept terms and conditions before register
             </div>
           </div>

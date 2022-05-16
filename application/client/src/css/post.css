@@ -7,113 +7,109 @@
  * Error Messages: None
  * Author: Wilfredo Aceytuno, Drashti Shah, Mary Tangog
  *****************************************************/
-h1{
+    .App {
     text-align: center;
-    padding: 1%;
-    color: black;
-}
-h5{
-    text-align: center; 
-    color: black; 
-    padding: 0.02%;
-}
-.container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
     }
-.field-Post{
-    background-color: #f1df94;
-    max-width: 1000px;
-}
-.Label{
-    float: left;
-    display: inline;
-}
-input{
-    display: inline;
-    padding: 2%;
-    width: 50%;
-    flex: 0 0 200px;
-    height: 50px;
-}
-textarea{
-    margin-left: 8.8%;
-    height: 5%;
-}
-#post-label{
-    margin: 3%;
-    width: 1000px;
-
-}
-.post-title{
-    display: inline;
-    margin-left: 1%;
-}
-.post-price{
-    display: inline;
-    margin-left: 0.3%;
-
-
-}
-.form-select{
-    width: 500px;
-    margin-left: 10.2%;
-    display: inline
-}
-.post-pickup{
-    display: inline;
-    margin-left: 2.6%;
-}
-.upload-img{
-    text-align: center;
-    padding: 1%;
-
-}
-.postButton{
-    border: none;
-    margin: .5cm;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: rgb(255, 255, 255);
-    background-color: green;
-    text-align: center;
-    cursor: pointer;
-    width: 23%;
-    border-radius: 20cm;
-    margin-left:28%;
-    margin-right:2%;
-}
-.registerButton:hover {
-    background-color: #4A217B;
-    }
-
-.container2{
-    text-align: center;
-}
-
-.post-title{
-    margin-left: 160px;
-}
-
-.post-price{
-    margin-left: 160px;
-}
-.cancel-link{
-    color:rgb(95, 95, 95);
-  }
-  
-.cancel-link:hover{
-    color: red;
-  }
-
-  .post-para{
-    text-align: center;
-    margin: .01%;
-    font-size: 15pt;
-    color: #4A217B;
     
+    h1{
+        text-align: center;
+        padding: 1%;
+        color: black;
+    }
+
+    h5{
+        text-align: center; 
+        color: black; 
+        padding: 0.02%;
+    }
+
+    .container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        }
+    .field-Post{
+        padding: 5%;
+        width: 100%;
+    }
+    .Label{
+        float: left;
+        display: inline;
+    }
+    input{
+        display: inline;
+        width: 50%;
+        flex: 0 0 200px;
+        height: 50px;
+    }
+    textarea{
+        height: 5%;
+    }
+
+    .upload-img{
+        text-align: center;
+        padding: 1%;
+        margin-left: 2%;
+    }
+    .postButton{
+        border: none;
+        margin: .5cm;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: rgb(255, 255, 255);
+        background-color: green;
+        text-align: center;
+        cursor: pointer;
+        width: 20%;
+        border-radius: 20cm;
+        margin-left: 15%;
+    }
+    .registerButton:hover {
+        background-color: #4A217B;
+        }
+
+    .container2{
+        text-align: center;
+    }
+
+    .cancel-link{
+        color:rgb(95, 95, 95);
+    }
+    
+    .cancel-link:hover{
+        color: red;
+    }
+
+    .post-para{
+        text-align: center;
+        margin: .01%;
+        font-size: 15pt;
+        color: #4A217B;
+    }
+
+    .form-control{
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        word-break: break-all;
+    }
+
+    .containerPost{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f1df94;
+    }
+
+  .col-12{
+    padding: 10px;
+  }
+
+  .hasAccount{
+    margin-left: 0%;
   }

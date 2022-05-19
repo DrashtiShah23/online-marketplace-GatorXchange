@@ -77,12 +77,12 @@ app.use(logger('dev'));
 
 // Test endpoint for testing post in backend. Ignore
 app.post('/test', (req, res) => {
-  console.log(req.body);
-  //res.send('Sending a name and email to server: ' + req.body.name + ', ' + req.body.email);
-  console.log('Sending a name and email to server');
+  console.log(req.body.password);
+  
+  console.log('Sending a hashed password to server');
 
   const saltRounds = 10;
-  bcrypt.hash(req.body.name, saltRounds)
+  bcrypt.hash(req.body.password, saltRounds)
     .then((hashedPassword) => {
       console.log(hashedPassword);
       res.send(hashedPassword);
@@ -185,6 +185,26 @@ app.post("/login", (req, res) => {
     });
 
 });
+
+// Post endpoint
+// app.post('/post', (req, res) => {
+  
+//   const fk_user_id = req.session.user_id;
+//   const title = req.body.title;
+//   const price = req.body.price;
+//   const description = req.body.description;
+//   const category = req.body.category;
+//   const pickup_location = req.body.pickup_location;
+//   const image = req.file.path;
+
+//   // Prepare the SQL query
+//   const addPost = 
+//         `INSERT INTO users
+//         (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
+      
+//       // Insert new user account into database
+//       database.query(addPost, [sfsu_id, username, email, hashedPassword, 1])
+// });
 
 // This endpoint gets all search results to display on home page
 app.get('/getAllPosts', (req, res) => {

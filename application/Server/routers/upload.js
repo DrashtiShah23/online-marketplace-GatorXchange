@@ -38,13 +38,9 @@ const upload = multer({ storage: storage });
 
 router.use(cors());
 
-router.post('/image', upload.single('file'), async function (req, res) {
+// router.post('/image', upload.single('file'), async function (req, res) {
+router.post('/post', upload.single('file'), async function (req, res) {    
     
-    const imagePath = req.file.path;
-    const imageName = req.file.filename;
-    //const imageDestination = `${req.file.destination}/${imageName}`;
-    const thumbnailName = `thumbnail-${imageName}`;
-    const thumbnailDestination = '../client/public/images/thumbnails/' + thumbnailName;
 
     try {
         // Use this code block for the individual post page to resize image if necessary
@@ -59,6 +55,12 @@ router.post('/image', upload.single('file'), async function (req, res) {
         // console.log(resizedImage);
 
         // Create a thumbnail of the original image that is 200 x 200 pixels
+        const imagePath = req.file.path;
+        const imageName = req.file.filename;
+        //const imageDestination = `${req.file.destination}/${imageName}`;
+        const thumbnailName = `thumbnail-${imageName}`;
+        const thumbnailDestination = '../client/public/images/thumbnails/' + thumbnailName;
+
         const thumbnail = await sharp(imagePath)
             .resize({width: 200, height: 200})
             .toFile(thumbnailDestination);
@@ -66,20 +68,64 @@ router.post('/image', upload.single('file'), async function (req, res) {
         thumbnail.name = thumbnailName;
         thumbnail.path = thumbnailDestination;
         
-        console.log('The thumbnail is:');
-        console.log(thumbnail);
-        console.log('Image upload successful!');
-        res.send('Image upload successful!');
+        const title = req.body.title;
+        const price = req.body.price;
+        const description = req.body.description;
+        
+        const pickupLocation = req.body.pickup_location;
+
+        // const fk_user_id = req.session.user_id;
+        const fk_user_id = req.body.user_id;
+        const category = req.body.category;
+        let fk_category_id;
+
+        if (category === 'Books') {
+            fk_category_id = 1;
+        }
+        else if (category === 'Electronics') {
+            fk_category_id = 2;
+        }
+        else {
+            fk_category_id = 3;
+        }
+    
+        // Prepare the SQL query
+        let addPost = 
+            `INSERT INTO posts
+            (title, price, description, pickup_location, photo_path, thumbnail, fk_user_id, fk_category_id)` 
+            + `VALUES (?, ?, ?, ?, ?, ?, now(), ?, ?)`;
+        
+        // Insert pending post for admin approval
+        database.execute(addPost, [title, price, description, pickupLocation, imagePath, thumbnail.path, fk_user_id, fk_category_id])
+            .then(([results]) => {
+                // Post created successfully
+            if (results && results.affectedRows) {
+                console.log('Added pending post for admin to review!');
+                res.status(200).send('Added pending post for admin to review!');
+            }
+            })
+            .catch((err) => {
+                console.log('Error adding post: ');
+                console.log(err);
+                return;
+            });
+
+            console.log('The thumbnail is:');
+            console.log(thumbnail);
+            console.log('Image upload successful!');
+            res.send('Image upload successful!');
+        }
+        catch (err) {
+            console.log('Uploading image failed');
+            console.log(err);
     }
-    catch (err) {
-        console.log('Uploading image failed');
-        console.log(err);
-    }
-})
-router.get('/upload', async function (req, res) {
-    console.log(req.query);
-    res.send(req.query);
 });
+
+// router.get('/upload', async function (req, res) {
+//     console.log(req.body.name);
+    
+//     res.send(req.body.name);
+// });
 
 
 

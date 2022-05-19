@@ -14,8 +14,8 @@ export default function NavBar() {
       <p>
       SFSU Software Engineering Project CSC 648-848, Spring 2022. For Demonstration Only
       </p>
-      {/* React-bootstrap components please read websites documentation to style. ENJOY*/}
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      {/* Changed the expand to sm from lg to make it mobile responsive */}
+      <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <Logo
             animation="border"
@@ -27,7 +27,7 @@ export default function NavBar() {
           GatorXChange
         </Navbar.Brand>
         <Container>
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Container>
         
         <Nav>

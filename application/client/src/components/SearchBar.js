@@ -6,7 +6,7 @@
  * Error Messages: None
  * Author: Thomas Nguyen
  ******************************************************/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';
 import {
   Container,
@@ -17,6 +17,7 @@ import {
   Form,
   FormControl,
   Button,
+  Modal,
 } from "react-bootstrap";
 import axios from "axios";
 import SearchResults from './SearchResults';
@@ -26,6 +27,11 @@ export default function SearchBar() {
   const [category, setCategory] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSubmitted, setSearchSubmitted] = useState(false);
+  const [hidden, setHidden] = useState(true);
+  let [results, updateResults] = useState([]);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   // let navigate = useNavigate();
 
   // Event handler for setting the category. Event represents the dropdown option value
@@ -68,13 +74,13 @@ export default function SearchBar() {
           console.log("Search term input is " + searchParams.searchTerm);
 
           // Redirect to the search results page which renders the search results component
-          window.location = "/search";
+          //window.location = "/search";
           // navigate('/search', {replace: true});
           // <Routes>
           // <Route path="/search" element={<SearchResults/>} />
           // </Routes>
           // <Navigate to="/search" replace={true} />
-          //setSearchSubmitted(true);
+          setSearchSubmitted(true);
         }
       })
       .catch((err) => {
@@ -91,8 +97,56 @@ export default function SearchBar() {
     // Reset the search term, category, and search submitted state values after submission
     // setSearchTerm('');
     // setCategory('');
-   // setSearchSubmitted(false);
+    setSearchSubmitted(false);
+    setHidden(false);
   };
+
+  const displayProductsHome = results.map((result, i) => {
+    return (
+      <div className="card" key={i}>
+
+        <div className="card-content">
+          <p>Category: {result.category}</p>
+        </div>
+
+        <div className="card-content">
+          <img className="thumbnail" src={result.thumbnail} alt=""/>
+        </div>
+
+        <div className="card-content">
+          <p>Title: {result.title}</p>
+        </div>
+
+        <div className="card-content">
+          <p>Price: ${result.price}.00</p>
+        </div>
+
+        <div className="card-content">
+          <p>Description: {result.description}</p>
+        </div>
+
+        <Button onClick={handleShow} variant='primary'>
+            Contact Seller
+        </Button>
+      </div>
+    )  
+  });
+
+  const getAllResultsHome = () => {
+    axios.post("/search",{category: '', searchTerm: ''})
+    axios.get('/search')
+      .then((res) => {
+        results = [...res.data];
+        console.log(results);        
+        updateResults(results);
+      })
+      .catch((err) => {
+        console.log('Failed to get search results' + err);
+      })
+  }
+  useEffect(() => {
+    getAllResultsHome();
+  }, []);
 
   return (
     <div className="search">
@@ -133,7 +187,7 @@ export default function SearchBar() {
                   name="searchTerm"
                 />
 
-                <Button variant={"warning"} type="submit">
+                <Button onClick={()=> setHidden(s=> !s)}variant={"warning"} type="submit">
                   Search
                 </Button>
               </InputGroup>
@@ -144,7 +198,50 @@ export default function SearchBar() {
       
       {/* Display a list of search results each time user submits a search */}
       {searchSubmitted ? <SearchResults />: null}
-      
+
+    <div className="card-containerHomepage">
+      {hidden ? displayProductsHome: false}
     </div>
+    <main>
+    <Modal show={show} onHide={handleClose}>
+           <Modal.Header closeButton>
+             <Modal.Title>Contact Seller</Modal.Title>
+           </Modal.Header>
+           <Modal.Body>
+             <Form>
+               <Form.Group className="email" >
+                 <Form.Label>Email address</Form.Label>
+                 <Form.Control
+                   type="email"
+                   placeholder="@sfsu.com"
+                   autoFocus
+                 />
+               </Form.Group>
+               <Form.Group className="item">
+                 <Form.Label>Item</Form.Label>
+                 <Form.Control
+                   type="text"
+                   placeholder="Item Title"
+                   />
+               </Form.Group>
+               <Form.Group
+                 className="messagebox"
+               >
+                 <Form.Label>Message</Form.Label>
+                 <Form.Control as="textarea" rows={3} placeholder="Message here..."/>
+               </Form.Group>
+             </Form>
+           </Modal.Body>
+           <Modal.Footer>
+             <Button variant="secondary" onClick={handleClose}>
+               Cancel
+             </Button>
+             <Button variant="primary" onClick={handleClose}>
+               Send
+             </Button>
+           </Modal.Footer>
+         </Modal>
+      </main>  
+    </div>   
   );
 }

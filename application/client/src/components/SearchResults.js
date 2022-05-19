@@ -13,7 +13,6 @@ import '../css/App.css';
 import axios from 'axios';
 import {Button} from 'react-bootstrap'
 
-
 const SearchResults = () => {
   let [results, updateResults] = useState([]);
   

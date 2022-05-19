@@ -5,26 +5,18 @@
  * Error Messages: None
  * Author: Thomas Nguyen
  *********************************************************************/
-import SearchBar from '../components/SearchBar';
-import '../css/App.css';
-
-const VPTestHome = () => {
-  
-  return (
-    <div className="container">
-      
-        <h1><br />Vertical Prototype Test Home Page.<br /><br /></h1>
-        <h2>The platform made for gators, by gators.<br /><br /></h2>
-        <h2>Try using our search bar to browse products.<br /><br /></h2>
-      
-      <div>
-        <main>
-          <SearchBar />
-        </main>
-      </div>
-    </div>
-
-  );
-};
-
-export default VPTestHome;
+ import React from "react";
+ import SearchBar from '../components/SearchBar';
+ import '../css/App.css';
+ 
+ const VPTestHome = () => {
+   //message box modal
+   return (
+     <div className="container">  
+       <h1>Welcome to GatorXChange <br/> The platform made for gators, by gators.</h1>
+       <SearchBar/>
+     </div>
+   );
+ };
+ 
+ export default VPTestHome;

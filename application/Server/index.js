@@ -186,6 +186,54 @@ app.post("/login", (req, res) => {
 
 });
 
+// This endpoint gets all search results to display on home page
+app.get('/getAllPosts', (req, res) => {
+  const getAllPosts = 
+    `SELECT * FROM posts 
+    INNER JOIN categories 
+    ON posts.fk_category_id = categories.category_id`;
+  database.execute(getAllPosts)
+    .then(([results]) => {
+      const allPosts = [];
+      // Setup each post as an object to add to the allPosts array 
+      for (let i = 0; i < results.length; i++) {
+        let post = {
+          category: results[i].category,
+          image: results[i].photo_path,
+          thumbnail: results[i].thumbnail,
+          title: results[i].title,
+          price: results[i].price,
+          description: results[i].description,
+          pickup_location: results[i].pickup_location,
+          dateTime: results[i].created
+        };
+        console.log();
+        console.log(`Post ${i} sent over is: `);
+        console.log('Post category: ' + post.category);
+        console.log('Post image: ' + post.image);
+        console.log('Post thumbnail: ' + post.thumbnail);
+        console.log('Post title: ' + post.title);
+        console.log('Post price: ' + post.price);
+        console.log('Post description: ' + post.description);
+        console.log('Post pickup location: ' + post.pickup_location);
+        console.log('Post creation date/time: ' + post.dateTime);
+        console.log();
+        // Add the post to the allPosts array 
+        allPosts.push(post);
+      }
+      // Send the allPosts array over to client
+      console.log('Array containing all posts is: ' + JSON.stringify(allPosts));
+      res.status(200).send(JSON.stringify(allPosts));
+      console.log('Finished sending all posts over to client!');
+    })
+    .catch((err) => {
+      console.log('Error getting all database posts');
+      console.log(err);
+      res.status(404).send('Error getting all database posts');
+    });
+});
+
+
 // This store variable will store all user search parameters globally
 let store = [];
 
@@ -275,6 +323,7 @@ app.get('/search', (req, res) => {
           title: results[i].title,
           price: results[i].price,
           description: results[i].description,
+          pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
         console.log();
@@ -285,6 +334,7 @@ app.get('/search', (req, res) => {
         console.log('Post title: ' + post.title);
         console.log('Post price: ' + post.price);
         console.log('Post description: ' + post.description);
+        console.log('Post pickup location: ' + post.pickup_location);
         console.log('Post creation date/time: ' + post.dateTime);
         console.log();
         // Add the post to the list of search results

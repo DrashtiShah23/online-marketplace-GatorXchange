@@ -6,14 +6,17 @@ import { ThemeProvider } from 'styled-components';
 import { ReactComponent as Logo } from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SearchBar from './SearchBar'
+import '../css/nav.css';
 
 
 export default function NavBar() {
   return (
     <div>
-      <p>
-      SFSU Software Engineering Project CSC 648-848, Spring 2022. For Demonstration Only
-      </p>
+      <div class="title-text">
+        <p>
+        SFSU Software Engineering Project CSC 648-848, Spring 2022. For Demonstration Only
+        </p>
+      </div>
       {/* Changed the expand to sm from lg to make it mobile responsive */}
       <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
         <Navbar.Brand href="/">
@@ -34,6 +37,14 @@ export default function NavBar() {
           <Nav.Link href="Post">Post</Nav.Link>
         </Nav>
 
+        <Nav>
+          <Nav.Link href="Login">Login</Nav.Link>
+        </Nav>
+
+        <Nav>
+          <Nav.Link href="Signup">Signup</Nav.Link>
+        </Nav>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
@@ -50,7 +61,7 @@ export default function NavBar() {
           </Nav>
           </Navbar.Collapse>
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
             <NavDropdown title="Account" id="collapsible-nav-dropdown">
@@ -59,17 +70,18 @@ export default function NavBar() {
               <NavDropdown.Item href="SignUp">
                 Sign up
               </NavDropdown.Item>
-              {/* Example on how to set up */}
-              <NavDropdown.Item href="#action/3.4">
+             // Example on how to set up *
+              <NavDropdown.Item href="#action/3.4"> 
               </NavDropdown.Item>
             </NavDropdown>
-          </Nav>
+          </Nav> */}
+          
           <Nav>
             <Nav.Link href="About">About</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
             </Nav.Link>
           </Nav>
-        </Navbar.Collapse>
+        {/* </Navbar.Collapse> */}
         
       </Navbar >
     

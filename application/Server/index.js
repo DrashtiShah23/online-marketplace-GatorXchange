@@ -353,56 +353,143 @@ app.get('/search', (req, res) => {
 
   // Represents the SQL query to run to get the relevant posts from database
   let getPosts;
+  let searchResults = [];
 
   // User clicked search button without any params. Display all posts from database
   if (searchTerm == '' && category == '' ) {
+    // Prepare the SQL query with placeholder values
     getPosts = 
       `SELECT * 
       FROM posts
       INNER JOIN categories
-      ON posts.fk_category_id = categories.category_id`;
+      ON posts.fk_category_id = categories.category_id
+      WHERE active = ?`;
+
+    // Run the query to get all active posts
+    database.execute(getPosts, [1])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
+          console.log();
+          console.log(`Post ${i} sent over is: `);
+          console.log('Post ID: ' + post.post_id);
+          console.log('Post category: ' + post.category);
+          console.log('Post image: ' + post.image);
+          console.log('Post thumbnail: ' + post.thumbnail);
+          console.log('Post title: ' + post.title);
+          console.log('Post price: ' + post.price);
+          console.log('Post description: ' + post.description);
+          console.log('Post pickup location: ' + post.pickup_location);
+          console.log('Post creation date/time: ' + post.dateTime);
+          console.log();
+          // Add the post to the list of search results
+          console.log("posts: ", post) 
+          searchResults.push(post);
+        }
+
+        console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+        // Send the database results to the frontend
+        console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.status(404).send('Error querying database: ' + err.stack);
+    });
   }
-  // User entered a search term and selected a category
+  // User entered both a search term and selected a category
   else if (searchTerm != '' && category != '') {
+    // Prepare the SQL query with placeholder values
     getPosts =
       `SELECT * 
       FROM posts 
       INNER JOIN categories 
       ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `' 
-      AND ( title LIKE '%` + searchTerm + `%' 
-      OR description LIKE '%` + searchTerm + `%')`;
+      WHERE (active = ?
+      AND category = ?
+      AND (title LIKE ?
+      OR description LIKE ?))`;
+    
+    // Run the query to get active posts matching both the search term and category
+    let sqlReadySearchTerm = '%' + searchTerm + '%';
+    database.execute(getPosts, [1, category, sqlReadySearchTerm, sqlReadySearchTerm])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
+          console.log();
+          console.log(`Post ${i} sent over is: `);
+          console.log('Post ID: ' + post.post_id);
+          console.log('Post category: ' + post.category);
+          console.log('Post image: ' + post.image);
+          console.log('Post thumbnail: ' + post.thumbnail);
+          console.log('Post title: ' + post.title);
+          console.log('Post price: ' + post.price);
+          console.log('Post description: ' + post.description);
+          console.log('Post pickup location: ' + post.pickup_location);
+          console.log('Post creation date/time: ' + post.dateTime);
+          console.log();
+          // Add the post to the list of search results
+          console.log("posts: ", post) 
+          searchResults.push(post);
+      }
+
+        console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+        // Send the database results to the frontend
+        console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.status(404).send('Error querying database: ' + err.stack);
+    });
   }
+  
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
+    // Prepare the SQL query with placeholder values
     getPosts = 
       `SELECT * 
       FROM posts 
       INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
-      WHERE title LIKE '%` + searchTerm + `%' OR 
-      description LIKE '%` + searchTerm + `%'`;
-  }
-  // User did not enter a search term but selected a category
-  else if (searchTerm == '' && category != '') {
-    getPosts =
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
-      ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `'`;
-  }
-
-  // Store the list of search results to send over to the Search Results page
-  let searchResults = [];
-
-  // Extract posts from posts table in database based on user's search params
-  // TODO: Refactor the query into a execute statement so that it is cached, resulting in faster performance   
-  database.query(getPosts)
-    .then(([results]) => {
-      // For every search result, create a post object containing relevant post info to display
+      WHERE (active = ?
+      AND (title LIKE ?
+      OR description LIKE ?))`;
+    
+    // Run the query to get active posts matching the search term
+    let sqlReadySearchTerm = '%' + searchTerm + '%';
+    database.execute(getPosts, [1, sqlReadySearchTerm, sqlReadySearchTerm])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
       for (let i = 0; i < results.length; i++) {
         let post = {
+          post_id: results[i].post_id,
           category: results[i].category,
           image: results[i].photo_path,
           thumbnail: results[i].thumbnail,
@@ -414,6 +501,7 @@ app.get('/search', (req, res) => {
         };
         console.log();
         console.log(`Post ${i} sent over is: `);
+        console.log('Post ID: ' + post.post_id);
         console.log('Post category: ' + post.category);
         console.log('Post image: ' + post.image);
         console.log('Post thumbnail: ' + post.thumbnail);
@@ -429,19 +517,73 @@ app.get('/search', (req, res) => {
       }
 
         console.log('Database results array is: ' + JSON.stringify(searchResults));
-  
+
         // Send the database results to the frontend
         console.log('Finished sending database results');
         return res.status(200).send(JSON.stringify(searchResults));
-        
     })
     .catch((err) => {
         console.error('Error querying database: ');
         console.log(err.stack);
         return res.status(404).send('Error querying database: ' + err.stack);
     });
+  }
+  // User did not enter a search term but selected a category
+  else if (searchTerm == '' && category != '') {
+    // Prepare the SQL query with placeholder values
+    getPosts =
+      `SELECT * 
+      FROM posts 
+      INNER JOIN categories 
+      ON posts.fk_category_id = categories.category_id
+      WHERE category = ?
+      AND active = ?`;
+    
+    // Run the query to get active posts matching the category
+    database.execute(getPosts, [category, 1])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
+          console.log();
+          console.log(`Post ${i} sent over is: `);
+          console.log('Post ID: ' + post.post_id);
+          console.log('Post category: ' + post.category);
+          console.log('Post image: ' + post.image);
+          console.log('Post thumbnail: ' + post.thumbnail);
+          console.log('Post title: ' + post.title);
+          console.log('Post price: ' + post.price);
+          console.log('Post description: ' + post.description);
+          console.log('Post pickup location: ' + post.pickup_location);
+          console.log('Post creation date/time: ' + post.dateTime);
+          console.log();
+          // Add the post to the list of search results
+          console.log("posts: ", post) 
+          searchResults.push(post);
+      }
 
+          console.log('Database results array is: ' + JSON.stringify(searchResults));
 
+          // Send the database results to the frontend
+          console.log('Finished sending database results');
+          return res.status(200).send(JSON.stringify(searchResults));
+      })
+      .catch((err) => {
+          console.error('Error querying database: ');
+          console.log(err.stack);
+          return res.status(404).send('Error querying database: ' + err.stack);
+      });
+  }
 });
 /*  Socket communication with Server */
 

@@ -13,11 +13,13 @@ const cors = require('cors');
 const multer = require('multer');
 const sharp = require('sharp');
 const crypto = require('crypto');
+const database = require('../config/database.js');
 
 // Multer setup
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
-        cb(null, '../client/public/images/uploads/')
+        cb(null, '../client/public/images/uploads/') // Image path
+        
     },
     filename: (req, file, cb) => {
         //Get the file extension
@@ -39,9 +41,9 @@ const upload = multer({ storage: storage });
 router.use(cors());
 
 // router.post('/image', upload.single('file'), async function (req, res) {
-router.post('/post', upload.single('file'), async function (req, res) {    
+router.post('/post', upload.single('image'), async function (req, res) {    
     
-
+    
     try {
         // Use this code block for the individual post page to resize image if necessary
         // Resize the original image to a 800 x 800 pixel image
@@ -60,7 +62,7 @@ router.post('/post', upload.single('file'), async function (req, res) {
         //const imageDestination = `${req.file.destination}/${imageName}`;
         const thumbnailName = `thumbnail-${imageName}`;
         const thumbnailDestination = '../client/public/images/thumbnails/' + thumbnailName;
-
+        
         const thumbnail = await sharp(imagePath)
             .resize({width: 200, height: 200})
             .toFile(thumbnailDestination);
@@ -68,57 +70,71 @@ router.post('/post', upload.single('file'), async function (req, res) {
         thumbnail.name = thumbnailName;
         thumbnail.path = thumbnailDestination;
         
+        // Construct the specific image/thumbnail paths to store in the database
+        // so that the images will load correctly in the frontend
+        let photoPath = 'images/uploads/' + imageName;
+        let thumbnailPath = 'images/thumbnails/' + thumbnailName;
+        
         const title = req.body.title;
         const price = req.body.price;
         const description = req.body.description;
         
-        const pickupLocation = req.body.pickup_location;
+        const pickupLocation = req.body.pickupLocation;
 
         // const fk_user_id = req.session.user_id;
         const fk_user_id = req.body.user_id;
         const category = req.body.category;
         let fk_category_id;
 
+        // Set post category id to corresponding category
         if (category === 'Books') {
             fk_category_id = 1;
         }
         else if (category === 'Electronics') {
             fk_category_id = 2;
         }
-        else {
+        else if (category === 'Clothes') {
             fk_category_id = 3;
         }
-    
+
+        console.log('Title: ' + title);
+        console.log('Price: ' + price);
+        console.log('Description: ' + description);
+        console.log('Category: ' + category);
+        console.log('Pick up location: ' + pickupLocation);
+        console.log('User ID: ' + fk_user_id);
+        console.log('Photo path: ' + photoPath);
+        console.log('Thumbnail path: ' + thumbnailPath);
+        
         // Prepare the SQL query
         let addPost = 
-            `INSERT INTO posts
-            (title, price, description, pickup_location, photo_path, thumbnail, fk_user_id, fk_category_id)` 
-            + `VALUES (?, ?, ?, ?, ?, ?, now(), ?, ?)`;
+            `INSERT INTO posts \
+            (title, price, description, pickup_location, photo_path, thumbnail, created, fk_user_id, fk_category_id) \
+            VALUES (?, ?, ?, ?, ?, ?, now(), ?, ?)`;
         
         // Insert pending post for admin approval
-        database.execute(addPost, [title, price, description, pickupLocation, imagePath, thumbnail.path, fk_user_id, fk_category_id])
+        database.execute(addPost, [title, price, description, pickupLocation, photoPath, thumbnailPath, fk_user_id, fk_category_id])
             .then(([results]) => {
-                // Post created successfully
+            // Post sent successfully
             if (results && results.affectedRows) {
-                console.log('Added pending post for admin to review!');
-                res.status(200).send('Added pending post for admin to review!');
+                console.log('Sent pending post for admin to review!');
+                return res.status(200).send('Added pending post for admin to review!');
             }
-            })
+            }) // 
             .catch((err) => {
-                console.log('Error adding post: ');
+                console.log('Error adding post to database: ');
                 console.log(err);
-                return;
+                return res.status(404).send('Error adding post to database');
             });
 
-            console.log('The thumbnail is:');
-            console.log(thumbnail);
             console.log('Image upload successful!');
-            res.send('Image upload successful!');
         }
-        catch (err) {
-            console.log('Uploading image failed');
-            console.log(err);
+    catch (err) {
+        console.log('Error encountered while calling post endpoint');
+        console.log(err);
+        return res.status(404).send('Error encountered while calling post endpoint');
     }
+    
 });
 
 // router.get('/upload', async function (req, res) {

@@ -15,16 +15,14 @@ import axios from "axios";
 
 const Post = () => {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [pickupLocation, setPickupLocation] = useState("");
   const [image, setImage] = useState({ preview: "", data: ""});
   
-//  const uploadFileEle = document.getElementById("fileInput");
-  
 
-    // Prevents form from being submitted if form is not valid
+  // Prevents form from being submitted if form is not valid
   (function () {
     var forms = document.querySelectorAll(".needs-validation");
     Array.prototype.slice.call(forms).forEach(function (form) {
@@ -53,7 +51,6 @@ const Post = () => {
     setPrice((v) =>
       e.target.validity.valid ? e.target.value : v );
   }
-
 
   const handleDescription = (e) => {
     console.log(e.target.value);
@@ -96,8 +93,8 @@ const Post = () => {
     formData.append("description", description);
     formData.append("category", category);
     formData.append("pickupLocation", pickupLocation);
-    formData.append("upload-image", image.data);
-    console.log(formData)
+    formData.append("image", image.data);
+    // console.log(formData)
 
     // Send the form data over to /post endpoint
     axios.post("/upload/post", formData, config)
@@ -112,6 +109,15 @@ const Post = () => {
           console.log("Category input is " + formData.category);
           console.log("Pickup location input is " + formData.pickupLocation);
           console.log("Image input is " + formData.image.data);
+
+          // Reset the state variables before after post success
+          setTitle("");
+          setPrice("");
+          setDescription("");
+          setCategory("");
+          setPickupLocation("");
+          setImage({ preview: "", data: ""});
+
           window.location = "/";
         }
       })
@@ -125,6 +131,8 @@ const Post = () => {
         console.log("Upload of the post failed :(");
         console.log(err);
       });
+    
+  
 
     // Create post parameters that will be used for SQL queries into the database
     // const postData = {

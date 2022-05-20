@@ -186,25 +186,58 @@ app.post("/login", (req, res) => {
 
 });
 
-// Post endpoint
-// app.post('/post', (req, res) => {
+// Admin endpoint to get all pending user posts
+app.get('/getPendingPosts', (req, res) => {
   
-//   const fk_user_id = req.session.user_id;
-//   const title = req.body.title;
-//   const price = req.body.price;
-//   const description = req.body.description;
-//   const category = req.body.category;
-//   const pickup_location = req.body.pickup_location;
-//   const image = req.file.path;
+  // Prepare the SQL query
+  const getPendingPosts = 
+    `SELECT * FROM posts
+    WHERE active = ?`;
+  
+  // Get all pending posts from database
+  database.execute(getPendingPosts, [0])
+    .then(([results]) => {
+      let pendingPosts = [];
+      // For every search result, create a post object containing relevant post info to display
+      for (let i = 0; i < results.length; i++) {
+        let post = {
+          post_id: results[i].post_id,
+          category: results[i].category,
+          thumbnail: results[i].thumbnail,
+          title: results[i].title,
+          price: results[i].price,
+          description: results[i].description,
+          pickup_location: results[i].pickup_location,
+          dateTime: results[i].created
+        };
+        console.log();
+        console.log(`Post ${i} sent over is: `);
+        console.log('Post ID: ' + post.post_id);
+        console.log('Post category: ' + post.category);
+        console.log('Post thumbnail: ' + post.thumbnail);
+        console.log('Post title: ' + post.title);
+        console.log('Post price: ' + post.price);
+        console.log('Post description: ' + post.description);
+        console.log('Post pickup location: ' + post.pickup_location);
+        console.log('Post creation date/time: ' + post.dateTime);
+        console.log();
+        // Add the post to the list of pending posts
+        console.log("posts: ", post) 
+        pendingPosts.push(post);
+      }
 
-//   // Prepare the SQL query
-//   const addPost = 
-//         `INSERT INTO users
-//         (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
-      
-//       // Insert new user account into database
-//       database.query(addPost, [sfsu_id, username, email, hashedPassword, 1])
-// });
+        console.log('Pending posts array is: ' + JSON.stringify(pendingPosts));
+  
+        // Send the database results to the frontend
+        res.send(JSON.stringify(pendingPosts));
+        console.log('Finished sending pending posts');
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.sendStatus(404).send('Error querying database');
+    });
+});
 
 // This endpoint gets all search results to display on home page
 app.get('/getAllPosts', (req, res) => {

@@ -85,7 +85,7 @@ app.post('/test', (req, res) => {
   bcrypt.hash(req.body.password, saltRounds)
     .then((hashedPassword) => {
       console.log(hashedPassword);
-      res.send(hashedPassword);
+      return res.status(200).send(hashedPassword);
   });
 });
 
@@ -93,7 +93,7 @@ app.post('/test', (req, res) => {
 app.get('/test', (req, res) => {
   console.log('Name is: ' + req.body.name);
   console.log('Email is: ' + req.body.email);
-  res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
+  return res.status(200).send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
 });
 
 // Registration endpoint
@@ -129,24 +129,24 @@ app.post("/register", (req, res) => {
           // Account created successfully
           if (results && results.affectedRows) {
             console.log('Account created successfully!');
-            res.status(200).send('Account created successfully!');
+            return res.status(200).send('Account created successfully!');
           }
           // Account already exists
           else {
             console.log('Account already exists. Create an account with different information.');
-            res.status(404).send('Account already exists. Create an account with different information.');
+            return res.status(404).send('Account already exists. Create an account with different information.');
           }
         })
         .catch((err) => {
           console.log('Error creating account in database with account info: ');
           console.log(err);
-          return;
+          return res.status(404).send('Error creating account in database with account info');
         });
     })
     .catch((err) => {
       console.log('Error hashing password: ');
       console.log(err);
-      res.status(404).send('Error hashing password');
+      return res.status(404).send('Error hashing password');
     });
 });
 
@@ -170,18 +170,18 @@ app.post("/login", (req, res) => {
       // Valid login info
       if (results.length == 1) {
         console.log('Account exists. Logging user in...');
-        res.status(200).send('Account exists. Logging user in...');
+        return res.status(200).send('Account exists. Logging user in...');
       }
       // Invalid login info
       else {
         console.log('Account does not exist. Make sure your information is correct or create an account.');
-        res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+        return res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
       }
     })
     .catch((err) => {
       console.log('Error querying database with login info:');
       console.log(err);
-      return;
+      return res.status(404).send('Error querying database with login info:');
     });
 
 });
@@ -192,7 +192,7 @@ app.get('/getPendingPosts', (req, res) => {
   // Prepare the SQL query
   const getPendingPosts = 
     `SELECT * FROM posts
-    WHERE active = ?`;
+     WHERE active = ?`;
   
   // Get all pending posts from database
   database.execute(getPendingPosts, [0])
@@ -202,6 +202,7 @@ app.get('/getPendingPosts', (req, res) => {
       for (let i = 0; i < results.length; i++) {
         let post = {
           post_id: results[i].post_id,
+          index: i,
           category: results[i].category,
           thumbnail: results[i].thumbnail,
           title: results[i].title,
@@ -213,6 +214,7 @@ app.get('/getPendingPosts', (req, res) => {
         console.log();
         console.log(`Post ${i} sent over is: `);
         console.log('Post ID: ' + post.post_id);
+        console.log('Post index: ' + i);
         console.log('Post category: ' + post.category);
         console.log('Post thumbnail: ' + post.thumbnail);
         console.log('Post title: ' + post.title);
@@ -229,13 +231,43 @@ app.get('/getPendingPosts', (req, res) => {
         console.log('Pending posts array is: ' + JSON.stringify(pendingPosts));
   
         // Send the database results to the frontend
-        res.send(JSON.stringify(pendingPosts));
         console.log('Finished sending pending posts');
+        return res.status(200).send(JSON.stringify(pendingPosts));
+        
     })
     .catch((err) => {
         console.error('Error querying database: ');
         console.log(err.stack);
-        return res.sendStatus(404).send('Error querying database');
+        return res.status(404).send('Error querying database');
+    });
+});
+
+// Admin endpoint to approve pending user posts
+app.put('/approvePendingPosts', (req, res) => {
+  
+  const post_id = req.body.post_id;
+  console.log(post_id)
+  // Prepare the SQL query
+  const approvePendingPosts = 
+    `Update posts
+     SET active = ?
+     WHERE post_id = ?`;
+  
+  // Update pending post to active post in database
+  database.execute(approvePendingPosts, [1, post_id])
+    .then(([results]) => {
+      // Post was approved
+      if (results && results.affectedRows) {
+        console.log('Post approved by admin!');
+        return res.status(200).send('Post approved by admin!');
+      }
+
+    })
+    // Error approving post
+    .catch((err) => {
+      console.log('Error approving post: ');
+      console.log(err);
+      return res.status(404).send('Error approving post ');
     });
 });
 
@@ -276,13 +308,14 @@ app.get('/getAllPosts', (req, res) => {
       }
       // Send the allPosts array over to client
       console.log('Array containing all posts is: ' + JSON.stringify(allPosts));
-      res.status(200).send(JSON.stringify(allPosts));
       console.log('Finished sending all posts over to client!');
+      return res.status(200).send(JSON.stringify(allPosts));
+      
     })
     .catch((err) => {
       console.log('Error getting all database posts');
       console.log(err);
-      res.status(404).send('Error getting all database posts');
+      return res.status(404).send('Error getting all database posts');
     });
 });
 
@@ -298,7 +331,7 @@ app.post('/search', (req, res) => {
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
-  res.sendStatus(200);
+  return res.sendStatus(200);
   
 });
 
@@ -398,13 +431,14 @@ app.get('/search', (req, res) => {
         console.log('Database results array is: ' + JSON.stringify(searchResults));
   
         // Send the database results to the frontend
-        res.send(JSON.stringify(searchResults));
         console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
+        
     })
     .catch((err) => {
         console.error('Error querying database: ');
         console.log(err.stack);
-        return;
+        return res.status(404).send('Error querying database: ' + err.stack);
     });
 
 

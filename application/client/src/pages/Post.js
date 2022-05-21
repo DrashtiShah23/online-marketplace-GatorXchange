@@ -4,7 +4,7 @@
  * if not the users are given the link to register for
  * an account at the bottom.
  * Error Messages: None
- * Authors: Mary Tangog, Drashti Shah, Thomas Nguyen
+ * Authors: Mary Tangog, Drashti Shah
  *****************************************************/
 
 import React, { useState } from "react";

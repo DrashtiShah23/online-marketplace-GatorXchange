@@ -13,7 +13,8 @@ const express = require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const session = require("express-session");
+const session = require("express-session");
+const mySQLSession = require('express-mysql-session')(session);
 // const socketio = require("socket.io");
 // const helmet = require('helmet');
 const logger = require("morgan");
@@ -54,6 +55,7 @@ app.use(cors());
 // app.use(helmet());
 app.use(logger('dev'));
 
+let mySQLSessionStore = new mySQLSession({}, database);
 
 // app.use(
 //   cors({
@@ -63,17 +65,27 @@ app.use(logger('dev'));
 //   })
 // );
 
-// app.use(
-//   session({
-//     key: "userId",
-//     secret: "subscribe",
-//     resave: false,
-//     saveUninitialized: false,
-//     // cookie: {
-//     //   expires: 60 * 60 * 24,
-//   },
-//   )
-// );
+app.use(
+  session({
+    key: "user_id",
+    secret: "csc648",
+    store: mySQLSessionStore,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: {
+    //   expires: 60 * 60 * 24,
+  },
+  )
+);
+
+// Maintain user session while logged in
+app.use((req, res, next) => {
+  if (req.session.user_id) {
+    res.locals.logged = true;
+  }
+    
+  next();
+});
 
 // Test endpoint for testing post in backend. Ignore
 app.post('/test', (req, res) => {
@@ -118,13 +130,13 @@ app.post("/register", (req, res) => {
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => {
       console.log(hashedPassword);
-      // Create the SQL insert statement
+      // Prepare the SQL insert query
       const createUser = 
         `INSERT INTO users
-        (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
+        (sfsu_id, username, email, password)` + `VALUES (?, ?, ?, ?)`;
       
       // Insert new user account into database
-      database.query(createUser, [sfsu_id, username, email, hashedPassword, 1])
+      database.execute(createUser, [sfsu_id, username, email, hashedPassword])
         .then(([results]) => {
           // Account created successfully
           if (results && results.affectedRows) {
@@ -151,38 +163,59 @@ app.post("/register", (req, res) => {
 });
 
 // Login endpoint
-// TODO: Setup session and cookies for login
 app.post("/login", (req, res) => {
   // Get login info
   const email = req.body.email;
   const password = req.body.password;
 
-  // Create the SQL query
+  // Prepare the SQL query to check user accounts
   const findUser =
-    `SELECT email, password 
+    `SELECT user_id, username, email, password, is_admin 
     FROM users 
-    WHERE email = '` + email + `' 
-    AND password = '` + password + `'`;
-
+    WHERE email = ?`; 
+    
+  let user_id, username;
+  
   // Check the database whether an account with the username and password entered exists
-  database.query(findUser)
+  database.execute(findUser, [email])
     .then(([results]) => {
       // Valid login info
-      if (results.length == 1) {
-        console.log('Account exists. Logging user in...');
-        return res.status(200).send('Account exists. Logging user in...');
+      if (results && results.length == 1) {
+        
+        let passwordMatches = bcrypt.compare(password, results[0].password);
+        // Create a session only if password matches
+        if (passwordMatches) {
+          user_id = results[0].user_id;
+          username = results[0].username;
+          console.log('User ID: ' + user_id);
+          console.log('Username: ' + username);
+  
+          req.session.user_id = user_id;
+          req.session.username = username;
+          res.locals.logged = true;
+          res.redirect('/');
+          console.log(`Account exists. Logging ${username} in...`);
+          return res.status(200).send(`Account exists. Logging ${username} in...`);
+        }
+
+        // Invalid login info
+        else {
+          console.log('Account does not exist. Make sure your information is correct or create an account.');
+          return res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+        }
       }
-      // Invalid login info
-      else {
-        console.log('Account does not exist. Make sure your information is correct or create an account.');
-        return res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
-      }
+      
     })
     .catch((err) => {
       console.log('Error querying database with login info:');
       console.log(err);
       return res.status(404).send('Error querying database with login info:');
     });
+
+});
+
+// Logout endpoint
+app.post('/logout', (req, res) => {
 
 });
 
@@ -246,7 +279,8 @@ app.get('/getPendingPosts', (req, res) => {
 app.put('/approvePendingPosts', (req, res) => {
   
   const post_id = req.body.post_id;
-  console.log(post_id)
+  console.log('Pending Post ID: ' + post_id);
+
   // Prepare the SQL query
   const approvePendingPosts = 
     `Update posts

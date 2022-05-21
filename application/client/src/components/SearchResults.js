@@ -12,9 +12,16 @@ import { useState, useEffect } from 'react';
 import '../css/App.css';
 import axios from 'axios';
 import {Button} from 'react-bootstrap'
+import {
+  Form,
+  Modal,
+} from "react-bootstrap";
 
 const SearchResults = () => {
   let [results, updateResults] = useState([]);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   
   // This function displays the list of search results received from database
   const displayResults = results.map((result, i) => {
@@ -38,7 +45,7 @@ const SearchResults = () => {
         <div className="card-content">
           <p>Description: {result.description}</p>
         </div>
-        <Button variant='primary'>
+        <Button onClick={handleShow} variant='primary'>
             Contact Seller
           </Button>
         <div>
@@ -90,7 +97,45 @@ const SearchResults = () => {
       </div>
       <div className="card-container">
         {/* Display the list of results from the database */}
-        {displayResults} 
+        {displayResults}
+        <Modal show={show} onHide={handleClose}>
+           <Modal.Header closeButton>
+             <Modal.Title>Contact Seller</Modal.Title>
+           </Modal.Header>
+           <Modal.Body>
+             <Form>
+               <Form.Group className="email" >
+                 <Form.Label>Email address</Form.Label>
+                 <Form.Control
+                   type="email"
+                   placeholder="@sfsu.com"
+                   autoFocus
+                 />
+               </Form.Group>
+               <Form.Group className="item">
+                 <Form.Label>Item</Form.Label>
+                 <Form.Control
+                   type="text"
+                   placeholder="Item Title"
+                   />
+               </Form.Group>
+               <Form.Group
+                 className="messagebox"
+               >
+                 <Form.Label>Message</Form.Label>
+                 <Form.Control as="textarea" rows={3} placeholder="Message here..."/>
+               </Form.Group>
+             </Form>
+           </Modal.Body>
+           <Modal.Footer>
+             <Button variant="secondary" onClick={handleClose}>
+               Cancel
+             </Button>
+             <Button variant="primary" onClick={handleClose}>
+               Send
+             </Button>
+           </Modal.Footer>
+         </Modal>
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ import SearchResults from './components/SearchResults';
 import Test from './components/Test'
 import MyProfile from './pages/MyProfile';
 import MyPosts from './pages/MyPosts';
+import MyMessages from './pages/MyMessages';
 
 
 
@@ -40,6 +41,7 @@ function App() {
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/MyProfile' element={<MyProfile/>} />
                 <Route path='/MyPosts' element={<MyPosts/>} />
+                <Route path='/MyMessages' element={<MyMessages/>} />
                  {/* <Route path='/search' element={<SearchResults />} /> */}
                 
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />

@@ -21,7 +21,7 @@ import '../css/nav.css';
 export default function NavBar() {
   return (
     <div>
-      <div class="title-text">
+      <div className="title-text">
         <p>
         SFSU Software Engineering Project CSC 648-848-03, Spring 2022 by Team 01. For Demonstration Only
         </p>

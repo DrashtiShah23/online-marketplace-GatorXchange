@@ -74,9 +74,6 @@ const SearchResults = () => {
         <div className="card-content">
           <p>Category: {result.category}</p>
         </div>
-        {/* <div className="card-content">
-          <p>Image: </p>
-        </div> */}
         <div className="card-content">
           <img className="thumbnail" src={result.thumbnail} alt=""/>
         </div>
@@ -91,7 +88,7 @@ const SearchResults = () => {
         </div>
         <Button onClick={handleShow} variant='primary'>
             Contact Seller
-          </Button>
+        </Button>
         <div>
           
         </div>

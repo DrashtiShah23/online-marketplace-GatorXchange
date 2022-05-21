@@ -7,11 +7,11 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP: http://3.101.143.240
+1. Server URL or IP: http://54.67.78.9
 2. SSH username: ubuntu
 3. SSH password or key: team1.pem file
     <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used: localhost:3306 or 3.101.143.240 and port 3306
+4. Database URL or IP and port used: localhost:3306 or 54.67.78.9 and port 3306
     <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
 5. Database username: admin
 6. Database password: team1
@@ -21,7 +21,7 @@
 1. Move the copy of team1.pem file into your ~/.ssh folder (Usually hidden).
 2. Open a terminal of your choice, cmd prompt, or powershell.
 3. Enter the following command on the team1.pem file: chmod 400 ~/.ssh/team1.pem
-4. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@3.101.143.240
+4. Enter the following command: ssh -i "~/.ssh/team1.pem" ubuntu@54.67.78.9
 5. You should see a welcome message by Ubuntu. You are now in the AWS virtual machine!
 
 ### Instructions for logging into the remote database:

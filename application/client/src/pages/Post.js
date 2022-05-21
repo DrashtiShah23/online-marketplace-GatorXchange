@@ -4,7 +4,7 @@
  * if not the users are given the link to register for
  * an account at the bottom.
  * Error Messages: None
- * Author: Mary Tangog, Drashti Shah
+ * Authors: Mary Tangog, Drashti Shah
  *****************************************************/
 
 import React, { useState } from "react";
@@ -15,14 +15,14 @@ import axios from "axios";
 
 const Post = () => {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [val, setVal] = useState();
-  const [check, setcheckboxvalue] = useState(false);
-  const uploadFileEle = document.getElementById("fileInput");
+  const [category, setCategory] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [image, setImage] = useState({ preview: "", data: ""});
+  
 
-    // Prevents form from being submitted if form is not valid
+  // Prevents form from being submitted if form is not valid
   (function () {
     var forms = document.querySelectorAll(".needs-validation");
     Array.prototype.slice.call(forms).forEach(function (form) {
@@ -40,34 +40,76 @@ const Post = () => {
     });
   })();
 
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const handlePrice = (e) => {
+    /** setting the price by using the event handler e */
+    setPrice((v) =>
+      e.target.validity.valid ? e.target.value : v );
+  }
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+  }
+
+  const handlePickupLocation = (e) => {
+    setPickupLocation(e.target.value);
+  }
+
+  const handleImage = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    setImage(img);
+  };
+
   // Event handler for submitting the post information to send to backend
   const handleSubmit = (e) => {
     // Don't refresh the page upon submitting post queries
     e.preventDefault();
     // Prevents form from being submitted if form is not valid
 
-    // Create post parameters that will be used for SQL queries into the database
-    const postData = {
-      title: title,
-      category: category,
-      price: price,
-      description: description,
+    const config = {
+      headers: { "content-type": "multipart/form-data" }
     };
-    // Send a POST request to the server
-    axios
-      .post("/post", postData)
+
+    // Grab form data to send to backend
+    let formData = new FormData();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("pickupLocation", pickupLocation);
+    formData.append("image", image.data);
+    
+
+    // Send the form data over to /post endpoint
+    axios.post("/upload/post", formData, config)
       .then((res) => {
-        // If status is OK, redirect user to the home page
         if (res.status === 200) {
           // For checking data is correct in inspector
           console.log("Data submitted is:");
-          console.log(postData);
-          console.log("Title input is: " + postData.username);
-          console.log("Category input is " + postData.email);
-          console.log("Price input is " + postData.password);
-          console.log("Description input is " + postData.id);
+          console.log("Title input is: " + formData.title);
+          console.log("Price input is " + formData.price);
+          console.log("Description input is " + formData.description);
+          console.log("Category input is " + formData.category);
+          console.log("Pickup location input is " + formData.pickupLocation);
 
-          // Redirect to the home page after successfully creating an account
+          // Reset the state variables before after post success
+          setTitle("");
+          setPrice("");
+          setDescription("");
+          setCategory("");
+          setPickupLocation("");
+          setImage({ preview: "", data: ""});
+
           window.location = "/";
         }
       })
@@ -81,6 +123,7 @@ const Post = () => {
         console.log("Upload of the post failed :(");
         console.log(err);
       });
+    
   };
 
   /** Creating a post form where the user enters the details of the post */
@@ -103,9 +146,8 @@ const Post = () => {
               placeholder="Title"
               required
               value={title}
-              onChange={(e) =>
-                setTitle(e.target.value)
-              } /** setting the title by using the event handler e */
+              onChange={handleTitle}
+              /** setting the title by using the event handler e */
             />
             <div className="invalid-feedback">Title is required</div>
         </div>
@@ -114,16 +156,12 @@ const Post = () => {
           <Form.Label className="form-label">Price*:</Form.Label>
             <input
               className="form-control"
-              value="price"
               placeholder="Price"
               pattern="[0-9]*"
-              value={val}
+              value={price}
               required
               onChange={
-                (e) =>
-                  setPrice((v) =>
-                    e.target.validity.valid ? e.target.value : v
-                  ) /** setting the price by using the event handler e */
+                handlePrice
               }
             />
             <div className="invalid-feedback">Price is required</div>
@@ -137,18 +175,15 @@ const Post = () => {
             placeholder="Description"
             cols="50"
             rows="5"
-            required
             value={description}
-            onChange={(e) =>
-              setDescription(e.target.value)
-            } /** setting the description by using the event handler e */
+            onChange={handleDescription} /** setting the description by using the event handler e */
           />
           <div className="invalid-feedback">Description is required</div>
         </div>
 
         <div className="col-12">
           <Form.Label className="form-label"> Categories* </Form.Label>
-          <Form.Select aria-label="Categories" required className="form-control">
+          <Form.Select aria-label="Categories" required className="form-control" onChange={handleCategory}>
             <option value="">Select Category</option>
             <option value="Books">Books</option>
             <option value="Electronics">Electronics</option>
@@ -159,27 +194,29 @@ const Post = () => {
 
         <div className="col-12">
           <Form.Label>Location* </Form.Label>
-            <Form.Select aria-label="Pickup" required className="form-control">
+            <Form.Select aria-label="Pickup" required className="form-control" onChange={handlePickupLocation}>
               <option value="">Select Pickup Location</option>
-              <option value="CesarChavezBldg">Cesar Chavez building </option>
-              <option value="Library ">J. Paul Leaonard Library </option>
-              <option value="AdminBldg">Administration building</option>
-              <option value="CafeRusso">Cafe Russo</option>
+              <option value="Cesar Chavez Building">Cesar Chavez Building </option>
+              <option value="J. Paul Leonard Library">J. Paul Leonard Library </option>
+              <option value="Administration Building">Administration Building</option>
+              <option value="Cafe Russo">Cafe Russo</option>
               <option value="Quad">Quad</option>
             </Form.Select>
             <div className="invalid-feedback">Location is required</div>
         </div>
 
-        <div className="upload-img" className="col-12">
+        <div className="upload-img col-12">
           <h5>Upload image of the item</h5>
           <input
             className="upload"
-            required
             type="file"
-            id="avatar"
-            name="avatar"
+            name="image"
+            required
             accept="image/png, image/jpeg"
+            onChange={handleImage}
           />
+          {/* Image preview before upload using inline css to resize */}
+          <img src={image.preview} style={{width: "30%", height:"30%"}} alt="" />
           <div className="invalid-feedback">Image of item is required</div>
         </div>
 

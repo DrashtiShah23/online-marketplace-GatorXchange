@@ -16,7 +16,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: '3.101.143.240',
+      host: '54.67.78.9',
       key: '~/.ssh/team1.pem',
       ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',

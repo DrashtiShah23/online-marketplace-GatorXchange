@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/App.css';
 
 
@@ -20,14 +20,19 @@ import Home from './pages/Home';
 import Test from './components/Test'
 import MyProfile from './pages/MyProfile';
 import MyPosts from './pages/MyPosts';
+// import { UserContext } from './UserContext';
+// import { LoginContext} from './LoginContext';
 import MyMessages from './pages/MyMessages';
 
 
 
 function App() {
-    
+    // const [loginState, setLoginState] = useState(false);
+    // const [user, setUser] = useState({});
     return (
         <Router>
+            {/* <LoginContext.Provider value={{loginState, setLoginState}}>
+            <UserContext.Provider value={{user, setUser}}> */}
             <Navbar />
             <Routes>
 
@@ -52,7 +57,8 @@ function App() {
                 <Route path='/upload' element={<Test />} />
                 
             </Routes>
-          
+            {/* </UserContext.Provider>
+            </LoginContext.Provider> */}
         </Router>
         
     );

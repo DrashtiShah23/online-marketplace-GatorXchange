@@ -66,7 +66,7 @@ const Signup = () => {
           console.log("Username input is: " + userData.username);
           console.log("Email input is " + userData.email);
           console.log("Password input is " + userData.password);
-          console.log("SFSU ID input is " + userData.id);
+          console.log("SFSU ID input is " + userData.sfsu_id);
 
           // Redirect to the login page after successfully creating an account
           window.location = "/login";

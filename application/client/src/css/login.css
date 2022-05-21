@@ -1,0 +1,124 @@
+/*****************************************************
+ * Purpose: To use customised css for login form
+ * Output: A specific color, size background etc all 
+ *         used in registration form and login form 
+ *         the user's search parameters
+ * Error Messages: None
+ * Author:Drashti Shah
+ *****************************************************/
+
+.App {
+  text-align: center;
+}
+
+/* Three columns side by side */
+
+.container-login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Display the columns below each other instead of side by side on small screens */
+@media screen and (max-width: 780px) {
+  .column {
+    width: 80%;
+    display: block;
+  }
+}
+/* Responsive design */
+@media screen and (min-width: 40em) {
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+/* setting the login field and using it to define the background color of the form and other css styles */
+.field-login {
+  padding: 5%;
+  width: 1000px;
+  background-color: #f1df94;
+  float: center;
+}
+
+/* label for password to align it in inline block with the input fields*/
+label.form-label-password {
+  color: #4a217b;
+  font-size: 20pt;
+  margin-left: 15%;
+  margin-right: 2%;
+}
+
+/* label for password to align it in inline block with the input fields*/
+label.form-label-email {
+  color: #4a217b;
+  font-size: 20pt;
+  margin-left: 15%;
+  margin-right: 7.5%;
+}
+
+/* setting the h1 styling for the login form */
+h1-login {
+  color: #4a217b;
+  padding: 1%;
+  text-align: center;
+}
+
+/* styling for the login button to align its position easier for the users
+.link-button-login {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+} */
+#login-label {
+  margin-bottom: 0px;
+}
+
+/* setting the input fields and aligning them with the labels */
+input.form-control-login {
+  width: 50%;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin: auto;
+}
+
+/* css for thr login button to be at a specific position */
+.Login-Button {
+  border: none;
+  margin: 3% 4% 3% 23%;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: rgb(255, 255, 255);
+  background-color: green;
+  text-align: center;
+  cursor: pointer;
+  width: 23%;
+  border-radius: 20cm;
+}
+.LoginButton:hover {
+  background-color: purple;
+}
+
+.col-12-login {
+  padding: 10px;
+}
+
+/* setting the css for the paragraph for registering an account here  */
+.login {
+  text-align: center;
+  /* margin: 3% 4% 5.5% 18%; */
+  margin-bottom: 10%;
+  font-size: 15pt;
+  color: #4a217b;
+}

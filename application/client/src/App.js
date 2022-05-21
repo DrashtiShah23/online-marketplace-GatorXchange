@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './css/App.css';
 
 
@@ -16,31 +16,36 @@ import AboutDrashti from './pages/About/AboutDrashti';
 import AboutMary from './pages/About/AboutMary';
 import AboutJavier from './pages/About/Aboutjavier';
 import AboutMicheas from './pages/About/AboutMicheas';
-// Vertical prototype test home page. Replace with Home component later
-import VPTestHome from './pages/VPTestHome';
-import SearchResults from './components/SearchResults';
+import Home from './pages/Home';
 import Test from './components/Test'
 import MyProfile from './pages/MyProfile';
 import MyPosts from './pages/MyPosts';
+// import { UserContext } from './UserContext';
+// import { LoginContext} from './LoginContext';
+import MyMessages from './pages/MyMessages';
 
 
 
 function App() {
-    
+    // const [loginState, setLoginState] = useState(false);
+    // const [user, setUser] = useState({});
     return (
         <Router>
+            {/* <LoginContext.Provider value={{loginState, setLoginState}}>
+            <UserContext.Provider value={{user, setUser}}> */}
             <Navbar />
             <Routes>
 
-                {/* <Route exact path='/' element={<Home />} /> */}
-                <Route exact path='/' element={<VPTestHome/>} />
+                
+                <Route exact path='/' element={<Home/>} />
                 <Route path='/about' element={<About />} />
                 <Route path='/Post' element={<Post />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/SignUp' element={<SignUp />} />
                 <Route path='/MyProfile' element={<MyProfile/>} />
                 <Route path='/MyPosts' element={<MyPosts/>} />
-                <Route path='/search' element={<SearchResults />} />
+                <Route path='/MyMessages' element={<MyMessages/>} />
+                 {/* <Route path='/search' element={<SearchResults />} /> */}
                 
                 <Route path='/AboutWilfredo' element={<AboutWilfredo/>} />
                 <Route path='/AboutThomas' element={<AboutThomas/>} />
@@ -52,7 +57,8 @@ function App() {
                 <Route path='/upload' element={<Test />} />
                 
             </Routes>
-          
+            {/* </UserContext.Provider>
+            </LoginContext.Provider> */}
         </Router>
         
     );

@@ -9,14 +9,15 @@
  import SearchBar from '../components/SearchBar';
  import '../css/App.css';
  
- const VPTestHome = () => {
+ const Home = () => {
    //message box modal
    return (
      <div className="container">  
-       <h1>Welcome to GatorXChange <br/> The platform made for gators, by gators.</h1>
+       <h2>Welcome to GatorXChange </h2>
+       <h4> The platform to buy, sell, and exchange goods explicitly for SFSU students, staff and faculty!</h4>
        <SearchBar/>
      </div>
    );
  };
  
- export default VPTestHome;
+ export default Home;

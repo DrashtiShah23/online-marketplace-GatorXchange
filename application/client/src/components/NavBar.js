@@ -18,7 +18,7 @@ export default function NavBar() {
         </p>
       </div>
       {/* Changed the expand to sm from lg to make it mobile responsive */}
-      <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="sm" bg="secondary" variant="dark">
         <Navbar.Brand href="/">
           <Logo
             animation="border"

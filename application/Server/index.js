@@ -264,20 +264,8 @@ app.get('/getPendingPosts', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        // console.log();
-        // console.log(`Post ${i} sent over is: `);
-        // console.log('Post ID: ' + post.post_id);
-        // console.log('Post index: ' + i);
-        // console.log('Post category: ' + post.category);
-        // console.log('Post thumbnail: ' + post.thumbnail);
-        // console.log('Post title: ' + post.title);
-        // console.log('Post price: ' + post.price);
-        // console.log('Post description: ' + post.description);
-        // console.log('Post pickup location: ' + post.pickup_location);
-        // console.log('Post creation date/time: ' + post.dateTime);
-        // console.log();
+
         // Add the post to the list of pending posts
-        // console.log("posts: ", post); 
         pendingPosts.push(post);
       }
 
@@ -346,22 +334,10 @@ app.get('/getAllPosts', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        // console.log();
-        // console.log(`Post ${i} sent over is: `);
-        // console.log('Post category: ' + post.category);
-        // console.log('Post image: ' + post.image);
-        // console.log('Post thumbnail: ' + post.thumbnail);
-        // console.log('Post title: ' + post.title);
-        // console.log('Post price: ' + post.price);
-        // console.log('Post description: ' + post.description);
-        // console.log('Post pickup location: ' + post.pickup_location);
-        // console.log('Post creation date/time: ' + post.dateTime);
-        // console.log();
         // Add the post to the allPosts array 
         allPosts.push(post);
       }
       // Send the allPosts array over to client
-      // console.log('Array containing all posts is: ' + JSON.stringify(allPosts));
       console.log('Finished sending all posts over to client!');
       return res.status(200).send(JSON.stringify(allPosts));
       
@@ -433,20 +409,8 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          // console.log();
-          // console.log(`Post ${i} sent over is: `);
-          // console.log('Post ID: ' + post.post_id);
-          // console.log('Post category: ' + post.category);
-          // console.log('Post image: ' + post.image);
-          // console.log('Post thumbnail: ' + post.thumbnail);
-          // console.log('Post title: ' + post.title);
-          // console.log('Post price: ' + post.price);
-          // console.log('Post description: ' + post.description);
-          // console.log('Post pickup location: ' + post.pickup_location);
-          // console.log('Post creation date/time: ' + post.dateTime);
-          // console.log();
+
           // Add the post to the list of search results
-          // console.log("posts: ", post) 
           searchResults.push(post);
         }
 
@@ -492,20 +456,8 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          // console.log();
-          // console.log(`Post ${i} sent over is: `);
-          // console.log('Post ID: ' + post.post_id);
-          // console.log('Post category: ' + post.category);
-          // console.log('Post image: ' + post.image);
-          // console.log('Post thumbnail: ' + post.thumbnail);
-          // console.log('Post title: ' + post.title);
-          // console.log('Post price: ' + post.price);
-          // console.log('Post description: ' + post.description);
-          // console.log('Post pickup location: ' + post.pickup_location);
-          // console.log('Post creation date/time: ' + post.dateTime);
-          // console.log();
-          // Add the post to the list of search results
-          // console.log("posts: ", post) 
+
+          // Add the post to the list of search results) 
           searchResults.push(post);
       }
 
@@ -551,20 +503,8 @@ app.get('/search', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        // console.log();
-        // console.log(`Post ${i} sent over is: `);
-        // console.log('Post ID: ' + post.post_id);
-        // console.log('Post category: ' + post.category);
-        // console.log('Post image: ' + post.image);
-        // console.log('Post thumbnail: ' + post.thumbnail);
-        // console.log('Post title: ' + post.title);
-        // console.log('Post price: ' + post.price);
-        // console.log('Post description: ' + post.description);
-        // console.log('Post pickup location: ' + post.pickup_location);
-        // console.log('Post creation date/time: ' + post.dateTime);
-        // console.log();
+
         // Add the post to the list of search results
-        // console.log("posts: ", post) 
         searchResults.push(post);
       }
 
@@ -607,20 +547,8 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          // console.log();
-          // console.log(`Post ${i} sent over is: `);
-          // console.log('Post ID: ' + post.post_id);
-          // console.log('Post category: ' + post.category);
-          // console.log('Post image: ' + post.image);
-          // console.log('Post thumbnail: ' + post.thumbnail);
-          // console.log('Post title: ' + post.title);
-          // console.log('Post price: ' + post.price);
-          // console.log('Post description: ' + post.description);
-          // console.log('Post pickup location: ' + post.pickup_location);
-          // console.log('Post creation date/time: ' + post.dateTime);
-          // console.log();
-          // // Add the post to the list of search results
-          // console.log("posts: ", post) 
+
+          // Add the post to the list of search results
           searchResults.push(post);
       }
 

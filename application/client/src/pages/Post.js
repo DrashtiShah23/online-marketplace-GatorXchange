@@ -41,34 +41,28 @@ const Post = () => {
   })();
 
   const handleTitle = (e) => {
-    console.log(e.target.value);
     setTitle(e.target.value);
   }
 
   const handlePrice = (e) => {
-    console.log(e.target.value);
     /** setting the price by using the event handler e */
     setPrice((v) =>
       e.target.validity.valid ? e.target.value : v );
   }
 
   const handleDescription = (e) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   }
 
   const handleCategory = (e) => {
-    console.log(e.target.value);
     setCategory(e.target.value);
   }
 
   const handlePickupLocation = (e) => {
-    console.log(e.target.value);
     setPickupLocation(e.target.value);
   }
 
   const handleImage = (e) => {
-    console.log(e.target.files[0]);
     const img = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
@@ -94,7 +88,7 @@ const Post = () => {
     formData.append("category", category);
     formData.append("pickupLocation", pickupLocation);
     formData.append("image", image.data);
-    // console.log(formData)
+    
 
     // Send the form data over to /post endpoint
     axios.post("/upload/post", formData, config)
@@ -102,13 +96,11 @@ const Post = () => {
         if (res.status === 200) {
           // For checking data is correct in inspector
           console.log("Data submitted is:");
-          console.log(formData);
           console.log("Title input is: " + formData.title);
           console.log("Price input is " + formData.price);
           console.log("Description input is " + formData.description);
           console.log("Category input is " + formData.category);
           console.log("Pickup location input is " + formData.pickupLocation);
-          console.log("Image input is " + formData.image.data);
 
           // Reset the state variables before after post success
           setTitle("");
@@ -132,44 +124,6 @@ const Post = () => {
         console.log(err);
       });
     
-  
-
-    // Create post parameters that will be used for SQL queries into the database
-    // const postData = {
-    //   title: title,
-    //   category: category,
-    //   price: price,
-    //   description: description,
-    // };
-    // // Send a POST request to the server
-    // axios
-    //   .post("/post", postData)
-    //   .then((res) => {
-    //     // If status is OK, redirect user to the home page
-    //     if (res.status === 200) {
-    //       // For checking data is correct in inspector
-    //       console.log("Data submitted is:");
-    //       console.log(postData);
-    //       console.log("Title input is: " + postData.username);
-    //       console.log("Category input is " + postData.email);
-    //       console.log("Price input is " + postData.password);
-    //       console.log("Description input is " + postData.id);
-
-    //       // Redirect to the home page after successfully creating an account
-    //       window.location = "/";
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     if (err.response) {
-    //       console.log("Server status is: " + err.response.status);
-    //     } else if (err.request) {
-    //       console.log(err.request);
-    //       console.log("Network error or server is offline");
-    //     }
-    //     console.log("Upload of the post failed :(");
-    //     console.log(err);
-    //   });
-
   };
 
   /** Creating a post form where the user enters the details of the post */
@@ -259,7 +213,6 @@ const Post = () => {
             name="image"
             required
             accept="image/png, image/jpeg"
-            // value={image}
             onChange={handleImage}
           />
           {/* Image preview before upload using inline css to resize */}

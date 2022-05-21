@@ -215,12 +215,12 @@ app.post("/login", (req, res) => {
 
 });
 
-app.get('/login', (req, res) => {
+// app.get('/login', (req, res) => {
   
-  console.log('Grabbing session data:');
-  console.log(req.session);
-  res.status(200).send(req.session);
-});
+//   console.log('Grabbing session data:');
+//   console.log(req.session);
+//   res.status(200).send(req.session);
+// });
 
 // Logout endpoint
 app.post('/logout', (req, res) => {

@@ -67,8 +67,8 @@ let mySQLSessionStore = new mySQLSession({}, database);
 
 app.use(
   session({
-    key: "user_id",
-    secret: "csc648",
+    key: 'user_id',
+    secret: 'csc648',
     store: mySQLSessionStore,
     resave: false,
     saveUninitialized: false,
@@ -193,7 +193,7 @@ app.post("/login", (req, res) => {
           req.session.user_id = user_id;
           req.session.username = username;
           res.locals.logged = true;
-          res.redirect('/');
+          //res.redirect('/');
           console.log(`Account exists. Logging ${username} in...`);
           return res.status(200).send(`Account exists. Logging ${username} in...`);
         }
@@ -216,7 +216,19 @@ app.post("/login", (req, res) => {
 
 // Logout endpoint
 app.post('/logout', (req, res) => {
-
+  // Destroy the user session when logging out
+  req.session.destroy((err) => {
+    // Error
+    if (err) {
+      console.log('Error: Session could not be destroyed');
+      console.log(err);
+    } // Success
+    else {
+      console.log('Session destroyed successfully. User is logged out');
+      res.clearCookie('user_id');
+      res.status(200).send('User is now logged out');
+    }
+  });
 });
 
 // Admin endpoint to get all pending user posts

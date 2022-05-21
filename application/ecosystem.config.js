@@ -18,7 +18,7 @@ module.exports = {
       user: 'ubuntu',
       host: '54.67.78.9',
       key: '~/.ssh/team1.pem',
-      ref: 'origin/test-deploy',
+      ref: 'origin/main',
       repo: 'git@github.com:CSC-648-SFSU/csc648-03-sp22-Team01.git',
       path: '/home/ubuntu/prod',
       'post-deploy': 'cd ./application/Server && npm install && cd ../ && pm2 reload ecosystem.config.js --env production && pm2 serve ./client/build 3000 --name prod-client'

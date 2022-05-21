@@ -1,3 +1,12 @@
+/******************************************************
+ * Purpose: Displays the navbar to user to show different 
+ * options to post, login, register, see their profile
+ * Output: Renders on each page 
+ * Error Messages: None
+ * Author: Wilfredo Aceytuno, Drashti Shah, Thomas Nguyen
+ ******************************************************/
+
+
 import { GlobalStyles } from './Global.js';
 import { lightTheme, darkTheme } from './NavbarElements.js';
 import React from "react";

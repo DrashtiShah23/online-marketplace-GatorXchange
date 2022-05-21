@@ -14,7 +14,7 @@ export default function NavBar() {
     <div>
       <div class="title-text">
         <p>
-        SFSU Software Engineering Project CSC 648-848, Spring 2022. For Demonstration Only
+        SFSU Software Engineering Project CSC 648-848-03, Spring 2022 by Team 01. For Demonstration Only
         </p>
       </div>
       {/* Changed the expand to sm from lg to make it mobile responsive */}
@@ -65,27 +65,14 @@ export default function NavBar() {
           </Nav>
           </Navbar.Collapse>
 
-        {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto">
-            <NavDropdown title="Account" id="collapsible-nav-dropdown">
-              <NavDropdown.Item
-                href="Login">Log in</NavDropdown.Item>
-              <NavDropdown.Item href="SignUp">
-                Sign up
-              </NavDropdown.Item>
-             // Example on how to set up *
-              <NavDropdown.Item href="#action/3.4"> 
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav> */}
+        
           
           <Nav>
             <Nav.Link href="About">About</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
             </Nav.Link>
           </Nav>
-        {/* </Navbar.Collapse> */}
+        
         
       </Navbar >
     

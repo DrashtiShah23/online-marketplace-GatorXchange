@@ -81,8 +81,8 @@ router.post('/post', upload.single('image'), async function (req, res) {
         
         const pickupLocation = req.body.pickupLocation;
 
-        // const fk_user_id = req.session.user_id;
-        const fk_user_id = req.body.user_id;
+        const fk_user_id = req.session.user_id;
+        
         const category = req.body.category;
         let fk_category_id;
 
@@ -136,13 +136,6 @@ router.post('/post', upload.single('image'), async function (req, res) {
     }
     
 });
-
-// router.get('/upload', async function (req, res) {
-//     console.log(req.body.name);
-    
-//     res.send(req.body.name);
-// });
-
 
 
 module.exports = router;

@@ -7,16 +7,40 @@
  * Author: Mary Tangog, Drashti Shah
  *************************************************************/
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../css/login.css";
 import { Form } from "react-bootstrap";
 import axios from "axios";
+import { LoginContextProvider } from "../LoginContext";
+import { UserContextProvider } from "../UserContext";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState("");
+  // const {user, setUser} = useContext(UserContextProvider)
+  // const {loginState, setLoginState} = useContext(LoginContextProvider);
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("user");
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //     console.log(foundUser.user_id)
+  //   }
+  //   console.log(loggedInUser)
+    
+  // }, []);
+
+  // logout the user
+  // const handleLogout = () => {
+  //   setUser({});
+  //   setEmail("");
+  //   setPassword("");
+  //   //localStorage.clear();
+  //   setLoginState(false);
+  // };
 
   // Event handler for submitting the login information to send to backend
   const handleSubmit = (e) => {
@@ -40,7 +64,13 @@ const Login = () => {
           console.log(LoginData);
           console.log("Email input is " + LoginData.email);
           console.log("Password input is " + LoginData.password);
-
+          
+          // Set global login state to true
+          // setLoginState(true);
+          // console.log(res.data);
+          // setUser(res.data);
+          //localStorage.setItem("user", JSON.stringify(res.data))
+          alert('Login successful!');
           // Redirect to the home results page 
           window.location = "/";
      
@@ -54,10 +84,32 @@ const Login = () => {
           console.log(err.request);
           console.log("Network error or server is offline");
         }
-        console.log("Registration failed :(");
+        console.log("Login failed :(");
         console.log(err);
       });
   };
+
+  // if (user) {
+  //   return (
+  //     <div>
+  //       <p>{user.username} logged in!</p>
+  //       <p>User ID is: {user.user_id}</p>
+  //       <button onClick={handleLogout}>logout</button>
+  //     </div>
+  //   )
+  // }
+
+//  if (loginState) {
+//    return (
+//      <div>
+//        <p>{user.username} logged in</p>
+//        <p>User ID is: {user.user_id}</p>
+//        <button onClick={handleLogout}>logout</button>
+//      </div>
+//    )
+//  }
+  
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -66,7 +118,7 @@ const Login = () => {
           <h1 className="h1-login">Login</h1>
 
           <div className="col-12-login">
-            <Form.Label className="formLabel-login" class="form-label-email">
+            <Form.Label className="formLabel-login form-label-email">
               Email
             </Form.Label>
             <input
@@ -80,7 +132,7 @@ const Login = () => {
           </div>
 
           <div className="col-12-login">
-            <Form.Label className="formLabel-login" class="form-label-password">
+            <Form.Label className="formLabel-login form-label-password">
               Password
             </Form.Label>
             <input
@@ -104,7 +156,7 @@ const Login = () => {
           <div></div>
         </div>
       </div>
-    </form>
+    </form>  
   );
 };
 

@@ -12,7 +12,7 @@
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const mySQLSession = require('express-mysql-session')(session);
 // const socketio = require("socket.io");
@@ -50,20 +50,19 @@ const uploadRouter = require('./routers/upload.js');
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cookieParser());
-app.use(cors());
+// app.use(cookieParser());
 // app.use(helmet());
 app.use(logger('dev'));
 
 let mySQLSessionStore = new mySQLSession({}, database);
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:3000"],
-//     methods: ["GET", "POST", "UPDATE"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "UPDATE"],
+    credentials: true,
+  })
+);
 
 app.use(
   session({
@@ -193,9 +192,11 @@ app.post("/login", (req, res) => {
           req.session.user_id = user_id;
           req.session.username = username;
           res.locals.logged = true;
-          //res.redirect('/');
+          
           console.log(`Account exists. Logging ${username} in...`);
-          return res.status(200).send(`Account exists. Logging ${username} in...`);
+          // return res.status(200).send(`Account exists. Logging ${username} in...`);
+          // return res.status(200).send(req.sessionID);
+          return res.status(200).send(req.session);
         }
 
         // Invalid login info
@@ -212,6 +213,13 @@ app.post("/login", (req, res) => {
       return res.status(404).send('Error querying database with login info:');
     });
 
+});
+
+app.get('/login', (req, res) => {
+  
+  console.log('Grabbing session data:');
+  console.log(req.session);
+  res.status(200).send(req.session);
 });
 
 // Logout endpoint
@@ -256,24 +264,24 @@ app.get('/getPendingPosts', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        console.log();
-        console.log(`Post ${i} sent over is: `);
-        console.log('Post ID: ' + post.post_id);
-        console.log('Post index: ' + i);
-        console.log('Post category: ' + post.category);
-        console.log('Post thumbnail: ' + post.thumbnail);
-        console.log('Post title: ' + post.title);
-        console.log('Post price: ' + post.price);
-        console.log('Post description: ' + post.description);
-        console.log('Post pickup location: ' + post.pickup_location);
-        console.log('Post creation date/time: ' + post.dateTime);
-        console.log();
+        // console.log();
+        // console.log(`Post ${i} sent over is: `);
+        // console.log('Post ID: ' + post.post_id);
+        // console.log('Post index: ' + i);
+        // console.log('Post category: ' + post.category);
+        // console.log('Post thumbnail: ' + post.thumbnail);
+        // console.log('Post title: ' + post.title);
+        // console.log('Post price: ' + post.price);
+        // console.log('Post description: ' + post.description);
+        // console.log('Post pickup location: ' + post.pickup_location);
+        // console.log('Post creation date/time: ' + post.dateTime);
+        // console.log();
         // Add the post to the list of pending posts
-        console.log("posts: ", post) 
+        // console.log("posts: ", post); 
         pendingPosts.push(post);
       }
 
-        console.log('Pending posts array is: ' + JSON.stringify(pendingPosts));
+        // console.log('Pending posts array is: ' + JSON.stringify(pendingPosts));
   
         // Send the database results to the frontend
         console.log('Finished sending pending posts');
@@ -338,22 +346,22 @@ app.get('/getAllPosts', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        console.log();
-        console.log(`Post ${i} sent over is: `);
-        console.log('Post category: ' + post.category);
-        console.log('Post image: ' + post.image);
-        console.log('Post thumbnail: ' + post.thumbnail);
-        console.log('Post title: ' + post.title);
-        console.log('Post price: ' + post.price);
-        console.log('Post description: ' + post.description);
-        console.log('Post pickup location: ' + post.pickup_location);
-        console.log('Post creation date/time: ' + post.dateTime);
-        console.log();
+        // console.log();
+        // console.log(`Post ${i} sent over is: `);
+        // console.log('Post category: ' + post.category);
+        // console.log('Post image: ' + post.image);
+        // console.log('Post thumbnail: ' + post.thumbnail);
+        // console.log('Post title: ' + post.title);
+        // console.log('Post price: ' + post.price);
+        // console.log('Post description: ' + post.description);
+        // console.log('Post pickup location: ' + post.pickup_location);
+        // console.log('Post creation date/time: ' + post.dateTime);
+        // console.log();
         // Add the post to the allPosts array 
         allPosts.push(post);
       }
       // Send the allPosts array over to client
-      console.log('Array containing all posts is: ' + JSON.stringify(allPosts));
+      // console.log('Array containing all posts is: ' + JSON.stringify(allPosts));
       console.log('Finished sending all posts over to client!');
       return res.status(200).send(JSON.stringify(allPosts));
       
@@ -371,9 +379,7 @@ let store = [];
 
 // Send user search parameters to server 
 app.post('/search', (req, res) => {
-  console.log();
-  console.log('Got a post request. Request body is:');
-  console.log(req.body);
+  
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
@@ -427,20 +433,20 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          console.log();
-          console.log(`Post ${i} sent over is: `);
-          console.log('Post ID: ' + post.post_id);
-          console.log('Post category: ' + post.category);
-          console.log('Post image: ' + post.image);
-          console.log('Post thumbnail: ' + post.thumbnail);
-          console.log('Post title: ' + post.title);
-          console.log('Post price: ' + post.price);
-          console.log('Post description: ' + post.description);
-          console.log('Post pickup location: ' + post.pickup_location);
-          console.log('Post creation date/time: ' + post.dateTime);
-          console.log();
+          // console.log();
+          // console.log(`Post ${i} sent over is: `);
+          // console.log('Post ID: ' + post.post_id);
+          // console.log('Post category: ' + post.category);
+          // console.log('Post image: ' + post.image);
+          // console.log('Post thumbnail: ' + post.thumbnail);
+          // console.log('Post title: ' + post.title);
+          // console.log('Post price: ' + post.price);
+          // console.log('Post description: ' + post.description);
+          // console.log('Post pickup location: ' + post.pickup_location);
+          // console.log('Post creation date/time: ' + post.dateTime);
+          // console.log();
           // Add the post to the list of search results
-          console.log("posts: ", post) 
+          // console.log("posts: ", post) 
           searchResults.push(post);
         }
 
@@ -486,20 +492,20 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          console.log();
-          console.log(`Post ${i} sent over is: `);
-          console.log('Post ID: ' + post.post_id);
-          console.log('Post category: ' + post.category);
-          console.log('Post image: ' + post.image);
-          console.log('Post thumbnail: ' + post.thumbnail);
-          console.log('Post title: ' + post.title);
-          console.log('Post price: ' + post.price);
-          console.log('Post description: ' + post.description);
-          console.log('Post pickup location: ' + post.pickup_location);
-          console.log('Post creation date/time: ' + post.dateTime);
-          console.log();
+          // console.log();
+          // console.log(`Post ${i} sent over is: `);
+          // console.log('Post ID: ' + post.post_id);
+          // console.log('Post category: ' + post.category);
+          // console.log('Post image: ' + post.image);
+          // console.log('Post thumbnail: ' + post.thumbnail);
+          // console.log('Post title: ' + post.title);
+          // console.log('Post price: ' + post.price);
+          // console.log('Post description: ' + post.description);
+          // console.log('Post pickup location: ' + post.pickup_location);
+          // console.log('Post creation date/time: ' + post.dateTime);
+          // console.log();
           // Add the post to the list of search results
-          console.log("posts: ", post) 
+          // console.log("posts: ", post) 
           searchResults.push(post);
       }
 
@@ -545,24 +551,24 @@ app.get('/search', (req, res) => {
           pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        console.log();
-        console.log(`Post ${i} sent over is: `);
-        console.log('Post ID: ' + post.post_id);
-        console.log('Post category: ' + post.category);
-        console.log('Post image: ' + post.image);
-        console.log('Post thumbnail: ' + post.thumbnail);
-        console.log('Post title: ' + post.title);
-        console.log('Post price: ' + post.price);
-        console.log('Post description: ' + post.description);
-        console.log('Post pickup location: ' + post.pickup_location);
-        console.log('Post creation date/time: ' + post.dateTime);
-        console.log();
+        // console.log();
+        // console.log(`Post ${i} sent over is: `);
+        // console.log('Post ID: ' + post.post_id);
+        // console.log('Post category: ' + post.category);
+        // console.log('Post image: ' + post.image);
+        // console.log('Post thumbnail: ' + post.thumbnail);
+        // console.log('Post title: ' + post.title);
+        // console.log('Post price: ' + post.price);
+        // console.log('Post description: ' + post.description);
+        // console.log('Post pickup location: ' + post.pickup_location);
+        // console.log('Post creation date/time: ' + post.dateTime);
+        // console.log();
         // Add the post to the list of search results
-        console.log("posts: ", post) 
+        // console.log("posts: ", post) 
         searchResults.push(post);
       }
 
-        console.log('Database results array is: ' + JSON.stringify(searchResults));
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
 
         // Send the database results to the frontend
         console.log('Finished sending database results');
@@ -601,24 +607,24 @@ app.get('/search', (req, res) => {
             pickup_location: results[i].pickup_location,
             dateTime: results[i].created
           };
-          console.log();
-          console.log(`Post ${i} sent over is: `);
-          console.log('Post ID: ' + post.post_id);
-          console.log('Post category: ' + post.category);
-          console.log('Post image: ' + post.image);
-          console.log('Post thumbnail: ' + post.thumbnail);
-          console.log('Post title: ' + post.title);
-          console.log('Post price: ' + post.price);
-          console.log('Post description: ' + post.description);
-          console.log('Post pickup location: ' + post.pickup_location);
-          console.log('Post creation date/time: ' + post.dateTime);
-          console.log();
-          // Add the post to the list of search results
-          console.log("posts: ", post) 
+          // console.log();
+          // console.log(`Post ${i} sent over is: `);
+          // console.log('Post ID: ' + post.post_id);
+          // console.log('Post category: ' + post.category);
+          // console.log('Post image: ' + post.image);
+          // console.log('Post thumbnail: ' + post.thumbnail);
+          // console.log('Post title: ' + post.title);
+          // console.log('Post price: ' + post.price);
+          // console.log('Post description: ' + post.description);
+          // console.log('Post pickup location: ' + post.pickup_location);
+          // console.log('Post creation date/time: ' + post.dateTime);
+          // console.log();
+          // // Add the post to the list of search results
+          // console.log("posts: ", post) 
           searchResults.push(post);
       }
 
-          console.log('Database results array is: ' + JSON.stringify(searchResults));
+          // console.log('Database results array is: ' + JSON.stringify(searchResults));
 
           // Send the database results to the frontend
           console.log('Finished sending database results');

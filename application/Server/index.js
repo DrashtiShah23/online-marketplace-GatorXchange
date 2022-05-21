@@ -414,7 +414,7 @@ app.get('/search', (req, res) => {
           searchResults.push(post);
         }
 
-        console.log('Database results array is: ' + JSON.stringify(searchResults));
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
   
         // Send the database results to the frontend
         console.log('Finished sending database results');
@@ -461,7 +461,7 @@ app.get('/search', (req, res) => {
           searchResults.push(post);
       }
 
-        console.log('Database results array is: ' + JSON.stringify(searchResults));
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
   
         // Send the database results to the frontend
         console.log('Finished sending database results');

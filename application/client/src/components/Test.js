@@ -10,9 +10,9 @@ function Test() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         let formData = new FormData()
-        formData.append('file', image.data)
+        formData.append('image', image.data)
         /* end routes when user uploads image. */
-        const response = await fetch('http://localhost:3001/upload/image', {
+        const response = await fetch('http://localhost:3001/upload/post', {
             method: 'POST',
             body: formData,
         })
@@ -36,7 +36,7 @@ function Test() {
                     <Card.Title>Upload to server</Card.Title>
                     <br></br>
                     <form onSubmit={handleSubmit}>
-                        <input type='file' name='file' onChange={handleFileChange}></input>
+                        <input type='file' name='image' onChange={handleFileChange}></input>
                         <Button variant="primary" type='submit'>Submit</Button>
                     </form>
                     {status && <h4>{status}</h4>}

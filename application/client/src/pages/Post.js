@@ -1,122 +1,243 @@
+/*****************************************************
+ * Purpose: Allows the user to create a post from their 
+ * account to buy or sell. Ensures if the user is logged in 
+ * if not the users are given the link to register for
+ * an account at the bottom.
+ * Error Messages: None
+ * Authors: Mary Tangog, Drashti Shah
+ *****************************************************/
+
 import React, { useState } from "react";
-import "../css/registration.css";
+import { Form }from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Form from 'react-bootstrap/Form'
+import "../css/post.css";
+import axios from "axios";
+
 const Post = () => {
-
-
-
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [val, setVal] = useState();
-  const [check, setcheckboxvalue] = useState(false);
-  const uploadFileEle = document.getElementById("fileInput");
+  const [category, setCategory] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [image, setImage] = useState({ preview: "", data: ""});
+  
 
+  // Prevents form from being submitted if form is not valid
+  (function () {
+    var forms = document.querySelectorAll(".needs-validation");
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const handlePrice = (e) => {
+    /** setting the price by using the event handler e */
+    setPrice((v) =>
+      e.target.validity.valid ? e.target.value : v );
+  }
+
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+  }
+
+  const handlePickupLocation = (e) => {
+    setPickupLocation(e.target.value);
+  }
+
+  const handleImage = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    setImage(img);
+  };
+
+  // Event handler for submitting the post information to send to backend
+  const handleSubmit = (e) => {
+    // Don't refresh the page upon submitting post queries
+    e.preventDefault();
+    // Prevents form from being submitted if form is not valid
+
+    const config = {
+      headers: { "content-type": "multipart/form-data" }
+    };
+
+    // Grab form data to send to backend
+    let formData = new FormData();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("pickupLocation", pickupLocation);
+    formData.append("image", image.data);
+    
+
+    // Send the form data over to /post endpoint
+    axios.post("/upload/post", formData, config)
+      .then((res) => {
+        if (res.status === 200) {
+          // For checking data is correct in inspector
+          console.log("Data submitted is:");
+          console.log("Title input is: " + formData.title);
+          console.log("Price input is " + formData.price);
+          console.log("Description input is " + formData.description);
+          console.log("Category input is " + formData.category);
+          console.log("Pickup location input is " + formData.pickupLocation);
+
+          // Reset the state variables before after post success
+          setTitle("");
+          setPrice("");
+          setDescription("");
+          setCategory("");
+          setPickupLocation("");
+          setImage({ preview: "", data: ""});
+
+          window.location = "/";
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log("Server status is: " + err.response.status);
+        } else if (err.request) {
+          console.log(err.request);
+          console.log("Network error or server is offline");
+        }
+        console.log("Upload of the post failed :(");
+        console.log(err);
+      });
+    
+  };
+
+  /** Creating a post form where the user enters the details of the post */
   return (
-    <div className="container">
-      <h1>ADD POST</h1>
-      <div className="card">
-        <div id="float-label">
-          <input
-            type="title" placeholder="Title*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Title required!")}
-            required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          {/* <label htmlFor="title">Title*</label> */}
+  <div className="containerPost" >
+    <form
+      className="row row-cols-lg-auto g-3 align-items-center needs-validation"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <div className="container">
+        <div className="field">
+        <h1> Post an Item </h1>
+
+        <div className="col-12">
+          <Form.Label className="form-label">Title*: </Form.Label>
+            <input
+              className="form-control"
+              type="title"
+              placeholder="Title"
+              required
+              value={title}
+              onChange={handleTitle}
+              /** setting the title by using the event handler e */
+            />
+            <div className="invalid-feedback">Title is required</div>
         </div>
-        <div id="float-label">
-          <input
-            value="price" placeholder="Price*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Price required!")}
-            pattern="[0-9]*"
-            value={val}
-            onChange={(e) =>
-              setPrice((v) => (e.target.validity.valid ? e.target.value : v))
-            }
-          />
-          {/* <label htmlFor="price">Price*</label> */}
+
+        <div className="col-12">
+          <Form.Label className="form-label">Price*:</Form.Label>
+            <input
+              className="form-control"
+              placeholder="Price"
+              pattern="[0-9]*"
+              value={price}
+              required
+              onChange={
+                handlePrice
+              }
+            />
+            <div className="invalid-feedback">Price is required</div>
         </div>
-        <div id="float-label">
-          <input
-            type="description" placeholder="Description*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Description required!")}
+
+        <div className="col-12">
+          <Form.Label className="form-label">Description*: </Form.Label>
+          <textarea
             required
+            className="form-control"
+            placeholder="Description"
+            cols="50"
+            rows="5"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleDescription} /** setting the description by using the event handler e */
           />
-          {/* <label htmlFor="description">Description*</label> */}
+          <div className="invalid-feedback">Description is required</div>
         </div>
-        <div id="float-label">
-          <Form.Select aria-label="Catrgories">
-          <option>Select Category</option>
+
+        <div className="col-12">
+          <Form.Label className="form-label"> Categories* </Form.Label>
+          <Form.Select aria-label="Categories" required className="form-control" onChange={handleCategory}>
+            <option value="">Select Category</option>
             <option value="Books">Books</option>
             <option value="Electronics">Electronics</option>
             <option value="Clothes">Clothes</option>
-        </Form.Select>
-          {/*<input
-            type="category" placeholder="Category*"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "Category required!")}
+          </Form.Select>
+          <div className="invalid-feedback">Category is required</div>
+        </div>
+
+        <div className="col-12">
+          <Form.Label>Location* </Form.Label>
+            <Form.Select aria-label="Pickup" required className="form-control" onChange={handlePickupLocation}>
+              <option value="">Select Pickup Location</option>
+              <option value="Cesar Chavez Building">Cesar Chavez Building </option>
+              <option value="J. Paul Leonard Library">J. Paul Leonard Library </option>
+              <option value="Administration Building">Administration Building</option>
+              <option value="Cafe Russo">Cafe Russo</option>
+              <option value="Quad">Quad</option>
+            </Form.Select>
+            <div className="invalid-feedback">Location is required</div>
+        </div>
+
+        <div className="upload-img col-12">
+          <h5>Upload image of the item</h5>
+          <input
+            className="upload"
+            type="file"
+            name="image"
             required
-            class="text-input"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            accept="image/png, image/jpeg"
+            onChange={handleImage}
           />
-          { <label htmlFor="category">Category*</label> */}
-        </div>
-        <div id="float-label">
-          <Form.Select aria-label="Pickup">
-          <option>Select Pickup Location</option>
-            <option value="CesarChavezBldg">Cesar Chavez building </option>
-            <option value="Library ">J. Paul Leaonard Library </option>
-            <option value="AdminBldg">Administration building</option>
-            <option value="CafeRusso">Cafe Russo</option>
-            <option value="Quad">Quad</option>
-        </Form.Select>
+          {/* Image preview before upload using inline css to resize */}
+          <img src={image.preview} style={{width: "30%", height:"30%"}} alt="" />
+          <div className="invalid-feedback">Image of item is required</div>
         </div>
 
-        <div>
-        <label for="avatar"style={{ textalign: 'center',background:"lightgrey", padding:"5px 10px" }}>Choose a photo of item to upload:  </label></div>
-<br/>
-        <div>
-        <input  type="file"
-       id="avatar" name="avatar"
-       accept="image/png, image/jpeg"/>
-      
-        </div>
+        <div className="hasAccount col-12">
 
-        <div className="checkbox">
-        <br/>
-        <input
-            type="checkbox"
-            required
-            id="TnC"
-            onChange={(e) => setcheckboxvalue(e.target.value)}
-          />
-          <label id="TnC">
-            {" "}
-            I Agree with the
-            <Link to="/"> Terms and Conditions </Link>
-          </label>
+        <p className="post-para">
+          The post will be approved by the admin within 24-48 hrs after the
+          upload
+        </p>
+        <button className="postButton" type="submit">
+          Post
+        </button>
+        {/* Having a cancel link so users can be directed to home page */}
+        <Link className="cancel-link" to="/" >
+          Cancel
+        </Link>
         </div>
-        
-
-        <button className="registerButton">Post</button>
-        <div>
-          <p>
-          Already have an account?
-            <Link to="/Login">Login here</Link>
-          </p>
         </div>
-      </div>
-    </div>
+      </div> 
+    </form>
+  </div>
   );
 };
 

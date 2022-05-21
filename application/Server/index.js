@@ -9,15 +9,16 @@
  * Error Messages: None
  * Authors: Thomas Nguyen and Javier Marquez
  *********************************************************************/
-const express = require('express')
-const cors = require("cors")
-const bodyParser = require("body-parser")
-const cookieParser = require("cookie-parser")
-// const session = require("express-session")
-// const bcrypt = require("bcrypt")
-// const socketio = require("socket.io")
+const express = require('express');
+const cors = require("cors");
+const bodyParser = require("body-parser");
+// const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const mySQLSession = require('express-mysql-session')(session);
+// const socketio = require("socket.io");
 // const helmet = require('helmet');
 const logger = require("morgan");
+const bcrypt = require("bcrypt");
 const path = require('path');
 const database = require('./config/database.js');
 const app = express();
@@ -29,7 +30,7 @@ const PORT = 3001;
 // const homeRouter = require('./routers/home.js')
 // const usersRouter = require('./routers/users.js')
 // const VpRouter = require('./routers/VPResult.js')
-const uploadRouter = require('./routers/upload.js')
+const uploadRouter = require('./routers/upload.js');
 // const chatRouter = require('./routers/chat.js')
 // const http = require("http")
 
@@ -49,44 +50,62 @@ const uploadRouter = require('./routers/upload.js')
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cookieParser());
-app.use(cors())
-// app.use(helmet())
-app.use(logger('dev'))
+// app.use(cookieParser());
+// app.use(helmet());
+app.use(logger('dev'));
 
+let mySQLSessionStore = new mySQLSession({}, database);
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:3000"],
-//     methods: ["GET", "POST", "UPDATE"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "UPDATE"],
+    credentials: true,
+  })
+);
 
-// app.use(
-//   session({
-//     key: "userId",
-//     secret: "subscribe",
-//     resave: false,
-//     saveUninitialized: false,
-//     // cookie: {
-//     //   expires: 60 * 60 * 24,
-//   },
-//   )
-// );
+app.use(
+  session({
+    key: 'user_id',
+    secret: 'csc648',
+    store: mySQLSessionStore,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: {
+    //   expires: 60 * 60 * 24,
+  },
+  )
+);
 
-// Test endpoints for testing backend. Ignore
+// Maintain user session while logged in
+app.use((req, res, next) => {
+  if (req.session.user_id) {
+    res.locals.logged = true;
+  }
+    
+  next();
+});
+
+// Test endpoint for testing post in backend. Ignore
 app.post('/test', (req, res) => {
-  console.log(req.body);
-  res.send('Sending a name and email to server: ' + req.body.name + ', ' + req.body.email);
-  console.log('Sending a name and email to server');
-})
+  console.log(req.body.password);
+  
+  console.log('Sending a hashed password to server');
 
+  const saltRounds = 10;
+  bcrypt.hash(req.body.password, saltRounds)
+    .then((hashedPassword) => {
+      console.log(hashedPassword);
+      return res.status(200).send(hashedPassword);
+  });
+});
+
+// Test endpoint for testing get in backend. Ignore
 app.get('/test', (req, res) => {
   console.log('Name is: ' + req.body.name);
   console.log('Email is: ' + req.body.email);
-  res.send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
-})
+  return res.status(200).send('Data retrieved from server: ' + req.body.name + ', ' + req.body.email);
+});
 
 // Registration endpoint
 app.post("/register", (req, res) => {
@@ -97,86 +116,250 @@ app.post("/register", (req, res) => {
   const password = req.body.password;
   
   // Verify frontend data is correct
-  console.log()
+  console.log();
   console.log('SFSU ID received: ' + sfsu_id);
   console.log('Username received: ' + username);
   console.log('Email received: ' + email);
   console.log('Password received: ' + password);
-  console.log()
-  // Create the SQL insert statement
-  const createUser = 
-    `INSERT INTO users
-    (sfsu_id, username, email, password, registered)` + `VALUES (?, ?, ?, ?, 1)`;
+  console.log();
 
-  // Insert new user account into database
-  database.query(createUser, [sfsu_id, username, email, password, 1])
-    .then(([results]) => {
-      // Account created successfully
-      if (results && results.affectedRows) {
-        console.log('Account created successfully!');
-        res.status(200).send('Account created successfully!');
-      }
-      // Account already exists
-      else {
-        console.log('Account already exists. Create an account with different information.');
-        res.status(404).send('Account already exists. Create an account with different information.');
-      }
+  
+  // Auto generate the salt and hash the password
+  const saltRounds = 10;
+  bcrypt.hash(password, saltRounds)
+    .then((hashedPassword) => {
+      console.log(hashedPassword);
+      // Prepare the SQL insert query
+      const createUser = 
+        `INSERT INTO users
+        (sfsu_id, username, email, password)` + `VALUES (?, ?, ?, ?)`;
+      
+      // Insert new user account into database
+      database.execute(createUser, [sfsu_id, username, email, hashedPassword])
+        .then(([results]) => {
+          // Account created successfully
+          if (results && results.affectedRows) {
+            console.log('Account created successfully!');
+            return res.status(200).send('Account created successfully!');
+          }
+          // Account already exists
+          else {
+            console.log('Account already exists. Create an account with different information.');
+            return res.status(404).send('Account already exists. Create an account with different information.');
+          }
+        })
+        .catch((err) => {
+          console.log('Error creating account in database with account info: ');
+          console.log(err);
+          return res.status(404).send('Error creating account in database with account info');
+        });
     })
     .catch((err) => {
-      console.log('Error creating account in database with account info: ');
+      console.log('Error hashing password: ');
       console.log(err);
-      return;
-    });  
+      return res.status(404).send('Error hashing password');
+    });
 });
 
 // Login endpoint
-// TODO: Setup session and cookies for login
 app.post("/login", (req, res) => {
   // Get login info
   const email = req.body.email;
   const password = req.body.password;
 
-  // Create the SQL query
+  // Prepare the SQL query to check user accounts
   const findUser =
-    `SELECT email, password 
+    `SELECT user_id, username, email, password, is_admin 
     FROM users 
-    WHERE email = '` + email + `' 
-    AND password = '` + password + `'`;
-
+    WHERE email = ?`; 
+    
+  let user_id, username;
+  
   // Check the database whether an account with the username and password entered exists
-  database.query(findUser)
+  database.execute(findUser, [email])
     .then(([results]) => {
       // Valid login info
-      if (results.length == 1) {
-        console.log('Account exists. Logging user in...');
-        res.status(200).send('Account exists. Logging user in...');
+      if (results && results.length == 1) {
+        
+        let passwordMatches = bcrypt.compare(password, results[0].password);
+        // Create a session only if password matches
+        if (passwordMatches) {
+          user_id = results[0].user_id;
+          username = results[0].username;
+          console.log('User ID: ' + user_id);
+          console.log('Username: ' + username);
+  
+          req.session.user_id = user_id;
+          req.session.username = username;
+          res.locals.logged = true;
+          
+          console.log(`Account exists. Logging ${username} in...`);
+          // return res.status(200).send(`Account exists. Logging ${username} in...`);
+          // return res.status(200).send(req.sessionID);
+          return res.status(200).send(req.session);
+        }
+
+        // Invalid login info
+        else {
+          console.log('Account does not exist. Make sure your information is correct or create an account.');
+          return res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
+        }
       }
-      // Invalid login info
-      else {
-        console.log('Account does not exist. Make sure your information is correct or create an account.');
-        res.status(404).send('Account does not exist. Make sure your information is correct or create an account.');
-      }
+      
     })
     .catch((err) => {
       console.log('Error querying database with login info:');
       console.log(err);
-      return;
+      return res.status(404).send('Error querying database with login info:');
     });
 
 });
+
+// app.get('/login', (req, res) => {
+  
+//   console.log('Grabbing session data:');
+//   console.log(req.session);
+//   res.status(200).send(req.session);
+// });
+
+// Logout endpoint
+app.post('/logout', (req, res) => {
+  // Destroy the user session when logging out
+  req.session.destroy((err) => {
+    // Error
+    if (err) {
+      console.log('Error: Session could not be destroyed');
+      console.log(err);
+    } // Success
+    else {
+      console.log('Session destroyed successfully. User is logged out');
+      res.clearCookie('user_id');
+      res.status(200).send('User is now logged out');
+    }
+  });
+});
+
+// Admin endpoint to get all pending user posts
+app.get('/getPendingPosts', (req, res) => {
+  
+  // Prepare the SQL query
+  const getPendingPosts = 
+    `SELECT * FROM posts
+     WHERE active = ?`;
+  
+  // Get all pending posts from database
+  database.execute(getPendingPosts, [0])
+    .then(([results]) => {
+      let pendingPosts = [];
+      // For every search result, create a post object containing relevant post info to display
+      for (let i = 0; i < results.length; i++) {
+        let post = {
+          post_id: results[i].post_id,
+          index: i,
+          category: results[i].category,
+          thumbnail: results[i].thumbnail,
+          title: results[i].title,
+          price: results[i].price,
+          description: results[i].description,
+          pickup_location: results[i].pickup_location,
+          dateTime: results[i].created
+        };
+
+        // Add the post to the list of pending posts
+        pendingPosts.push(post);
+      }
+
+        // console.log('Pending posts array is: ' + JSON.stringify(pendingPosts));
+  
+        // Send the database results to the frontend
+        console.log('Finished sending pending posts');
+        return res.status(200).send(JSON.stringify(pendingPosts));
+        
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.status(404).send('Error querying database');
+    });
+});
+
+// Admin endpoint to approve pending user posts
+app.put('/approvePendingPosts', (req, res) => {
+  
+  const post_id = req.body.post_id;
+  console.log('Pending Post ID: ' + post_id);
+
+  // Prepare the SQL query
+  const approvePendingPosts = 
+    `Update posts
+     SET active = ?
+     WHERE post_id = ?`;
+  
+  // Update pending post to active post in database
+  database.execute(approvePendingPosts, [1, post_id])
+    .then(([results]) => {
+      // Post was approved
+      if (results && results.affectedRows) {
+        console.log('Post approved by admin!');
+        return res.status(200).send('Post approved by admin!');
+      }
+
+    })
+    // Error approving post
+    .catch((err) => {
+      console.log('Error approving post: ');
+      console.log(err);
+      return res.status(404).send('Error approving post ');
+    });
+});
+
+// This endpoint gets all search results to display on home page
+app.get('/getAllPosts', (req, res) => {
+  const getAllPosts = 
+    `SELECT * FROM posts 
+    INNER JOIN categories 
+    ON posts.fk_category_id = categories.category_id`;
+  database.execute(getAllPosts)
+    .then(([results]) => {
+      const allPosts = [];
+      // Setup each post as an object to add to the allPosts array 
+      for (let i = 0; i < results.length; i++) {
+        let post = {
+          category: results[i].category,
+          image: results[i].photo_path,
+          thumbnail: results[i].thumbnail,
+          title: results[i].title,
+          price: results[i].price,
+          description: results[i].description,
+          pickup_location: results[i].pickup_location,
+          dateTime: results[i].created
+        };
+        // Add the post to the allPosts array 
+        allPosts.push(post);
+      }
+      // Send the allPosts array over to client
+      console.log('Finished sending all posts over to client!');
+      return res.status(200).send(JSON.stringify(allPosts));
+      
+    })
+    .catch((err) => {
+      console.log('Error getting all database posts');
+      console.log(err);
+      return res.status(404).send('Error getting all database posts');
+    });
+});
+
 
 // This store variable will store all user search parameters globally
 let store = [];
 
 // Send user search parameters to server 
 app.post('/search', (req, res) => {
-  console.log();
-  console.log('Got a post request. Request body is:');
-  console.log(req.body);
+  
   console.log('Posted category: ' + req.body.category);
   console.log('Posted search term: ' + req.body.searchTerm);
   store.push(req.body);
-  res.sendStatus(200);
+  return res.sendStatus(200);
   
 });
 
@@ -198,92 +381,189 @@ app.get('/search', (req, res) => {
 
   // Represents the SQL query to run to get the relevant posts from database
   let getPosts;
+  let searchResults = [];
 
   // User clicked search button without any params. Display all posts from database
   if (searchTerm == '' && category == '' ) {
+    // Prepare the SQL query with placeholder values
     getPosts = 
       `SELECT * 
       FROM posts
       INNER JOIN categories
-      ON posts.fk_category_id = categories.category_id`;
+      ON posts.fk_category_id = categories.category_id
+      WHERE active = ?`;
+
+    // Run the query to get all active posts
+    database.execute(getPosts, [1])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
+
+          // Add the post to the list of search results
+          searchResults.push(post);
+        }
+
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+        // Send the database results to the frontend
+        console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.status(404).send('Error querying database: ' + err.stack);
+    });
   }
-  // User entered a search term and selected a category
+  // User entered both a search term and selected a category
   else if (searchTerm != '' && category != '') {
+    // Prepare the SQL query with placeholder values
     getPosts =
       `SELECT * 
       FROM posts 
       INNER JOIN categories 
       ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `' 
-      AND ( title LIKE '%` + searchTerm + `%' 
-      OR description LIKE '%` + searchTerm + `%')`;
+      WHERE (active = ?
+      AND category = ?
+      AND (title LIKE ?
+      OR description LIKE ?))`;
+    
+    // Run the query to get active posts matching both the search term and category
+    let sqlReadySearchTerm = '%' + searchTerm + '%';
+    database.execute(getPosts, [1, category, sqlReadySearchTerm, sqlReadySearchTerm])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
+
+          // Add the post to the list of search results) 
+          searchResults.push(post);
+      }
+
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
+  
+        // Send the database results to the frontend
+        console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
+    })
+    .catch((err) => {
+        console.error('Error querying database: ');
+        console.log(err.stack);
+        return res.status(404).send('Error querying database: ' + err.stack);
+    });
   }
+  
   // User entered a search term but did not select a category
   else if (searchTerm != '' && category == '') {
+    // Prepare the SQL query with placeholder values
     getPosts = 
       `SELECT * 
       FROM posts 
       INNER JOIN categories
       ON posts.fk_category_id = categories.category_id
-      WHERE title LIKE '%` + searchTerm + `%' OR 
-      description LIKE '%` + searchTerm + `%'`;
-  }
-  // User did not enter a search term but selected a category
-  else if (searchTerm == '' && category != '') {
-    getPosts =
-      `SELECT * 
-      FROM posts 
-      INNER JOIN categories 
-      ON posts.fk_category_id = categories.category_id
-      WHERE category = '` + category + `'`;
-  }
-
-  // Store the list of search results to send over to the Search Results page
-  let searchResults = [];
-
-  // Extract posts from posts table in database based on user's search params
-  // TODO: Refactor the query into a execute statement so that it is cached, resulting in faster performance   
-  database.query(getPosts)
-    .then(([results]) => {
-      // For every search result, create a post object containing relevant post info to display
+      WHERE (active = ?
+      AND (title LIKE ?
+      OR description LIKE ?))`;
+    
+    // Run the query to get active posts matching the search term
+    let sqlReadySearchTerm = '%' + searchTerm + '%';
+    database.execute(getPosts, [1, sqlReadySearchTerm, sqlReadySearchTerm])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
       for (let i = 0; i < results.length; i++) {
         let post = {
+          post_id: results[i].post_id,
           category: results[i].category,
           image: results[i].photo_path,
           thumbnail: results[i].thumbnail,
           title: results[i].title,
           price: results[i].price,
           description: results[i].description,
+          pickup_location: results[i].pickup_location,
           dateTime: results[i].created
         };
-        console.log();
-        console.log(`Post ${i} sent over is: `);
-        console.log('Post category: ' + post.category);
-        console.log('Post image: ' + post.image);
-        console.log('Post thumbnail: ' + post.thumbnail);
-        console.log('Post title: ' + post.title);
-        console.log('Post price: ' + post.price);
-        console.log('Post description: ' + post.description);
-        console.log('Post creation date/time: ' + post.dateTime);
-        console.log();
+
         // Add the post to the list of search results
-        console.log("posts: ", post) 
         searchResults.push(post);
       }
 
-        console.log('Database results array is: ' + JSON.stringify(searchResults));
-  
+        // console.log('Database results array is: ' + JSON.stringify(searchResults));
+
         // Send the database results to the frontend
-        res.send(JSON.stringify(searchResults));
         console.log('Finished sending database results');
+        return res.status(200).send(JSON.stringify(searchResults));
     })
     .catch((err) => {
         console.error('Error querying database: ');
         console.log(err.stack);
-        return;
+        return res.status(404).send('Error querying database: ' + err.stack);
     });
+  }
+  // User did not enter a search term but selected a category
+  else if (searchTerm == '' && category != '') {
+    // Prepare the SQL query with placeholder values
+    getPosts =
+      `SELECT * 
+      FROM posts 
+      INNER JOIN categories 
+      ON posts.fk_category_id = categories.category_id
+      WHERE category = ?
+      AND active = ?`;
+    
+    // Run the query to get active posts matching the category
+    database.execute(getPosts, [category, 1])
+      .then(([results]) => {
+        // For every search result, create a post object containing relevant post info to display
+        for (let i = 0; i < results.length; i++) {
+          let post = {
+            post_id: results[i].post_id,
+            category: results[i].category,
+            image: results[i].photo_path,
+            thumbnail: results[i].thumbnail,
+            title: results[i].title,
+            price: results[i].price,
+            description: results[i].description,
+            pickup_location: results[i].pickup_location,
+            dateTime: results[i].created
+          };
 
+          // Add the post to the list of search results
+          searchResults.push(post);
+      }
 
+          // console.log('Database results array is: ' + JSON.stringify(searchResults));
+
+          // Send the database results to the frontend
+          console.log('Finished sending database results');
+          return res.status(200).send(JSON.stringify(searchResults));
+      })
+      .catch((err) => {
+          console.error('Error querying database: ');
+          console.log(err.stack);
+          return res.status(404).send('Error querying database: ' + err.stack);
+      });
+  }
 });
 /*  Socket communication with Server */
 

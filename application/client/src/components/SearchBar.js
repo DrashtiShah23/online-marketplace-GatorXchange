@@ -4,7 +4,7 @@
  * Input: Category, Search Term
  * Output: Renders the search results page
  * Error Messages: None
- * Author: Thomas Nguyen
+ * Author: Thomas Nguyen, Drashti Shah
  ******************************************************/
 import React, { useState, useEffect } from "react";
 // import { useNavigate, Routes, Route, Navigate, Link } from 'react-router-dom';

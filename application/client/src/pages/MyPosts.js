@@ -1,3 +1,9 @@
+/******************************************************
+ * Purpose: Displays the user posts 
+ * Error Messages: None
+ * Author:  Drashti Shah, Mary Tangog
+ ******************************************************/
+
 import React, { useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";

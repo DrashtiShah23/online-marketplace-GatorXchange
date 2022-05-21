@@ -1,9 +1,9 @@
 /*********************************************************************
- * Purpose: Vertical prototype of home page in Milestone 2
+ * Purpose: Home page which is displayed on the website
  * Input: None
  * Output: List of search results based on user search parameters
  * Error Messages: None
- * Author: Thomas Nguyen
+ * Author: Thomas Nguyen, Drashti Shah
  *********************************************************************/
  import React from "react";
  import SearchBar from '../components/SearchBar';

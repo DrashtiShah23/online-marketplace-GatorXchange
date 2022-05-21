@@ -1,3 +1,10 @@
+/******************************************************
+ * Purpose: Displays the routes to each functionality in 
+ * the website
+ * Error Messages: None
+ * Author: Wilfredo Aceytuno, Drashti Shah, Thomas Nguyen,
+ * Javier Marquez
+ ******************************************************/
 import React, { useState } from 'react';
 import './css/App.css';
 

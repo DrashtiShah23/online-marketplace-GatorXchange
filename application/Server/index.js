@@ -7,7 +7,7 @@
  * Output: Express app startup, database connection, and all backend
  * functionality
  * Error Messages: None
- * Authors: Thomas Nguyen and Javier Marquez
+ * Authors: Thomas Nguyen, Javier Marquez, Drashti Shah
  *********************************************************************/
 const express = require('express');
 const cors = require("cors");

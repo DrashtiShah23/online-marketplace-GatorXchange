@@ -22,7 +22,51 @@ const SearchResults = () => {
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  // Event handler for submitting the message information to send to backend
+  const handleSubmitMessage = (e) => {
+    // Don't refresh the page upon submitting search queries
+    e.preventDefault();
+    // Prevents form from being submitted if form is not valid
+
+    // Create message parameters that will be used for SQL queries into the database
+    const MessageData = {
+      email: email,
+      message: message,
+    };
+    // Send a POST request to the server
+    axios
+      .post("/message", MessageData)
+      .then((res) => {
+        // If status is OK, redirect user to the message page
+        if (res.status === 200) {
+          // For checking data is correct in inspector
+          console.log("Data submitted is:");
+          console.log(MessageData);
+
+          console.log("Email input is " + MessageData.email);
+
+          console.log("Message input is " + MessageData.id);
+
+          // Show a window alert if the user is able to send the message to the seller successfully
+          window.alert("Message sent to the seller!");
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log("Server status is: " + err.response.status);
+        } else if (err.request) {
+          console.log(err.request);
+          console.log("Network error or server is offline");
+        }
+        console.log("Registration failed :(");
+        console.log(err);
+      });
+  };
+
+
   // This function displays the list of search results received from database
   const displayResults = results.map((result, i) => {
     return (
@@ -112,13 +156,7 @@ const SearchResults = () => {
                    autoFocus
                  />
                </Form.Group>
-               <Form.Group className="item">
-                 <Form.Label>Item</Form.Label>
-                 <Form.Control
-                   type="text"
-                   placeholder="Item Title"
-                   />
-               </Form.Group>
+               
                <Form.Group
                  className="messagebox"
                >
@@ -131,7 +169,10 @@ const SearchResults = () => {
              <Button variant="secondary" onClick={handleClose}>
                Cancel
              </Button>
-             <Button variant="primary" onClick={handleClose}>
+             <Button variant="primary" onClick={() => {
+                handleClose();
+                handleSubmitMessage();
+              }}>
                Send
              </Button>
            </Modal.Footer>

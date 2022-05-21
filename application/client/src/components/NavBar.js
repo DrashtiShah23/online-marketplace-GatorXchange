@@ -49,10 +49,14 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
             <NavDropdown title="User Profile" id="collapsible-nav-dropdown">
-              <NavDropdown.Item
-                href="Myprofile">MyProfile</NavDropdown.Item>
+              <NavDropdown.Item href="Myprofile">
+                MyProfile
+              </NavDropdown.Item>
               <NavDropdown.Item href="MyPosts">
                 My Posts
+              </NavDropdown.Item>
+              <NavDropdown.Item href="MyMessages">
+                My Messages
               </NavDropdown.Item>
               {/* Example on how to set up */}
               <NavDropdown.Item href="#action/3.4">
